@@ -1,0 +1,26 @@
+{
+    "name": "introduce-me",
+    "title": "Introduce Me",
+    "description": "Introduce NPCs, monsters and PCs with a bit of flair",
+    "author": "HarryBoy",
+    "esmodules": [
+        "introduce-me.js",
+        "greensock/esm/all.js"
+    ],
+     "styles": [
+         "introduce-me.css"
+     ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "version": "1.0.0",
+    "minimumCoreVersion": "8",
+    "compatibleCoreVersion":"9",
+    "url": "https://github.com/WBHarry/introduce-me",
+    "manifest": "https://github.com/WBHarry/introduce-me/releases/latest/download/module.json",
+    "download": "https://github.com/WBHarry/introduce-me/releases/latest/download/module.zip"
+  }
