@@ -1,3 +1,10 @@
 {
-    
+    "introduceMe": {
+        "flavorDialog": {
+            "title": "Introduce Me - Flavor",
+            "inputTitle": "Flavor",
+            "preview": "Private Preview",
+            "update": "Update Flavor"
+        }
+    }
 }
