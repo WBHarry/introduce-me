@@ -38,7 +38,7 @@ export default class FlavorDialog extends FormApplication {
         super.activateListeners(html);
     
         $(html).find('#preview').click(async () => {
-            await Introduction.introductionDisplay(this.token, this.flavor);
+            await Introduction.introductionDisplay(this.token, this.token.document._actor, this.flavor);
         });
 
         $(html).find('#update').click(async () => {

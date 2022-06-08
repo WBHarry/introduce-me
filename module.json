@@ -17,6 +17,7 @@
             "path": "lang/en.json"
         }
     ],
+    "socket": true,
     "version": "1.0.0",
     "minimumCoreVersion": "8",
     "compatibleCoreVersion":"9",

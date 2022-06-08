@@ -3,13 +3,16 @@ import FlavorDialog from './FlavorDialog.js';
 
 export default class Introduction {
     static introduceMe = async (token) => {
-        await Introduction.introductionDisplay(token);
+        if(token) {
+            await socket.emit(`module.introduce-me`, { uuid: token.document.uuid });
+            await Introduction.introductionDisplay(token, token.document._actor);
+        }
     }
 
-    static introductionDisplay = async (token, overrideFlavor) => {
+    static introductionDisplay = async (token, actor, overrideFlavor) => {
         if(token){
-            const flavor = overrideFlavor ?? token.document._actor.getFlag('introduce-me', 'flavor') ?? '"No veggies. I go Ham!"';
-            $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { token: token, flavor: flavor })));
+            const flavor = overrideFlavor ?? actor.getFlag('introduce-me', 'flavor') ?? '"No veggies. I go Ham!"';
+            $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { token: token, img: actor.img, flavor: flavor })));
             token.data.update({displayName: 30});
             const node = $(document.body).find('.introduce-me.introduction');
             const container = $(node).find('.introduction-container');
