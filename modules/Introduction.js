@@ -1,9 +1,9 @@
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
-import FlavorDialog from './FlavorDialog.js';
+import IntroduceDialog from './IntroduceDialog.js';
 
 export default class Introduction {
     static introduceMe = async (token) => {
-        if(token) {
+        if(game.user.isGM && token) {
             await socket.emit(`module.introduce-me`, { uuid: token.document.uuid });
             await Introduction.introductionDisplay(token, token.document._actor);
         }
@@ -21,8 +21,12 @@ export default class Introduction {
             const citation = $(container).find('label').last();
             const splitLabel = new SplitText(label, {type:"words,chars"});
             const splitCitation = new SplitText(citation, {type:"words,chars"});
-    
-            const animationTimeline = gsap.timeline();
+            
+            const onUpdate = () => {
+                const test = '';
+            }
+
+            const animationTimeline = gsap.timeline({onUpdate});
                 animationTimeline
                     .to(container, {width: 716, duration: 1})
                     .to(image, {opacity: 1, duration: 1})
@@ -42,34 +46,20 @@ export default class Introduction {
         }
     };
 
-    static setFlavor = async (token) => {
-        if(token){
-            await new FlavorDialog(token).render(true);
-            // new Dialog({
-            //     title: game.i18n.localize('introduceMe.flavorDialog.title'),
-            //     content: await renderTemplate('modules/introduce-me/templates/flavorDialog.hbs', {
-            //         flavor: token.document._actor.getFlag('introduce-me', 'flavor')
-            //     }),
-            //     buttons: {
-            //         preview: {
-            //             icon: '<i class="fas fa-eye"></i>',
-            //             label: game.i18n.localize('introduceMe.flavorDialog.preview'),
-            //             callback: async html => {
-            //                 const flavor =  $(html).find('input')[0].value;
-            //                 await Introduction.introduceMe(token, flavor);
-            //             }
-            //         },
-            //         update: {
-            //             icon: '<i class="fas fa-sync"></i>',
-            //             label: game.i18n.localize('introduceMe.flavorDialog.update'),
-            //             callback: html => {
-            //                 const flavor =  $(html).find('input')[0].value;
-            //                 token.document._actor.setFlag('introduce-me', 'flavor', flavor);
-            //             }
-            //         }
-            //     },
-            //     default: "update",
-            // }).render(true);
+    static introduceMeDialog = async (token) => {
+        if(game.user.isGM && token){
+            await new IntroduceDialog(token).render(true);
         }
     }
+
+    static renderHUD = async (data, html) => {
+        const rightColumn = $(html).find('.col.right');
+        $(rightColumn).append(await renderTemplate('modules/introduce-me/templates/introductionInteract.hbs'));
+
+        const introduceButton = $(rightColumn).find('.introduce-me.introduction-interact');
+        introduceButton.click(async () => {
+            await Introduction.introduceMeDialog(data.object);
+            data.clear();
+        });
+    };
 }

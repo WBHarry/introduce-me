@@ -1,0 +1,13 @@
+ <form class="introduce-me introduce-dialog" autocomplete="off">
+     <content>
+        <label><strong>{{localize "introduceMe.introduceDialog.inputTitle"}}</strong></label>
+        <input name="flavor" value="{{this.flavor}}" type="text" data-dtype="string" />
+    </content>
+    <footer>
+        <button id="introduce"><i class="fas fa-handshake"></i>{{localize "introduceMe.introduceDialog.introduce"}}</button>
+        <div class="flexrow">
+            <button id="preview"><i class="fas fa-eye"></i>{{localize "introduceMe.introduceDialog.preview"}}</button>
+            <button id="update"><i class="fas fa-sync"></i>{{localize "introduceMe.introduceDialog.update"}}</button>
+        </div>
+    </footer>
+</form>

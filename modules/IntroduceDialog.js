@@ -1,8 +1,8 @@
 import Introduction from './Introduction.js';
 
-export default class FlavorDialog extends FormApplication {
+export default class IntroduceDialog extends FormApplication {
     constructor(token) {
-        super({}, {title: game.i18n.localize('introduceMe.flavorDialog.title')});
+        super({}, {title: game.i18n.localize('introduceMe.introduceDialog.title')});
         this.token = token;
         this.flavor = token.document._actor.getFlag('introduce-me', 'flavor');
     }
@@ -13,10 +13,10 @@ export default class FlavorDialog extends FormApplication {
         height: 'auto',
         width: 400,
         id: 'flavor-dialog',
-        template: 'modules/introduce-me/templates/flavorDialog.hbs',
+        template: 'modules/introduce-me/templates/introduceDialog.hbs',
         closeOnSubmit: false,
         submitOnChange: true,
-        classes: ["introduce-me", "flavor_dialog"],
+        classes: ["introduce-me", "introduce-dialog"],
       };
       
       const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -43,6 +43,12 @@ export default class FlavorDialog extends FormApplication {
 
         $(html).find('#update').click(async () => {
             await this.token.document._actor.setFlag('introduce-me', 'flavor', this.flavor);
+            this.close();
+        });
+
+        $(html).find('#introduce').click(async () => {
+            await this.token.document._actor.setFlag('introduce-me', 'flavor', this.flavor);
+            await Introduction.introduceMe(this.token);
             this.close();
         });
     }

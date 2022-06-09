@@ -1,10 +1,17 @@
 {
     "introduceMe": {
-        "flavorDialog": {
-            "title": "Introduce Me - Flavor",
+        "introduceDialog": {
+            "title": "Introduce Me Flavor",
             "inputTitle": "Flavor",
             "preview": "Private Preview",
-            "update": "Update Flavor"
+            "update": "Update",
+            "introduce": "Introduce"
+        },
+        "settings": {
+            "title": "Settings"
+        },
+        "HUD": {
+            "introduceButton": "Introduce Me"
         }
     }
 }
