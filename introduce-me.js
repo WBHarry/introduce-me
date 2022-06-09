@@ -3,8 +3,8 @@ import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 
 Hooks.once('init', () => {
     game.modules.get("introduce-me").api = {
-        introduceMe: async (token) => await Introduction.introduceMe(token),
-        introduceDialog: Introduction.introduceMeDialog,
+        introduceMe: async (token) => await new Introduction().introduceMe(token),
+        introduceDialog: new Introduction().introduceMeDialog,
     };
     gsap.registerPlugin(SplitText);
 
@@ -21,12 +21,12 @@ Hooks.once('init', () => {
 Hooks.on('ready', () => {
     game.socket.on(`module.introduce-me`, async request => {
         const token = await fromUuid(request.uuid);
-        await Introduction.introductionDisplay(token, token.actor);
+        await new Introduction().introductionDisplay(token, token.actor);
     });
 });
 
 Hooks.on('renderTokenHUD', async (data, html) => {
     if(game.user.isGM && game.settings.get('introduce-me', 'show-hud')){
-        await Introduction.renderHUD(data, html);
+        await new Introduction().renderHUD(data, html);
     }
 });

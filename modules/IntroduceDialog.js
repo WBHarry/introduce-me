@@ -38,7 +38,7 @@ export default class IntroduceDialog extends FormApplication {
         super.activateListeners(html);
     
         $(html).find('#preview').click(async () => {
-            await Introduction.introductionDisplay(this.token, this.token.actor, true, this.flavor);
+            await new Introduction().introductionDisplay(this.token, this.token.actor, true, this.flavor);
         });
 
         $(html).find('#update').click(async () => {
@@ -49,7 +49,7 @@ export default class IntroduceDialog extends FormApplication {
 
         $(html).find('#introduce').click(async () => {
             await game.actors.get(this.token.actor.id).setFlag('introduce-me', 'flavor', this.flavor);
-            await Introduction.introduceMe(this.token);
+            await new Introduction().introduceMe(this.token);
             this.close();
         });
     }
