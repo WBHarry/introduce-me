@@ -1,10 +1,10 @@
 {
     "introduceMe": {
         "introduceDialog": {
-            "title": "Introduce Me Flavor",
-            "inputTitle": "Flavor",
+            "title": "Introduce Me",
+            "inputTitle": "Flavortext",
             "preview": "Private Preview",
-            "update": "Update",
+            "save": "Save Settings",
             "introduce": "Introduce"
         },
         "settings": {

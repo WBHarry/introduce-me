@@ -33,7 +33,6 @@ export default class IntroduceDialog extends FormApplication {
         this.render();
     }
 
-
     activateListeners(html) {
         super.activateListeners(html);
     
@@ -41,8 +40,7 @@ export default class IntroduceDialog extends FormApplication {
             await new Introduction().introductionDisplay(this.token, this.token.actor, true, this.flavor);
         });
 
-        $(html).find('#update').click(async () => {
-            
+        $(html).find('#save').click(async () => {
             await game.actors.get(this.token.actor.id).setFlag('introduce-me', 'flavor', this.flavor);
             this.close();
         });

@@ -17,6 +17,14 @@
             "path": "lang/en.json"
         }
     ],
+    "packs": [
+		{
+			"name": "introduce-me",
+			"label": "Introduce Me",
+			"path": "./packs/introduce-me.db",
+			"entity": "Macro"
+		}
+	],
     "socket": true,
     "version": "0.9",
     "minimumCoreVersion": "8",
