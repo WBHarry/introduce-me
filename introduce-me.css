@@ -15,6 +15,9 @@
   display: flex;
   margin-right: 40px;
 }
+.introduce-me.introduction .introduction-container .actor-container > img {
+  border: 0;
+}
 .introduce-me.introduction .introduction-container .text-container {
   display: flex;
   flex-direction: column;

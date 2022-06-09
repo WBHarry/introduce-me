@@ -21,7 +21,7 @@ Hooks.once('init', () => {
 Hooks.on('ready', () => {
     game.socket.on(`module.introduce-me`, async request => {
         const token = await fromUuid(request.uuid);
-        await Introduction.introductionDisplay(token, token._actor);
+        await Introduction.introductionDisplay(token, token.actor);
     });
 });
 

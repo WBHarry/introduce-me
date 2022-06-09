@@ -5,15 +5,28 @@ export default class Introduction {
     static introduceMe = async (token) => {
         if(game.user.isGM && token) {
             await socket.emit(`module.introduce-me`, { uuid: token.document.uuid });
-            await Introduction.introductionDisplay(token, token.document._actor);
+            await Introduction.introductionDisplay(token, token.actor);
         }
     }
 
-    static introductionDisplay = async (token, actor, overrideFlavor) => {
+    static introductionDisplay = async (token, actor, preview, overrideFlavor) => {
         if(token){
-            const flavor = overrideFlavor ?? actor.getFlag('introduce-me', 'flavor') ?? '"No veggies. I go Ham!"';
+            if(!preview){
+                await actor.update({'token.displayName': 30});
+                const scenes = Array.from(game.scenes);
+                for(let i = 0; i < scenes.length; i++){
+                    const tokens = Array.from(scenes[i].tokens);
+                    for(let j = 0; j < tokens.length; j++){
+                        const token = tokens[j];
+                        if(token.actor.id === actor.id){
+                            await token.update({displayName: 30});
+                        }
+                    }
+                }   
+            }
+
+            const flavor = overrideFlavor ?? actor.getFlag('introduce-me', 'flavor') ?? '';
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { token: token, img: actor.img, flavor: flavor })));
-            token.data.update({displayName: 30});
             const node = $(document.body).find('.introduce-me.introduction');
             const container = $(node).find('.introduction-container');
             const image = $(container).find('img#actorImage');
@@ -21,12 +34,8 @@ export default class Introduction {
             const citation = $(container).find('label').last();
             const splitLabel = new SplitText(label, {type:"words,chars"});
             const splitCitation = new SplitText(citation, {type:"words,chars"});
-            
-            const onUpdate = () => {
-                const test = '';
-            }
 
-            const animationTimeline = gsap.timeline({onUpdate});
+            const animationTimeline = gsap.timeline();
                 animationTimeline
                     .to(container, {width: 716, duration: 1})
                     .to(image, {opacity: 1, duration: 1})
