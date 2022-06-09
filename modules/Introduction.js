@@ -12,7 +12,7 @@ export default class Introduction {
 
     introduceMe = async (token) => {
         if(game.user.isGM && token) {
-            await socket.emit(`module.introduce-me`, { uuid: token.document.uuid });
+            await game.socket.emit(`module.introduce-me`, { uuid: token.document.uuid });
             await this.introductionDisplay(token, token.actor);
         }
     }
