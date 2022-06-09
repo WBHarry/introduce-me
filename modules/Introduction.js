@@ -26,7 +26,7 @@ export default class Introduction {
                     const tokens = Array.from(scenes[i].tokens);
                     for(let j = 0; j < tokens.length; j++){
                         const token = tokens[j];
-                        if(token.actor.id === actor.id){
+                        if(token.data.actorId === actor.id){
                             await token.update({displayName: 30});
                         }
                     }
