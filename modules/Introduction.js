@@ -17,7 +17,7 @@ export default class Introduction {
         }
     }
 
-    introductionDisplay = async (token, actor, preview, overrideFlavor) => {
+    introductionDisplay = async (token, actor, preview, overrideFlavor, overrideDuration) => {
         if(token){
             if(!preview && game.user.isGM){
                 await actor.update({'token.displayName': 30});
@@ -32,6 +32,10 @@ export default class Introduction {
                     }
                 }   
             }
+
+            const defaultIntroductionDuration = game.settings.get('introduce-me', 'introduction-duration');
+            const actorIntroductionDuration = actor.getFlag('introduce-me', 'introduction-duration');
+            const introductionDuration = overrideDuration ? overrideDuration : actorIntroductionDuration !== undefined ? actorIntroductionDuration : defaultIntroductionDuration;
 
             $(document.body).find('.introduce-me.introduction').remove();
             const flavor = overrideFlavor ?? actor.getFlag('introduce-me', 'flavor') ?? '';
@@ -66,10 +70,10 @@ export default class Introduction {
                     }, "<");
             }             
 
-            animationTimeline.to(node, { opacity: 0, duration: 0.5 }, ">2");
+            animationTimeline.to(node, { opacity: 0, duration: 0.5 }, `>${introductionDuration}`);
             setTimeout(() => {
                 $(node).remove();
-            }, 6000);
+            }, 4000+(introductionDuration*1000));
         }
     }
 

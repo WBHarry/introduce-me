@@ -2,10 +2,13 @@
     "introduceMe": {
         "introduceDialog": {
             "title": "Introduce Me",
-            "inputTitle": "Flavortext",
+            "flavorTitle": "Flavortext",
+            "durationTitle": "Introduction Duration",
             "preview": "Private Preview",
             "save": "Save Settings",
-            "introduce": "Introduce"
+            "introduce": "Introduce",
+            "default": "Reset to default",
+            "defaultDisabled": "Introduction Duration is default"
         },
         "settings": {
             "title": "Settings"

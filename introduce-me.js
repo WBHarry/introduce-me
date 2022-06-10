@@ -16,6 +16,15 @@ Hooks.once('init', () => {
         config: true,
         type: Boolean,
     });
+
+    game.settings.register('introduce-me', 'introduction-duration', {
+        name: 'Default Introduction Duration ',
+        hint: 'The default duration in seconds that the Introduction stays after the animation finishes before being removed.',
+        scope: 'world',
+        default: 2,
+        config: true,
+        type: Number,
+    });
 });
 
 Hooks.on('ready', () => {

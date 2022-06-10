@@ -91,10 +91,31 @@
   margin-bottom: 8px;
 }
 .introduce-me.introduce-dialog content {
+  margin-bottom: 8px;
+}
+.introduce-me.introduce-dialog content .setting {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 8px;
+}
+.introduce-me.introduce-dialog content .setting:not(:last-child) {
+  margin-bottom: 4px;
+}
+.introduce-me.introduce-dialog content .setting .input-row {
+  width: 100%;
+}
+.introduce-me.introduce-dialog content .setting .input-row .default-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  height: 26px;
+  width: 26px;
+  min-height: 26px;
+  min-width: 26px;
+}
+.introduce-me.introduce-dialog content .setting .input-row .default-button i {
+  margin: 0px;
 }
 .introduce-me.introduction-interact.control-icon {
   display: flex;

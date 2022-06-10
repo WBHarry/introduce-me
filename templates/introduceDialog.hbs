@@ -1,7 +1,21 @@
  <form class="introduce-me introduce-dialog" autocomplete="off">
      <content>
-        <label><strong>{{localize "introduceMe.introduceDialog.inputTitle"}}</strong></label>
-        <input name="flavor" value="{{this.flavor}}" type="text" data-dtype="string" />
+        <div class="setting">
+            <label><strong>{{localize "introduceMe.introduceDialog.flavorTitle"}}</strong></label>
+            <div class="flexrow input-row">
+                <input class="flex1" name="flavor" value="{{this.flavor}}" type="text" data-dtype="string" />
+                <div class="flex0 default-button"></div>
+            </div>
+        </div>
+        <div class="setting">
+            <label><strong>{{localize "introduceMe.introduceDialog.durationTitle"}}</strong></label>
+            <div class="flexrow input-row">
+                <input class="flex1" name="duration" value="{{this.duration}}" type="number" data-dtype="number" />
+                <button class="flex0 default-button" id="introduction-duration" {{#if this.durationIsDefault}}disabled title="{{localize "introduceMe.introduceDialog.defaultDisabled"}}"{{else}}title="{{localize "introduceMe.introduceDialog.default"}}"{{/if}}>
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+        </div>
     </content>
     <footer>
         <button id="introduce"><i class="fas fa-handshake"></i>{{localize "introduceMe.introduceDialog.introduce"}}</button>
