@@ -43,7 +43,7 @@ export default class Introduction {
             const colors = getActorIntroductionColors(token, actor);
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
                 token: token, 
-                img: actor.img, 
+                img: this.getIntroductionImage(token, actor), 
                 flavor: flavor,
                 colors: colors,
             })));
@@ -92,7 +92,7 @@ export default class Introduction {
             token: localToken ?? {
                 name: 'Color Tester'
             }, 
-            img: localActor?.img ?? 'icons/svg/cowled.svg', 
+            img: localActor ? this.getIntroductionImage(localToken, localActor) : 'icons/svg/cowled.svg', 
             flavor: flavor,
             colors: colors,
             editing: true,
@@ -118,5 +118,10 @@ export default class Introduction {
             await this.introduceMeDialog(data.object);
             data.clear();
         });
+    }
+
+    getIntroductionImage = (token, actor) => {
+        const useToken = game.settings.get('introduce-me', 'use-token');
+        return useToken ? token.data.img : actor.img;
     }
 }

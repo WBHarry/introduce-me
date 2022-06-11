@@ -11,17 +11,26 @@ export const registerGameSettings = () => {
     });
 
     game.settings.register('introduce-me', 'show-hud', {
-        name: 'Show HUD',
-        hint: 'If HUD is not displayed then use the module macros to access the functionality instead.',
+        name: game.i18n.localize('introduceMe.gameSettings.showHud.name'),
+        hint: game.i18n.localize('introduceMe.gameSettings.showHud.hint'),
         scope: 'world',
         default: true,
         config: true,
         type: Boolean,
     });
+    
+    game.settings.register('introduce-me', 'use-token', {
+        name: game.i18n.localize('introduceMe.gameSettings.useToken.name'),
+        hint: game.i18n.localize('introduceMe.gameSettings.useToken.hint'),
+        scope: 'world',
+        default: false,
+        config: true,
+        type: Boolean,
+    });
 
     game.settings.register('introduce-me', 'introduction-duration', {
-        name: 'Default Introduction Duration ',
-        hint: 'The default duration in seconds that the Introduction stays after the animation finishes before being removed.',
+        name: game.i18n.localize('introduceMe.gameSettings.introductionDuration.name'),
+        hint: game.i18n.localize('introduceMe.gameSettings.introductionDuration.hint'),
         scope: 'world',
         default: 2,
         config: true,
@@ -29,7 +38,7 @@ export const registerGameSettings = () => {
     });
 
     game.settings.register('introduce-me', 'introduction-colors', {
-        name: 'Introduction Colors',
+        name: game.i18n.localize('introduceMe.gameSettings.introductionColors.name'),
         scope: 'world',
         default: DefaultColors,
         config: false,

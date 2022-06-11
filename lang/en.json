@@ -30,6 +30,23 @@
         },
         "HUD": {
             "introduceButton": "Introduce Me"
+        },
+        "gameSettings": {
+            "showHud": {
+                "name": "Show HUD",
+                "hint": "If HUD is not displayed then use the module macros to access the functionality instead."
+            },
+            "useToken": {
+                "name": "Use Tokens",
+                "hint": "Show the actor token instead of the avatar in the Introduction."
+            },
+            "introductionDuration": {
+                "name": "Default Introduction Duration",
+                "hint": "The default duration in seconds that the Introduction stays after the animation finishes before being removed."
+            },
+            "introductionColors": {
+                "name": "Introduction Colors"
+            }
         }
     }
 }
