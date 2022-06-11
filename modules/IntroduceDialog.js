@@ -1,3 +1,4 @@
+import ColorSettings from './ColorSettings.js';
 import Introduction from './Introduction.js';
 
 export default class IntroduceDialog extends FormApplication {
@@ -28,11 +29,9 @@ export default class IntroduceDialog extends FormApplication {
 
     getData() {
         const duration = this.duration !== undefined ? this.duration : this.defaultDuration;
-        const durationIsDefault = this.duration === undefined || this.duration === this.defaultDuration;
         return { 
             flavor: this.flavor, 
             duration: duration, 
-            durationIsDefault: durationIsDefault
         };
     }
 
@@ -50,6 +49,10 @@ export default class IntroduceDialog extends FormApplication {
             await actor.unsetFlag('introduce-me', 'introduction-duration');
             this.duration = undefined;
             this.render();
+        });
+
+        $(html).find('button#color-setting').click(event => {
+            new ColorSettings(this.token, actor).render(true);
         });
 
         $(html).find('#preview').click(async () => {

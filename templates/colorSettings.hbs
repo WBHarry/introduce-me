@@ -1,0 +1,22 @@
+<form class="introduce-me color-settings">
+    <content>
+        <div class="flexrow flex-content">
+            <div class="flex0 color-label"></div>
+            <div class="flex0 action-button preview-button"></div>
+            <div class="flex0 action-button default-button"></div>
+            <label class="flex1 column-margin"><strong>{{localize "introduceMe.colorSettings.backgroundLabel"}}</strong></label>
+            <label class="flex1"><strong>{{localize "introduceMe.colorSettings.textLabel"}}</strong></label>
+            <label class="flex0 clip-label"><strong>{{localize "introduceMe.colorSettings.clipsLabel"}}</strong></label>
+        </div>
+        {{#each this.colors}}
+            {{> "modules/introduce-me/templates/partials/colorSetting.hbs" 
+                key=@key
+                color=this
+                label=(concat "introduceMe.colorSettings." @key)
+            }}
+        {{/each}}
+    </content>
+    <footer>
+        <button id="save"><i class="fas fa-save"></i>{{localize "introduceMe.colorSettings.save"}}</button>
+    </footer>
+</form>

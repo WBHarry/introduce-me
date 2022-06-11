@@ -1,5 +1,6 @@
 import Introduction from './modules/Introduction.js';
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
+import { registerGameSettings, registerHandlebars } from './modules/Setup.js';
 
 Hooks.once('init', () => {
     game.modules.get("introduce-me").api = {
@@ -8,23 +9,8 @@ Hooks.once('init', () => {
     };
     gsap.registerPlugin(SplitText);
 
-    game.settings.register('introduce-me', 'show-hud', {
-        name: 'Show HUD',
-        hint: 'If HUD is not displayed then use the module macros to access the functionality instead.',
-        scope: 'world',
-        default: true,
-        config: true,
-        type: Boolean,
-    });
-
-    game.settings.register('introduce-me', 'introduction-duration', {
-        name: 'Default Introduction Duration ',
-        hint: 'The default duration in seconds that the Introduction stays after the animation finishes before being removed.',
-        scope: 'world',
-        default: 2,
-        config: true,
-        type: Number,
-    });
+    registerGameSettings();
+    registerHandlebars();
 });
 
 Hooks.on('ready', () => {

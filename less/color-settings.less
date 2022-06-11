@@ -1,0 +1,51 @@
+.introduce-me {
+    &.color-settings {
+        content {
+            .flex-content {
+                align-items: center;
+                &:not(:last-of-type){
+                    padding-bottom: 4px;
+                    border-bottom: 1px solid black;
+                }
+                margin-bottom: 4px;
+                label {
+                    display: flex;
+                    justify-content: center;
+                }
+                .column-margin {
+                    margin-right: 16px;
+                }
+            }
+            .color-label {
+                width: 55px;
+                min-width: 55px;
+            }
+            .action-button {
+                width: 24px;
+                height: 24px;
+                min-width: 24px;
+                min-height: 24px;
+                margin: 0px 4px 0px 0px;
+                padding: 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                > i {
+                    margin: 0px;
+                }
+            }
+            .clip-label {
+                white-space: nowrap;
+            }
+            .clip-row {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 68px;
+            }
+        }
+        footer {
+            margin-top: 8px;
+        }
+    }
+}

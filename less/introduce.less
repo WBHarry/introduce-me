@@ -3,13 +3,16 @@
         position: absolute; 
         top: calc(50% - 406px); 
         left: calc(50% - 250px);
+        z-index: 1000;
         .introduction-container {
             width: 0px;
             height: 125px;
-            background: darkslategrey;
             display: flex;
             justify-content: flex-start;
             position: relative;
+            &.editing {
+                width: 716px;
+            }
             .actor-container {
                 display: flex;
                 margin-right: 40px;
@@ -27,7 +30,6 @@
             }
             & label {
                 font-size: 40px;
-                color: bisque;
                 opacity: 0;
                 width: 100%;
             }
@@ -58,6 +60,9 @@
                 position: relative;
                 left: 40px;
                 align-self: center;
+                &.visible {
+                    opacity: 1;
+                }
             }
             & img.clip {
                 position: absolute;
@@ -82,6 +87,27 @@
                     left: 0;
                     bottom: 0;
                     transform: rotate(180deg);
+                }
+            }
+            .visible {
+                opacity: 1;
+            }
+
+            .close-button {
+                position: absolute;
+                top: -25px;
+                right: calc(50% - 100px);
+                width: 200px;
+                height: 25px;
+                background: crimson;
+                border-radius: 0px;
+                border: 0;
+                font-size: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                > i {
+                    margin: 0px;
                 }
             }
         }

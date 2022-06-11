@@ -3,15 +3,30 @@
         "introduceDialog": {
             "title": "Introduce Me",
             "flavorTitle": "Flavortext",
+            "colorsTitle": "Edit Actor Introduction Colors",
             "durationTitle": "Introduction Duration",
             "preview": "Private Preview",
             "save": "Save Settings",
             "introduce": "Introduce",
-            "default": "Reset to default",
-            "defaultDisabled": "Introduction Duration is default"
+            "default": "Reset to default"
         },
         "settings": {
             "title": "Settings"
+        },
+        "colorSettings": {
+            "name": "Introduction Colors",
+            "label": "Color Settings",
+            "default": "Reset to default colors",
+            "preview": "Private Preview",
+            "save": "Save",
+            "actor": "Actor",
+            "players": "Players",
+            "friendly": "Friendly",
+            "neutral": "Neutral",
+            "hostile": "Hostile",
+            "backgroundLabel": "Background Color",
+            "textLabel": "Text Color",
+            "clipsLabel": "Show Clips"
         },
         "HUD": {
             "introduceButton": "Introduce Me"

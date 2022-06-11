@@ -2,14 +2,17 @@
   position: absolute;
   top: calc(50% - 406px);
   left: calc(50% - 250px);
+  z-index: 1000;
 }
 .introduce-me.introduction .introduction-container {
   width: 0px;
   height: 125px;
-  background: darkslategrey;
   display: flex;
   justify-content: flex-start;
   position: relative;
+}
+.introduce-me.introduction .introduction-container.editing {
+  width: 716px;
 }
 .introduce-me.introduction .introduction-container .actor-container {
   display: flex;
@@ -28,7 +31,6 @@
 }
 .introduce-me.introduction .introduction-container label {
   font-size: 40px;
-  color: bisque;
   opacity: 0;
   width: 100%;
 }
@@ -60,6 +62,9 @@
   left: 40px;
   align-self: center;
 }
+.introduce-me.introduction .introduction-container img#actorImage.visible {
+  opacity: 1;
+}
 .introduce-me.introduction .introduction-container img.clip {
   position: absolute;
   height: 64px;
@@ -84,6 +89,71 @@
   left: 0;
   bottom: 0;
   transform: rotate(180deg);
+}
+.introduce-me.introduction .introduction-container .visible {
+  opacity: 1;
+}
+.introduce-me.introduction .introduction-container .close-button {
+  position: absolute;
+  top: -25px;
+  right: calc(50% - 100px);
+  width: 200px;
+  height: 25px;
+  background: crimson;
+  border-radius: 0px;
+  border: 0;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-me.introduction .introduction-container .close-button > i {
+  margin: 0px;
+}
+.introduce-me.color-settings content .flex-content {
+  align-items: center;
+  margin-bottom: 4px;
+}
+.introduce-me.color-settings content .flex-content:not(:last-of-type) {
+  padding-bottom: 4px;
+  border-bottom: 1px solid black;
+}
+.introduce-me.color-settings content .flex-content label {
+  display: flex;
+  justify-content: center;
+}
+.introduce-me.color-settings content .flex-content .column-margin {
+  margin-right: 16px;
+}
+.introduce-me.color-settings content .color-label {
+  width: 55px;
+  min-width: 55px;
+}
+.introduce-me.color-settings content .action-button {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  margin: 0px 4px 0px 0px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-me.color-settings content .action-button > i {
+  margin: 0px;
+}
+.introduce-me.color-settings content .clip-label {
+  white-space: nowrap;
+}
+.introduce-me.color-settings content .clip-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+}
+.introduce-me.color-settings footer {
+  margin-top: 8px;
 }
 .introduce-me.introduce-dialog {
   display: flex;

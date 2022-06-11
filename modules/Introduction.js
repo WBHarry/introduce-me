@@ -1,5 +1,6 @@
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import IntroduceDialog from './IntroduceDialog.js';
+import { getActorIntroductionColors } from './ColorSettings.js';
 
 export default class Introduction {
     constructor() {
@@ -39,7 +40,13 @@ export default class Introduction {
 
             $(document.body).find('.introduce-me.introduction').remove();
             const flavor = overrideFlavor ?? actor.getFlag('introduce-me', 'flavor') ?? '';
-            $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { token: token, img: actor.img, flavor: flavor })));
+            const colors = getActorIntroductionColors(token, actor);
+            $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
+                token: token, 
+                img: actor.img, 
+                flavor: flavor,
+                colors: colors,
+            })));
             const node = $(document.body).find('.introduce-me.introduction');
             const container = $(node).find('.introduction-container');
             const image = $(container).find('img#actorImage');
@@ -76,6 +83,25 @@ export default class Introduction {
             }, 4000+(introductionDuration*1000));
         }
     }
+
+    editDisplay = async (colors, localToken, localActor) => {
+        $(document.body).find('.introduce-me.introduction').remove();
+        const flavor = localActor?.getFlag('introduce-me', 'flavor') ?? 'Flavortext';
+
+        $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
+            token: localToken ?? {
+                name: 'Color Tester'
+            }, 
+            img: localActor?.img ?? 'icons/svg/cowled.svg', 
+            flavor: flavor,
+            colors: colors,
+            editing: true,
+        })));
+
+        $(document.body).find('.introduce-me.introduction > .introduction-container > .close-button').click(event => {
+            $(document.body).find('.introduce-me.introduction').remove();
+        });
+    };
 
     introduceMeDialog = async (token) => {
         if(game.user.isGM && token){
