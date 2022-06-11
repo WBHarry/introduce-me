@@ -71,6 +71,7 @@ export default class ColorSettings extends FormApplication {
         });
 
         $(html).find('button.default-button').click(event => {
+            event.preventDefault();
             const type = event.currentTarget.attributes.getNamedItem('[data-id]').value;
 
             const defaultColor = type === 'actor' ? getActorIntroductionColorsByData(this.localToken, this.localActor) : DefaultColors[type];
