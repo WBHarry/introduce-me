@@ -34,7 +34,13 @@ export default class ColorSettings extends FormApplication {
 
     getData() {
         return { 
-            colors: this.colors
+            colors: Object.keys(this.colors).reduce((acc, key) => {
+                acc[key] = {
+                    ...this.colors[key],
+                    label: `introduceMe.colorSettings.${key}`
+                };
+                return acc;
+            }, {})
         };
     }
 
