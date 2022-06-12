@@ -24,9 +24,16 @@
             "friendly": "Friendly",
             "neutral": "Neutral",
             "hostile": "Hostile",
+            "template": "Template",
             "backgroundLabel": "Background Color",
             "textLabel": "Text Color",
             "clipsLabel": "Show Clips"
+        },
+        "colorTemplates": {
+            "name": "Color Templates",
+            "label": "Color Templates",
+            "newTemplatePlaceholder": "New template name..",
+            "create": "Create New Template"
         },
         "HUD": {
             "introduceButton": "Introduce Me"

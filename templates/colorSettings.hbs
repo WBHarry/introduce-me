@@ -1,16 +1,13 @@
 <form class="introduce-me color-settings" autocomplete="off">
     <content>
-        <div class="flexrow flex-content">
-            <div class="flex0 color-label"></div>
-            <div class="flex0 action-button preview-button"></div>
-            <div class="flex0 action-button default-button"></div>
-            <label class="flex1 column-margin"><strong>{{localize "introduceMe.colorSettings.backgroundLabel"}}</strong></label>
-            <label class="flex1"><strong>{{localize "introduceMe.colorSettings.textLabel"}}</strong></label>
-            <label class="flex0 clip-label"><strong>{{localize "introduceMe.colorSettings.clipsLabel"}}</strong></label>
-        </div>
+        {{> "modules/introduce-me/templates/partials/colorSettingHeader.hbs"
+            templates=this.templates    
+        }}
         {{#each this.colors}}
             {{> "modules/introduce-me/templates/partials/colorSetting.hbs" 
                 key=@key
+                name=(concat "colors." @key)
+                templates=../templates
                 color=this
             }}
         {{/each}}

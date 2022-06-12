@@ -110,26 +110,35 @@
 .introduce-me.introduction .introduction-container .close-button > i {
   margin: 0px;
 }
-.introduce-me.color-settings content .flex-content {
+.introduce-me.color-settings .flex-content {
   align-items: center;
   margin-bottom: 4px;
 }
-.introduce-me.color-settings content .flex-content:not(:last-of-type) {
+.introduce-me.color-settings .flex-content:not(:last-of-type) {
   padding-bottom: 4px;
   border-bottom: 1px solid black;
 }
-.introduce-me.color-settings content .flex-content label {
+.introduce-me.color-settings .flex-content label {
   display: flex;
   justify-content: center;
 }
-.introduce-me.color-settings content .flex-content .column-margin {
+.introduce-me.color-settings .flex-content .column-margin {
   margin-right: 16px;
 }
-.introduce-me.color-settings content .color-label {
+.introduce-me.color-settings .color-label {
   width: 60px;
   min-width: 60px;
 }
-.introduce-me.color-settings content .action-button {
+.introduce-me.color-settings .template-select {
+  width: 100px;
+  height: 26px;
+  margin-right: 4px;
+}
+.introduce-me.color-settings .template-label {
+  width: 100px;
+  margin-right: 4px;
+}
+.introduce-me.color-settings .action-button {
   width: 24px;
   height: 24px;
   min-width: 24px;
@@ -140,13 +149,13 @@
   align-items: center;
   justify-content: center;
 }
-.introduce-me.color-settings content .action-button > i {
+.introduce-me.color-settings .action-button > i {
   margin: 0px;
 }
-.introduce-me.color-settings content .clip-label {
+.introduce-me.color-settings .clip-label {
   white-space: nowrap;
 }
-.introduce-me.color-settings content .clip-row {
+.introduce-me.color-settings .clip-row {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,6 +163,44 @@
 }
 .introduce-me.color-settings footer {
   margin-top: 8px;
+}
+.introduce-me.color-templates form > header {
+  width: 50%;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.introduce-me.color-templates form > header button {
+  flex: 0;
+  margin: 0px 0px 0px 4px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-me.color-templates form > header button i {
+  margin: 0;
+}
+.introduce-me.color-templates .color-template-content {
+  margin-bottom: 8px;
+  height: 0;
+  overflow-y: hidden;
+}
+.introduce-me.color-templates .color-template-content[open] {
+  height: auto;
+}
+.introduce-me.color-templates .template-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.introduce-me.color-templates .template-toggle .delete-template {
+  cursor: pointer;
+}
+.introduce-me.color-templates .template-toggle .delete-template:hover {
+  text-shadow: 0 0 5px var(--color-shadow-primary);
 }
 .introduce-me.introduce-dialog {
   display: flex;

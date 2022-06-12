@@ -3,6 +3,7 @@ import Introduction from "./Introduction.js";
 export default class ColorSettings extends FormApplication {
     constructor(localToken, localActor) {
         super({}, {title: game.i18n.localize('introduceMe.colorSettings.label')});
+        this.templates = game.settings.get('introduce-me', 'color-templates');
         this.localToken = localToken;
         this.localActor = localActor;
         if(localActor){
@@ -19,7 +20,7 @@ export default class ColorSettings extends FormApplication {
       const defaults = super.defaultOptions;
       const overrides = {
         height: 'auto',
-        width: 600,
+        width: 'auto',
         id: 'color-settings',
         template: 'modules/introduce-me/templates/colorSettings.hbs',
         closeOnSubmit: false,
@@ -34,6 +35,7 @@ export default class ColorSettings extends FormApplication {
 
     getData() {
         return { 
+            templates: this.templates,
             colors: Object.keys(this.colors).reduce((acc, key) => {
                 acc[key] = {
                     ...this.colors[key],
@@ -49,11 +51,34 @@ export default class ColorSettings extends FormApplication {
         Object.keys(expandedData).forEach(key => {
             this[key] = expandedData[key];
         });
+
+        const path = event.currentTarget.attributes['data-edit']?.value;
+        setProperty(this, `colors.${path.split('.')[1]}.template`, undefined);
+        
         this.render();
     }
 
     activateListeners(html) {
         super.activateListeners(html);
+
+        $(html).find('.template-select').change(event =>{
+            event.stopPropagation();
+            const path = event.currentTarget.name;
+            const templatePath = path.split('.').slice(0, 2).join('.');
+            const id = event.currentTarget.value;
+
+            const template = this.templates.find(x => x.id === id);
+            if(template){
+                setProperty(this, templatePath, {
+                    template: id,
+                    ...template
+                });
+            }
+            else {
+                setProperty(this, templatePath, DefaultColors.friendly);
+            }
+            this.render();
+        });
 
         $(html).find('button#save').click(event => {
             if(this.localActor){

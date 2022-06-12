@@ -1,14 +1,19 @@
-<div class="flexrow flex-content">
-    <label class="flex0 flexrow color-label"><strong>{{localize this.color.label}}</strong></label>
+<div class="introduce-me color-settings flexrow flex-content">
+    {{#if this.templates}} <label class="flex0 flexrow color-label"><strong>{{localize this.color.label}}</strong></label>{{/if}}
     <button class="flex0 action-button preview-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.preview"}}"><i class="fas fa-eye"></i></button>
-    <button class="flex0 action-button default-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.default"}}"><i class="fas fa-undo"></i></button>
+    {{#if this.templates}}<button class="flex0 action-button default-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.default"}}"><i class="fas fa-undo"></i></button>{{/if}}
+    {{#if this.templates}} 
+        <select name="{{concat this.name ".template"}}" class="template-select">
+            {{selectOptions this.templates selected=this.color.template nameAttr="id" labelAttr="label" blank="No Template" }}
+        </select>
+    {{/if}}
     <div class="flex1 flexrow column-margin">
-        {{colorPicker name=(concat "colors." this.key ".background") value=this.color.background}}
+        {{colorPicker name=(concat this.name ".background") value=this.color.background}}
     </div>
     <div class="flex1 flexrow">
-        {{colorPicker name=(concat "colors." this.key ".text") value=this.color.text}}
+        {{colorPicker name=(concat this.name ".text") value=this.color.text}}
     </div>
     <div class="flex0 clip-row">
-        <input id="{{concat "colors." this.key ".clip"}}" type="checkbox" name="{{concat "colors." this.key ".clip"}}" data-dtype="Boolean" {{checked this.color.clip}}/>
+        <input id="{{concat this.name ".clip"}}" type="checkbox" name="{{concat this.name ".clip"}}" data-dtype="Boolean" {{checked this.color.clip}}/>
     </div>
 </div>
