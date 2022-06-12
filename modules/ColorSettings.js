@@ -1,8 +1,8 @@
 import Introduction from "./Introduction.js";
 
 export default class ColorSettings extends FormApplication {
-    constructor(localToken, localActor) {
-        super({}, {title: game.i18n.localize('introduceMe.colorSettings.label')});
+    constructor(localToken, localActor, title) {
+        super({}, {title: title ?? game.i18n.localize('introduceMe.colorSettings.label')});
         this.templates = game.settings.get('introduce-me', 'color-templates');
         this.localToken = localToken;
         this.localActor = localActor;
@@ -52,8 +52,10 @@ export default class ColorSettings extends FormApplication {
             this[key] = expandedData[key];
         });
 
-        const path = event.currentTarget.attributes['data-edit']?.value;
-        setProperty(this, `colors.${path.split('.')[1]}.template`, undefined);
+        const path = event.currentTarget.attributes['name'] ?? event.currentTarget.attributes['data-edit'];
+        if(path?.value){
+            setProperty(this, `colors.${path.value.split('.')[1]}.template`, undefined);
+        }
         
         this.render();
     }
@@ -69,25 +71,46 @@ export default class ColorSettings extends FormApplication {
 
             const template = this.templates.find(x => x.id === id);
             if(template){
+                const { actors, ...rest } = template;
                 setProperty(this, templatePath, {
                     template: id,
-                    ...template
+                    ...rest
                 });
+
+                // Keep a list of actors with the template.
+                if(this.localActor){
+                    this.templates[this.templates.indexOf(template)] = {
+                        ...template,
+                        actors: template.actors ? [...template.actors, this.localActor.id] : [this.localActor.id],
+                    };
+                }
             }
             else {
-                setProperty(this, templatePath, DefaultColors.friendly);
+                if(this.localActor){
+                    const template = this.templates.find(x => x.id === getProperty(this, path));
+                    const newList = template.actors?.filter(actor => actor !== this.localActor.id);
+                    this.templates[this.templates.indexOf(template)] = {
+                        ...template,
+                        actors: newList?.length > 0 ? newList : undefined,
+                    };
+                }
+
+                const key = this.localActor ? getDispositionName(this.localToken, this.localActor) : event.currentTarget.attributes.getNamedItem('[data-id]').value;
+                setProperty(this, templatePath, DefaultColors[key]);
             }
             this.render();
         });
 
-        $(html).find('button#save').click(event => {
+        $(html).find('button#save').click(async event => {
             if(this.localActor){
                 if(areColorsEqual(this.colors.actor, this.localToken, this.localActor)){
-                    this.localActor.unsetFlag('introduce-me', 'introduction-colors');
+                    await this.localActor.unsetFlag('introduce-me', 'introduction-colors');
                 }
                 else {
-                    this.localActor.setFlag('introduce-me', 'introduction-colors', this.colors);
+                    await this.localActor.setFlag('introduce-me', 'introduction-colors', this.colors);
                 }
+
+                game.settings.set('introduce-me', 'color-templates', this.templates);
             }
             else {
                 game.settings.set('introduce-me', 'introduction-colors', this.colors);
@@ -160,12 +183,27 @@ const getActorIntroductionColorsByData = (token, actor) => {
     }
 }
 
-const areColorsEqual = (colors, token, actor) => {
+const getDispositionName = (token, actor) => {
+    if(actor.data.type === 'character'){
+        return 'players';
+    }
+
+    switch(token.data.disposition){
+        case -1:
+            return 'hostile';
+        case 0:
+            return 'neutral';
+        default:
+            return 'friendly';
+    }
+}
+
+export const areColorsEqual = (colors, token, actor) => {
     const defaultColor = getActorIntroductionColorsByData(token, actor);
 
     return (
-        colors.background === defaultColor.background &&
-        colors.text === defaultColor.text &&
-        colors.clip === defaultColor.clip
+        colors?.background === defaultColor.background &&
+        colors?.text === defaultColor.text &&
+        colors?.clip === defaultColor.clip
     );
 };

@@ -1,9 +1,9 @@
 <div class="introduce-me color-settings flexrow flex-content">
-    {{#if this.templates}} <label class="flex0 flexrow color-label"><strong>{{localize this.color.label}}</strong></label>{{/if}}
+    {{#if this.showTemplates}} <label class="flex0 flexrow color-label"><strong>{{localize this.color.label}}</strong></label>{{/if}}
     <button class="flex0 action-button preview-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.preview"}}"><i class="fas fa-eye"></i></button>
-    {{#if this.templates}}<button class="flex0 action-button default-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.default"}}"><i class="fas fa-undo"></i></button>{{/if}}
-    {{#if this.templates}} 
-        <select name="{{concat this.name ".template"}}" class="template-select">
+    {{#if this.showTemplates}}<button class="flex0 action-button default-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.default"}}"><i class="fas fa-undo"></i></button>{{/if}}
+    {{#if this.showTemplates}} 
+        <select name="{{concat this.name ".template"}}" [data-id]="{{this.key}}" class="template-select">
             {{selectOptions this.templates selected=this.color.template nameAttr="id" labelAttr="label" blank="No Template" }}
         </select>
     {{/if}}

@@ -1,13 +1,14 @@
 <form class="introduce-me color-settings" autocomplete="off">
     <content>
         {{> "modules/introduce-me/templates/partials/colorSettingHeader.hbs"
-            templates=this.templates    
+            showTemplates=true
         }}
         {{#each this.colors}}
             {{> "modules/introduce-me/templates/partials/colorSetting.hbs" 
                 key=@key
                 name=(concat "colors." @key)
                 templates=../templates
+                showTemplates=true
                 color=this
             }}
         {{/each}}

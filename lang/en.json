@@ -8,7 +8,9 @@
             "preview": "Private Preview",
             "save": "Save Settings",
             "introduce": "Introduce",
-            "default": "Reset to default"
+            "noneDefault": "The actor has non-default colors",
+            "default": "Reset to default",
+            "actorColorSettings": "Actor Color Settings"
         },
         "settings": {
             "title": "Settings"

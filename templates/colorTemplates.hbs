@@ -1,7 +1,7 @@
 <form class="introduce-me color-templates" autocomplete="off">
     <header>
         <input class="flex0" name="newTemplateName" value="{{this.newTemplateName}}" type="text" data-dtype="text" placeholder="{{localize "introduceMe.colorTemplates.newTemplatePlaceholder"}}" />
-        <button class="flex0 color-template-create" title="{{localize "introduceMe.colorTemplates.create"}}"><i class="fas fa-plus"></i></button>
+        <button class="flex0 color-template-create" {{#unless this.createTemplateDisabled}}title="{{localize "introduceMe.colorTemplates.create"}}"{{/unless}} {{disabled this.createTemplateDisabled}}><i class="fas fa-plus"></i></button>
     </header>
     <content>
         {{#each this.templates}}

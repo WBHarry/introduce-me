@@ -1,4 +1,4 @@
-import ColorSettings from './ColorSettings.js';
+import ColorSettings, { areColorsEqual } from './ColorSettings.js';
 import Introduction from './Introduction.js';
 
 export default class IntroduceDialog extends FormApplication {
@@ -29,9 +29,12 @@ export default class IntroduceDialog extends FormApplication {
 
     getData() {
         const duration = this.duration !== undefined ? this.duration : this.defaultDuration;
+        const actorColor = this.token.actor.getFlag('introduce-me', 'introduction-colors');
+        const isDefaultColor = !actorColor ? true : areColorsEqual(actorColor, this.token, this.token.actor);
         return { 
             flavor: this.flavor, 
-            duration: duration, 
+            duration: duration,
+            isDefaultColor: isDefaultColor, 
         };
     }
 
@@ -51,8 +54,9 @@ export default class IntroduceDialog extends FormApplication {
             this.render();
         });
 
-        $(html).find('button#color-setting').click(event => {
-            new ColorSettings(this.token, actor).render(true);
+        $(html).find('button#color-setting').click(async event => {
+            await ActorColorSettings.generate(this.token, actor);
+            this.render();
         });
 
         $(html).find('#preview').click(async () => {
@@ -78,4 +82,33 @@ export default class IntroduceDialog extends FormApplication {
             this.close();
         });
     }
+}
+
+class ActorColorSettings extends ColorSettings {
+    constructor(localToken, localActor, resolve) {
+        super(localToken, localActor, game.i18n.localize('introduceMe.introduceDialog.actorColorSettings'));
+        this.resolve = resolve;
+    }
+
+    static get defaultOptions() {
+        const defaults = super.defaultOptions;
+        const overrides = {
+          id: 'actor-color-settings',
+        };
+        
+        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        
+        return mergedOptions;
+    }
+
+    close(options) {
+        super.close(options);
+        this.resolve?.();
+    }
+
+    static generate = async (localToken, localActor) => {
+        return new Promise((resolve) => {
+            return new ActorColorSettings(localToken, localActor, resolve).render(true);
+        });
+    };
 }

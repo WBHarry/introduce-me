@@ -27,7 +27,7 @@ export default class ColorTemplates extends FormApplication {
     }
 
     getData() {
-        const createTemplateDisabled = this.newTemplateName && this.colorTemplates.every(template => template.name !== this.newTemplateName);
+        const createTemplateDisabled = !this.newTemplateName || this.colorTemplates.some(template => template.label === this.newTemplateName);
 
         return { 
             templates: this.colorTemplates,
@@ -82,8 +82,29 @@ export default class ColorTemplates extends FormApplication {
         });
 
         $(html).find('button#save').click(event => {
+            const removedTemplates = game.settings.get('introduce-me', 'color-templates').filter(x => !this.colorTemplates.some(colorTemplate => colorTemplate.id == x.id));
+            removeTemplateFromActors(removedTemplates);
+
             game.settings.set('introduce-me', 'color-templates', this.colorTemplates);
             this.close();
         });
     }
+}
+
+const removeTemplateFromActors = (removedTemplates) => {
+    const dispositionColors = game.settings.get('introduce-me', 'introduction-colors');
+    removedTemplates.forEach(template => {
+        template.actors?.forEach(actorId => {
+            const actor = game.actors.get(actorId);
+            actor.unsetFlag('introduce-me', 'introduction-colors');
+        });
+
+        Object.keys(dispositionColors).forEach(key => {
+            if(dispositionColors[key].template === template.id){
+                dispositionColors[key] = DefaultColors[key];
+            }
+        });
+    });
+
+    game.settings.set('introduce-me', 'introduction-colors', dispositionColors);
 }
