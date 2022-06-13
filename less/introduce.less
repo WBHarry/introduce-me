@@ -1,9 +1,12 @@
 .introduce-me {
     &.introduction {
         position: absolute; 
-        top: calc(50% - 406px); 
-        left: calc(50% - 250px);
+        top: 100px;
+        left: calc(50% - 358px);
         z-index: 1000;
+        @media (max-width: 1600px) {
+            left: ~"max(calc(50% - 503px), 110px)";
+        }
         .introduction-container {
             width: 0px;
             height: 125px;
