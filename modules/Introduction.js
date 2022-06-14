@@ -21,7 +21,15 @@ export default class Introduction {
     introductionDisplay = async (token, actor, preview, overrideFlavor, overrideDuration) => {
         if(token){
             if(!preview && game.user.isGM){
-                await actor.update({'token.displayName': 30});
+                const usePermission = await game.settings.get('introduce-me', 'use-introduce-permission');
+                const permissionUpdate = usePermission ? {
+                    'permission': {
+                        ...actor.data.permission,
+                        default: actor.data.permission.default > 1 ? actor.data.permission.default : 1, 
+                    }
+                } : {};
+
+                await actor.update({'token.displayName': 30, ...permissionUpdate});
                 const scenes = Array.from(game.scenes);
                 for(let i = 0; i < scenes.length; i++){
                     const tokens = Array.from(scenes[i].tokens);

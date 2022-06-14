@@ -47,6 +47,15 @@ export const registerGameSettings = () => {
         type: Boolean,
     });
 
+    game.settings.register('introduce-me', 'use-introduce-permission', {
+        name: game.i18n.localize('introduceMe.gameSettings.useIntroducePermission.name'),
+        hint: game.i18n.localize('introduceMe.gameSettings.useIntroducePermission.hint'),
+        scope: 'world',
+        default: false,
+        config: true,
+        type: Boolean,
+    });
+
     game.settings.register('introduce-me', 'introduction-duration', {
         name: game.i18n.localize('introduceMe.gameSettings.introductionDuration.name'),
         hint: game.i18n.localize('introduceMe.gameSettings.introductionDuration.hint'),

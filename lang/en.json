@@ -54,6 +54,10 @@
                 "name": "Use Actor Name",
                 "hint": "Show the Actor name instead of the Token name in the Introduction."
             },
+            "useIntroducePermission": {
+                "name": "Introduce with Permission",
+                "hint": "When an actor is introduced, set their permission status to 'limited' for players unless already greater."
+            },
             "introductionDuration": {
                 "name": "Default Introduction Duration",
                 "hint": "The default duration in seconds that the Introduction stays after the animation finishes before being removed."
