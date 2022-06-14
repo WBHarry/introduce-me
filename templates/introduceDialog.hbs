@@ -3,14 +3,14 @@
         <div class="setting">
             <label><strong>{{localize "introduceMe.introduceDialog.flavorTitle"}}</strong></label>
             <div class="flexrow input-row">
-                <input class="flex1" name="flavor" value="{{this.flavor}}" type="text" data-dtype="string" />
+                <input class="flex1 flavor-input" name="flavor" value="{{this.flavor}}" type="text" data-dtype="string"/>
                 <div class="flex0 default-button"></div>
             </div>
         </div>
         <div class="setting">
             <label><strong>{{localize "introduceMe.introduceDialog.colorsTitle"}}</strong></label>
             <div class="flexrow input-row">
-                <button id="color-setting"><i class="fas fa-palette"></i></button>
+                <button id="color-setting"><i class="fas fa-palette color-palette"></i></button>
                 {{#if this.isDefaultColor}}
                     <div class="flex0 default-button"></div>
                 {{else}}
