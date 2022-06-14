@@ -18,7 +18,7 @@
         },
         {
             "lang": "es",
-            "name": "Español",
+            "name": "Espaï¿½ol",
             "path": "lang/es.json"
         }
     ],
@@ -31,7 +31,7 @@
         }
     ],
     "socket": true,
-    "version": "0.9.2.1",
+    "version": "0.9.2.3",
     "minimumCoreVersion": "8",
     "compatibleCoreVersion": "9",
     "url": "https://github.com/WBHarry/introduce-me",

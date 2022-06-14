@@ -39,7 +39,7 @@ export default class Introduction {
             const introductionDuration = overrideDuration ? overrideDuration : actorIntroductionDuration !== undefined ? actorIntroductionDuration : defaultIntroductionDuration;
 
             $(document.body).find('.introduce-me.introduction').remove();
-            const flavor = overrideFlavor ?? actor.getFlag('introduce-me', 'flavor') ?? '';
+            const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? '', actor);
             const colors = getActorIntroductionColors(token, actor);
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
                 token: token, 
@@ -86,7 +86,7 @@ export default class Introduction {
 
     editDisplay = async (colors, localToken, localActor) => {
         $(document.body).find('.introduce-me.introduction').remove();
-        const flavor = localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle");
+        const flavor = this.flavorParse(localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), localActor);
 
         $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
             token: localToken ?? {
@@ -123,5 +123,9 @@ export default class Introduction {
     getIntroductionImage = (token, actor) => {
         const useToken = game.settings.get('introduce-me', 'use-token');
         return useToken ? token.data.img : actor.img;
+    }
+
+    flavorParse = (flavor, actor) => {
+        return Roll.replaceFormulaData(flavor, actor?.data?.data) ?? flavor;
     }
 }
