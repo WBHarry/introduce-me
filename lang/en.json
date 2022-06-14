@@ -2,7 +2,7 @@
     "introduceMe": {
         "introduceDialog": {
             "title": "Introduce Me",
-            "flavorTitle": "Flavortext",
+            "flavorTitle": "Flavor Text",
             "colorsTitle": "Edit Actor Introduction Colors",
             "durationTitle": "Introduction Duration",
             "preview": "Private Preview",
@@ -29,7 +29,8 @@
             "template": "Template",
             "backgroundLabel": "Background Color",
             "textLabel": "Text Color",
-            "clipsLabel": "Show Clips"
+            "clipsLabel": "Show Clips",
+	    "tester": "Color Tester"
         },
         "colorTemplates": {
             "name": "Color Templates",

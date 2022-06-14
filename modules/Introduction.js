@@ -86,11 +86,11 @@ export default class Introduction {
 
     editDisplay = async (colors, localToken, localActor) => {
         $(document.body).find('.introduce-me.introduction').remove();
-        const flavor = localActor?.getFlag('introduce-me', 'flavor') ?? 'Flavortext';
+        const flavor = localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle");
 
         $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
             token: localToken ?? {
-                name: 'Color Tester'
+                name: game.i18n.localize("introduceMe.colorSettings.tester")
             }, 
             img: localActor ? this.getIntroductionImage(localToken, localActor) : 'icons/svg/cowled.svg', 
             flavor: flavor,
