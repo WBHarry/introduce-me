@@ -50,6 +50,10 @@
                 "name": "Use Tokens",
                 "hint": "Show the actor token instead of the avatar in the Introduction."
             },
+            "useActorName": {
+                "name": "Use Actor Name",
+                "hint": "Show the Actor name instead of the Token name in the Introduction."
+            },
             "introductionDuration": {
                 "name": "Default Introduction Duration",
                 "hint": "The default duration in seconds that the Introduction stays after the animation finishes before being removed."

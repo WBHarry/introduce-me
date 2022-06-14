@@ -38,6 +38,15 @@ export const registerGameSettings = () => {
         type: Boolean,
     });
 
+    game.settings.register('introduce-me', 'use-actor-name', {
+        name: game.i18n.localize('introduceMe.gameSettings.useActorName.name'),
+        hint: game.i18n.localize('introduceMe.gameSettings.useActorName.hint'),
+        scope: 'world',
+        default: false,
+        config: true,
+        type: Boolean,
+    });
+
     game.settings.register('introduce-me', 'introduction-duration', {
         name: game.i18n.localize('introduceMe.gameSettings.introductionDuration.name'),
         hint: game.i18n.localize('introduceMe.gameSettings.introductionDuration.hint'),

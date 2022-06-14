@@ -50,6 +50,10 @@
                 "name": "Usar Iconos",
                 "hint": "Mostrar el icono del actor en lugar del avatar en la Presentaci\u00F3n."
             },
+            "useActorName": {
+                "name": "Use Actor Name",
+                "hint": "Show the Actor name instead of the Token name in the Introduction."
+            },
             "introductionDuration": {
                 "name": "Duraci\u00F3n Predeterminada de la Presentaci\u00F3n",
                 "hint": "La duraci\u00F3n predeterminada en segundos que la Presentaci\u00F3n permanecer\u00E1 tras el fin de la animaci\u00F3n antes de ser eliminada."

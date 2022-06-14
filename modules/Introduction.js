@@ -39,10 +39,11 @@ export default class Introduction {
             const introductionDuration = overrideDuration ? overrideDuration : actorIntroductionDuration !== undefined ? actorIntroductionDuration : defaultIntroductionDuration;
 
             $(document.body).find('.introduce-me.introduction').remove();
+            const useActorName = game.settings.get('introduce-me', 'use-actor-name');
             const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? '', actor);
             const colors = getActorIntroductionColors(token, actor);
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
-                token: token, 
+                name: useActorName ? actor.name : token.name, 
                 img: this.getIntroductionImage(token, actor), 
                 flavor: flavor,
                 colors: colors,
@@ -86,12 +87,11 @@ export default class Introduction {
 
     editDisplay = async (colors, localToken, localActor) => {
         $(document.body).find('.introduce-me.introduction').remove();
+        const useActorName = game.settings.get('introduce-me', 'use-actor-name');
         const flavor = this.flavorParse(localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), localActor);
 
         $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
-            token: localToken ?? {
-                name: game.i18n.localize("introduceMe.colorSettings.tester")
-            }, 
+            name: localToken ? (useActorName ? localActor.name : localToken.name) : game.i18n.localize("introduceMe.colorSettings.tester"), 
             img: localActor ? this.getIntroductionImage(localToken, localActor) : 'icons/svg/cowled.svg', 
             flavor: flavor,
             colors: colors,
