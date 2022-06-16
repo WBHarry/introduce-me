@@ -14,7 +14,7 @@ export default class Introduction {
 
     introduceMe = async (token) => {
         if(game.user.isGM && token) {
-            await game.socket.emit(`module.introduce-me`, { type: RequestType.introduce, data: { uuid: token.document.uuid } });
+            await game.socket.emit(`module.introduce-me`, { type: RequestType.introduce, data: { uuid: token.document?.uuid ?? token.uuid } });
             await this.introductionDisplay(token, token.actor);
         }
     }
@@ -36,7 +36,7 @@ export default class Introduction {
                     const tokens = Array.from(scenes[i].tokens);
                     for(let j = 0; j < tokens.length; j++){
                         const token = tokens[j];
-                        if(token.data.actorId === actor.id){
+                        if(token.actorId ?? token.data.actorId === actor.id){
                             await token.update({displayName: 30});
                         }
                     }
@@ -148,7 +148,7 @@ export default class Introduction {
 
     introduceMeDialog = async (token) => {
         if(game.user.isGM && token){
-            await new IntroduceDialog(token).render(true);
+            await new IntroduceDialog(token, token.actor).render(true);
         }
     }
 
@@ -156,16 +156,15 @@ export default class Introduction {
         const rightColumn = $(html).find('.col.right');
         $(rightColumn).append(await renderTemplate('modules/introduce-me/templates/introductionInteract.hbs'));
 
-        const introduceButton = $(rightColumn).find('.introduce-me.introduction-interact');
-        introduceButton.click(async () => {
-            await this.introduceMeDialog(data.object);
+        $(rightColumn).find('.introduce-me.introduction-interact').click(async () => {
+            this.introduceMe(data.object);
             data.clear();
         });
     }
 
     getIntroductionImage = (token, actor) => {
         const useToken = game.settings.get('introduce-me', 'use-token');
-        return useToken ? token.data.img : actor.img;
+        return useToken ? token.img ?? token.data.img : actor.img;
     }
 
     flavorParse = (flavor, actor) => {

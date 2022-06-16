@@ -173,7 +173,7 @@ const getActorIntroductionColorsByData = (token, actor) => {
         return introductionColors.players;
     }
 
-    switch(token.data.disposition){
+    switch(token.disposition ?? token.data.disposition){
         case -1:
             return introductionColors.hostile;
         case 0:
@@ -188,7 +188,7 @@ const getDispositionName = (token, actor) => {
         return 'players';
     }
 
-    switch(token.data.disposition){
+    switch(token.disposition ?? token.data.disposition){
         case -1:
             return 'hostile';
         case 0:

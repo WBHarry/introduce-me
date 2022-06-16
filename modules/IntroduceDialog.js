@@ -2,12 +2,13 @@ import ColorSettings, { areColorsEqual } from './ColorSettings.js';
 import Introduction from './Introduction.js';
 
 export default class IntroduceDialog extends FormApplication {
-    constructor(token) {
+    constructor(token, actor) {
         super({}, {title: game.i18n.localize('introduceMe.introduceDialog.title')});
         this.defaultDuration = game.settings.get('introduce-me', 'introduction-duration');
         this.token = token;
-        this.flavor = token.actor.getFlag('introduce-me', 'flavor');
-        this.duration = token.actor.getFlag('introduce-me', 'introduction-duration');
+        this.actor = actor;
+        this.flavor = actor.getFlag('introduce-me', 'flavor');
+        this.duration = actor.getFlag('introduce-me', 'introduction-duration');
     }
 
     static get defaultOptions() {
@@ -29,8 +30,8 @@ export default class IntroduceDialog extends FormApplication {
 
     getData() {
         const duration = this.duration !== undefined ? this.duration : this.defaultDuration;
-        const actorColor = this.token.actor.getFlag('introduce-me', 'introduction-colors');
-        const isDefaultColor = !actorColor ? true : areColorsEqual(actorColor, this.token, this.token.actor);
+        const actorColor = this.actor.getFlag('introduce-me', 'introduction-colors');
+        const isDefaultColor = !actorColor ? true : areColorsEqual(actorColor, this.token, this.actor);
         return { 
             flavor: this.flavor, 
             duration: duration,
@@ -46,10 +47,9 @@ export default class IntroduceDialog extends FormApplication {
 
     activateListeners(html) {
         super.activateListeners(html);
-        const actor = game.actors.get(this.token.actor.id);
+        const actor = game.actors.get(this.actor.id);
 
         $(html).find('button.default-button').click(async event => {
-            await actor.unsetFlag('introduce-me', 'introduction-duration');
             this.duration = undefined;
             this.render();
         });
@@ -60,12 +60,16 @@ export default class IntroduceDialog extends FormApplication {
         });
 
         $(html).find('#preview').click(async () => {
-            await new Introduction().introductionDisplay(this.token, this.token.actor, true, this.flavor, this.duration);
+            await new Introduction().introductionDisplay(this.token, this.actor, true, this.flavor, this.duration);
         });
 
         $(html).find('#save').click(async () => {
             await actor.setFlag('introduce-me', 'flavor', this.flavor);
-            if(this.duration !== this.defaultDuration){
+
+            if(this.duration === undefined){
+                await actor.unsetFlag('introduce-me', 'introduction-duration');
+            }
+            else{
                 await actor.setFlag('introduce-me', 'introduction-duration', this.duration);
             }
 
@@ -74,7 +78,11 @@ export default class IntroduceDialog extends FormApplication {
 
         $(html).find('#introduce').click(async () => {
             await actor.setFlag('introduce-me', 'flavor', this.flavor);
-            if(this.duration !== this.defaultDuration){
+
+            if(this.duration === undefined){
+                await actor.unsetFlag('introduce-me', 'introduction-duration');
+            }
+            else{
                 await actor.setFlag('introduce-me', 'introduction-duration', this.duration);
             }
             

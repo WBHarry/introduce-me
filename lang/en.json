@@ -50,10 +50,13 @@
         "HUD": {
             "introduceButton": "Introduce Me"
         },
+        "actorSettings": {
+            "introduceButton": "Introduce"
+        },
         "gameSettings": {
             "showHud": {
                 "name": "Show HUD",
-                "hint": "If HUD is not displayed then use the module macros to access the functionality instead."
+                "hint": "Show the token HUD button. If disabled, use the module macros to introduce actors instead."
             },
             "useToken": {
                 "name": "Use Tokens",
