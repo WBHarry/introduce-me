@@ -1,6 +1,7 @@
 import Introduction from './modules/Introduction.js';
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import { registerGameSettings, registerHandlebars } from './modules/Setup.js';
+import { setupSockets } from './modules/SocketHandler.js';
 
 Hooks.once('init', () => {
     game.modules.get("introduce-me").api = {
@@ -13,11 +14,8 @@ Hooks.once('init', () => {
     registerHandlebars();
 });
 
-Hooks.on('ready', () => {
-    game.socket.on(`module.introduce-me`, async request => {
-        const token = await fromUuid(request.uuid);
-        await new Introduction().introductionDisplay(token, token.actor);
-    });
+Hooks.on('ready', async () => {
+    await setupSockets();
 });
 
 Hooks.on('renderTokenHUD', async (data, html) => {

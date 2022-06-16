@@ -1,6 +1,7 @@
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import IntroduceDialog from './IntroduceDialog.js';
 import { getActorIntroductionColors } from './ColorSettings.js';
+import { RequestType } from './SocketHandler.js';
 
 export default class Introduction {
     constructor() {
@@ -13,7 +14,7 @@ export default class Introduction {
 
     introduceMe = async (token) => {
         if(game.user.isGM && token) {
-            await game.socket.emit(`module.introduce-me`, { uuid: token.document.uuid });
+            await game.socket.emit(`module.introduce-me`, { type: RequestType.introduce, data: { uuid: token.document.uuid } });
             await this.introductionDisplay(token, token.actor);
         }
     }
@@ -42,6 +43,12 @@ export default class Introduction {
                 }   
             }
 
+            game.socket.on(`module.introduce-me`, request => {
+                if(request.type === RequestType.close){
+                        this.manualClose(node);
+                }
+            });
+
             const defaultIntroductionDuration = game.settings.get('introduce-me', 'introduction-duration');
             const actorIntroductionDuration = actor.getFlag('introduce-me', 'introduction-duration');
             const introductionDuration = overrideDuration ? overrideDuration : actorIntroductionDuration !== undefined ? actorIntroductionDuration : defaultIntroductionDuration;
@@ -55,12 +62,14 @@ export default class Introduction {
                 img: this.getIntroductionImage(token, actor), 
                 flavor: flavor,
                 colors: colors,
+                showSettings: !game.user.isGM || introductionDuration > 0 ? undefined : 1,
             })));
 
             const node = $(document.body).find('.introduce-me.introduction');
             this.setIntroductionPosition(node);
 
             const container = $(node).find('.introduction-container');
+            const settings = $(node).find('.settings-ui');
             const image = $(container).find('img#actorImage');
             const label = $(container).find('label#name');
             const citation = $(container).find('label#citation');
@@ -87,14 +96,34 @@ export default class Introduction {
                     .from(splitCitation.chars, 0.8, {
                         opacity: 0, scale: 0, y: 80, rotationX: 180, transformOrigin: "0% 50% -50"
                     }, "<");
-            }             
+            }      
+            
+            if(settings.length === 1) {
+                animationTimeline
+                    .from(settings, {opacity:0, duration: 0.5}, '>');
+            }
 
-            animationTimeline.to(node, { opacity: 0, duration: 0.5 }, `>${introductionDuration}`);
-            setTimeout(() => {
-                $(node).remove();
-            }, 4000+(introductionDuration*1000));
+            if(introductionDuration > 0){
+                animationTimeline.to(node, { opacity: 0, duration: 0.5 }, `>${introductionDuration}`);
+                setTimeout(() => {
+                    $(node).remove();
+                }, 4000+(introductionDuration*1000));
+            }
+
+            $(node).find('.close-button').click(async event => {
+                await game.socket.emit(`module.introduce-me`, { type: RequestType.close });
+                this.manualClose(node);
+            });
+
         }
     }
+
+    manualClose = (node) => {
+        gsap.to(node, { opacity: 0, duration: 0.5 });
+        setTimeout(() => {
+            $(node).remove();
+        }, 2000);
+    };
 
     editDisplay = async (colors, localToken, localActor) => {
         $(document.body).find('.introduce-me.introduction').remove();

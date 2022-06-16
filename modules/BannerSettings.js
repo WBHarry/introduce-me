@@ -84,10 +84,7 @@ export default class BannerSettings extends FormApplication {
         });
 
         $(html).find('.default-button').click(event => {
-            this.setPosition({
-                ...defaultPosition,
-                left: window.innerWidth*0.5-358
-            });
+            this.setPosition(defaultPosition);
             this.render();
         });
     }
@@ -95,7 +92,7 @@ export default class BannerSettings extends FormApplication {
 
 export const defaultPosition = {
     height: 125,
-    left: 'calc(50% - 358px)',
+    left: window.innerWidth*0.5-358,
     scale: 1,
     top: 100,
     width: 716,

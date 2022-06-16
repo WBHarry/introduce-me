@@ -27,7 +27,7 @@ export const registerGameSettings = () => {
         hint: "",
         icon: "far fa-image",
         type: BannerSettings,
-        restricted: true
+        restricted: false
     });
 
     game.settings.register('introduce-me', 'show-hud', {

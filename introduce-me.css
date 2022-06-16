@@ -110,7 +110,7 @@
 }
 .introduce-me.introduction .settings-ui {
   position: absolute;
-  top: calc(50%);
+  top: calc(50% - 12px);
   right: 0px;
   z-index: 1;
   width: 64px;
