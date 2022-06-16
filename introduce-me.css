@@ -1,17 +1,9 @@
 .introduce-me.introduction {
-  position: absolute;
-  top: 100px;
-  left: calc(50% - 358px);
   z-index: 1000;
-}
-@media (max-width: 1600px) {
-  .introduce-me.introduction {
-    left: max(calc(50% - 503px), 110px);
-  }
+  transform-origin: 0 0;
+  position: absolute;
 }
 .introduce-me.introduction .introduction-container {
-  width: 0px;
-  height: 125px;
   display: flex;
   justify-content: flex-start;
   position: relative;
@@ -22,6 +14,7 @@
 .introduce-me.introduction .introduction-container .actor-container {
   display: flex;
   margin-right: 40px;
+  width: 200px;
 }
 .introduce-me.introduction .introduction-container .actor-container > img {
   border: 0;
@@ -63,7 +56,7 @@
   width: 200px;
   opacity: 0;
   height: 200px;
-  position: relative;
+  position: absolute;
   left: 40px;
   align-self: center;
 }
@@ -114,6 +107,61 @@
 }
 .introduce-me.introduction .introduction-container .close-button > i {
   margin: 0px;
+}
+.introduce-me.introduction .settings-ui {
+  position: absolute;
+  top: calc(50%);
+  right: 0px;
+  z-index: 1;
+  width: 64px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: url(../../ui/parchment.jpg) repeat;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.introduce-me.introduction .settings-ui .main-buttons {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+.introduce-me.introduction .settings-ui .action-button {
+  background: beige;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 4px;
+  border: 0;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.introduce-me.introduction .settings-ui .action-button.standalone {
+  margin-right: 16px;
+}
+.introduce-me.introduction .settings-ui .action-button > i {
+  margin: 0px;
+}
+.introduce-me.introduction .settings-ui .close-button {
+  color: var(--color-border-highlight-alt);
+}
+.introduce-me.introduction .settings-ui .check-button {
+  color: green;
+}
+.introduce-me.introduction .settings-ui .default-button {
+  background: beige;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
 }
 .introduce-me.color-settings .flex-content {
   align-items: center;
@@ -206,6 +254,31 @@
 }
 .introduce-me.color-templates .template-toggle .delete-template:hover {
   text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.introduce-me.banner-settings {
+  position: absolute;
+  transform-origin: 0 0;
+}
+.introduce-me.banner-settings .position-anchor {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: 0 0 4px 0;
+}
+.window-resizable-handle:not(.introduce-me.banner-settings.position-anchor) {
+  bottom: -48px;
+}
+.introduce-me.banner-settings .introduce-me.introduction {
+  position: initial;
+}
+.introduce-me.banner-settings.window-app .window-content {
+  padding: 0;
+  overflow-x: visible;
+  overflow-y: visible;
+}
+.introduce-me.banner-settings .introduce-me.introduction .introduction-container.editing {
+  width: auto;
+  height: auto;
 }
 .introduce-me.introduce-dialog {
   display: flex;

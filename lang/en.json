@@ -1,5 +1,10 @@
 {
     "introduceMe": {
+        "introduce": {
+            "close": "Close Introduction",
+            "update": "Update introduction position and size",
+            "default": "Reset to default position and size"
+        },
         "introduceDialog": {
             "title": "Introduce Me",
             "flavorTitle": "Flavor Text",
@@ -30,13 +35,17 @@
             "backgroundLabel": "Background Color",
             "textLabel": "Text Color",
             "clipsLabel": "Show Clips",
-	    "tester": "Color Tester"
+	        "tester": "Color Tester"
         },
         "colorTemplates": {
             "name": "Color Templates",
             "label": "Color Templates",
             "newTemplatePlaceholder": "New template name..",
             "create": "Create New Template"
+        },
+        "bannerSettings": {
+            "name": "Banner Settings",
+            "label": "Banner Placement"
         },
         "HUD": {
             "introduceButton": "Introduce Me"

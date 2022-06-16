@@ -1,0 +1,29 @@
+.introduce-me {
+    &.banner-settings {
+        position: absolute;
+        transform-origin: 0 0;
+        .position-anchor {
+            top: 0;
+            left: 0;
+            z-index: 1;
+            border-radius: 0 0 4px 0;
+        }
+        .window-resizable-handle:not(&.position-anchor) {
+            bottom: -48px; // Improve styling layout to remove this.
+        }
+        .introduce-me.introduction {
+            position: initial;
+        }
+
+        &.window-app .window-content {
+            padding: 0;
+            overflow-x: visible;
+            overflow-y:visible
+        }
+
+        .introduce-me.introduction .introduction-container.editing {
+            width: auto;
+            height: auto;
+        }
+    }
+}

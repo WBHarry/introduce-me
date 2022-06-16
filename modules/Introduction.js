@@ -56,17 +56,20 @@ export default class Introduction {
                 flavor: flavor,
                 colors: colors,
             })));
+
             const node = $(document.body).find('.introduce-me.introduction');
+            this.setIntroductionPosition(node);
+
             const container = $(node).find('.introduction-container');
             const image = $(container).find('img#actorImage');
             const label = $(container).find('label#name');
             const citation = $(container).find('label#citation');
             const splitLabel = new SplitText(label, {type:"words,chars"});
             const splitCitation = new SplitText(citation, {type:"words,chars"});
-            
+
             const animationTimeline = gsap.timeline();
             animationTimeline
-                .to(container, {width: 716, duration: 1})
+                .from(container, {width:0, height: 'auto', duration: 1})
                 .to(image, {opacity: 1, duration: 1})
                 .from(image, {left: -100, duration: 1}, "<+=0.2");
 
@@ -104,9 +107,12 @@ export default class Introduction {
             flavor: flavor,
             colors: colors,
             editing: true,
+            showSettings: 1,
         })));
 
-        $(document.body).find('.introduce-me.introduction > .introduction-container > .close-button').click(event => {
+        this.setIntroductionPosition($(document.body).find('.introduce-me.introduction'));
+
+        $(document.body).find('.close-button').click(event => {
             $(document.body).find('.introduce-me.introduction').remove();
         });
     };
@@ -135,5 +141,14 @@ export default class Introduction {
 
     flavorParse = (flavor, actor) => {
         return Roll.replaceFormulaData(flavor, actor?.data?.data) ?? flavor;
+    }
+    
+    setIntroductionPosition = (node) => {
+        const { left, top, height, width, scale } = game.settings.get('introduce-me', 'position');
+        node[0].style.left = `${left}px`;
+        node[0].style.top = `${top}px`;
+        node[0].style.height = `${height}px`;
+        node[0].style.width = `${width}px`;
+        node[0].style.transform = `scale(${scale})`;
     }
 }

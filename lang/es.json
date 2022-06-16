@@ -1,5 +1,10 @@
 {
     "introduceMe": {
+        "introduce": {
+            "close": "Close Introduction",
+            "update": "Update introduction position and size",
+            "default": "Reset to default position and size"
+        },
         "introduceDialog": {
             "title": "Pres\u00E9ntame",
             "flavorTitle": "Texto Adicional",
@@ -30,13 +35,17 @@
             "backgroundLabel": "Color de Fondo",
             "textLabel": "Color de Texto",
             "clipsLabel": "Mostrar Clips",
-	    "tester": "Prueba de Color"
+	        "tester": "Prueba de Color"
         },
         "colorTemplates": {
             "name": "Plantillas de Color",
             "label": "Plantillas de Color",
             "newTemplatePlaceholder": "Nuevo nombre de plantilla..",
             "create": "Crear Nueva Plantilla"
+        },
+        "bannerSettings": {
+            "name": "Banner Settings",
+            "label": "Banner Placement"
         },
         "HUD": {
             "introduceButton": "Pres\u00E9ntame"

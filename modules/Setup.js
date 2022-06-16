@@ -1,5 +1,6 @@
 import ColorSettings, { DefaultColors } from './ColorSettings.js';
 import ColorTemplates from './ColorTemplates.js';
+import BannerSettings, { defaultPosition } from './BannerSettings.js';
 
 export const registerGameSettings = () => {
     game.settings.registerMenu("introduce-me", "color-settings", {
@@ -17,6 +18,15 @@ export const registerGameSettings = () => {
         hint: "",
         icon: "fas fa-book",
         type: ColorTemplates,
+        restricted: true
+    });
+
+    game.settings.registerMenu("introduce-me", "banner-settings", {
+        name: game.i18n.localize('introduceMe.bannerSettings.name'),
+        label: game.i18n.localize('introduceMe.bannerSettings.label'),
+        hint: "",
+        icon: "far fa-image",
+        type: BannerSettings,
         restricted: true
     });
 
@@ -81,10 +91,20 @@ export const registerGameSettings = () => {
         config: false,
         type: Object,
     });
+
+    game.settings.register('introduce-me', 'position', {
+        name: '',
+        hint: '',
+        scope: 'client',
+        default: defaultPosition,
+        config: false,
+        type: Object,
+    });
 };
 
 export const registerHandlebars = () => {
     loadTemplates([
+        'modules/introduce-me/templates/introduction.hbs',
         'modules/introduce-me/templates/partials/colorSetting.hbs',
         'modules/introduce-me/templates/partials/colorTemplate.hbs',
         'modules/introduce-me/templates/partials/colorSettingHeader.hbs',

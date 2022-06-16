@@ -1,15 +1,9 @@
 .introduce-me {
-    &.introduction {
-        position: absolute; 
-        top: 100px;
-        left: calc(50% - 358px);
+    &.introduction { 
         z-index: 1000;
-        @media (max-width: 1600px) {
-            left: ~"max(calc(50% - 503px), 110px)";
-        }
+        transform-origin: 0 0;
+        position: absolute;
         .introduction-container {
-            width: 0px;
-            height: 125px;
             display: flex;
             justify-content: flex-start;
             position: relative;
@@ -19,6 +13,7 @@
             .actor-container {
                 display: flex;
                 margin-right: 40px;
+                width: 200px;
                 > img {
                     border: 0;
                 }
@@ -60,7 +55,7 @@
                 width: 200px;
                 opacity: 0;
                 height: 200px;
-                position: relative;
+                position: absolute;
                 left: 40px;
                 align-self: center;
                 &.visible {
@@ -112,6 +107,62 @@
                 > i {
                     margin: 0px;
                 }
+            }
+        }
+
+        .settings-ui {
+            position: absolute;
+            top: calc(50%);
+            right: 0px;
+            z-index: 1;
+            width: 64px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: url(../../ui/parchment.jpg) repeat;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+            .main-buttons {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: space-evenly;
+            }
+            .action-button {
+                background: beige;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                margin-right: 4px;
+                border: 0;
+                font-size: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &.standalone {
+                    margin-right: 16px;
+                }
+                cursor: pointer;
+                > i {
+                    margin: 0px;
+                }
+            }
+            .close-button {
+                color: var(--color-border-highlight-alt);
+            }
+            .check-button {
+                color: green;
+            }
+            .default-button {
+                background: beige;
+                width: 16px;
+                height: 16px;
+                font-size: 14px;
             }
         }
     }

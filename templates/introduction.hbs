@@ -1,6 +1,14 @@
 <div class="introduce-me introduction">
+    {{#if this.showSettings}}
+        <div class="settings-ui">
+            <div class="main-buttons">
+                <button class="action-button close-button {{#unless (eq this.showSettings 2)}}standalone{{/unless}}" title="{{localize "introduceMe.introduce.close"}}"><i class="fas fa-times"></i></button>
+                {{#if (eq this.showSettings 2)}}<button class="action-button check-button" title="{{localize "introduceMe.introduce.update"}}"><i class="fas fa-check"></i></button>{{/if}}
+            </div>
+            {{#if (eq this.showSettings 2)}}<button class="action-button default-button" title="{{localize "introduceMe.introduce.default"}}"><i class="fas fa-undo"></i></button>{{/if}}
+        </div>
+    {{/if}}
     <div class="introduction-container {{#if this.editing}}editing{{/if}}" style="background-color: {{this.colors.background}};">
-        {{#if this.editing}}<button class="close-button"><i class="fas fa-times"></i></button>{{/if}}
         <div class="actor-container">
             {{#if this.colors.clip}}
                 <img class="clip right top" src="modules/introduce-me/assets/CornerClip.png"></img>
