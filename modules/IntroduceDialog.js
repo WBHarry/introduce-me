@@ -3,7 +3,8 @@ import Introduction from './Introduction.js';
 
 export default class IntroduceDialog extends FormApplication {
     constructor(token, actor) {
-        super({}, {title: game.i18n.localize('introduceMe.introduceDialog.title')});
+        const useActorName = game.settings.get('introduce-me', 'use-actor-name');
+        super({}, {title: `${game.i18n.localize('introduceMe.introduceDialog.title')}: ${useActorName ? actor.name : token.name}`});
         this.defaultDuration = game.settings.get('introduce-me', 'introduction-duration');
         this.token = token;
         this.actor = actor;
