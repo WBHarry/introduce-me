@@ -1,4 +1,5 @@
 import Scalable from "./Scalable.js";
+import { cleanupDOM } from './Introduction.js';
 
 export default class BannerSettings extends FormApplication {
     constructor(token, actor) {
@@ -69,6 +70,11 @@ export default class BannerSettings extends FormApplication {
         const header = $(outer).find('.position-anchor')[0];
         new Scalable(this, outer, header, true);
         return outer;
+    }
+
+    render(force, options) {
+        cleanupDOM();
+        super.render(force, options);
     }
 
     activateListeners(html) {

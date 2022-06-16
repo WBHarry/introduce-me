@@ -53,7 +53,7 @@ export default class Introduction {
             const actorIntroductionDuration = actor.getFlag('introduce-me', 'introduction-duration');
             const introductionDuration = overrideDuration ? overrideDuration : actorIntroductionDuration !== undefined ? actorIntroductionDuration : defaultIntroductionDuration;
 
-            $(document.body).find('.introduce-me.introduction').remove();
+            cleanupDOM();
             const useActorName = game.settings.get('introduce-me', 'use-actor-name');
             const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? '', actor);
             const colors = getActorIntroductionColors(token, actor);
@@ -126,7 +126,7 @@ export default class Introduction {
     };
 
     editDisplay = async (colors, localToken, localActor) => {
-        $(document.body).find('.introduce-me.introduction').remove();
+        cleanupDOM();
         const useActorName = game.settings.get('introduce-me', 'use-actor-name');
         const flavor = this.flavorParse(localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), localActor);
 
@@ -179,5 +179,16 @@ export default class Introduction {
         node[0].style.height = `${height}px`;
         node[0].style.width = `${width}px`;
         node[0].style.transform = `scale(${scale})`;
+    }
+}
+
+export const cleanupDOM =() => {
+    const bannerSettings = $(document.body).find('.introduce-me.banner-settings');
+    const introduction = $(document.body).find('.introduce-me.introduction');
+    if(bannerSettings.length > 0) {
+        $(bannerSettings).remove();
+    }
+    else if(introduction.length > 0) {
+        $(introduction).remove();
     }
 }
