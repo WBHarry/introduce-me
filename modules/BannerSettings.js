@@ -6,7 +6,6 @@ export default class BannerSettings extends FormApplication {
         const position = game.settings.get('introduce-me', 'position');
         super({}, {
             title: game.i18n.localize('introduceMe.bannerSettings.label'),
-            height: position.height,
             width: position.width,
             top: position.top,
             left: position.left,
@@ -67,6 +66,7 @@ export default class BannerSettings extends FormApplication {
 
     async _renderOuter() {
         const outer = $(await renderTemplate('modules/introduce-me/templates/bannerSettings.hbs'));
+        outer[0].style.height= 'auto';
         const header = $(outer).find('.position-anchor')[0];
         new Scalable(this, outer, header, true);
         return outer;

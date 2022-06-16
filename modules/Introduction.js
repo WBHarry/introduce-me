@@ -55,7 +55,7 @@ export default class Introduction {
 
             cleanupDOM();
             const useActorName = game.settings.get('introduce-me', 'use-actor-name');
-            const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? '', actor);
+            const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? String.fromCharCode(parseInt("00A0", 16)), actor);
             const colors = getActorIntroductionColors(token, actor);
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
                 name: useActorName ? actor.name : token.name, 
@@ -173,10 +173,9 @@ export default class Introduction {
     }
     
     setIntroductionPosition = (node) => {
-        const { left, top, height, width, scale } = game.settings.get('introduce-me', 'position');
+        const { left, top, width, scale } = game.settings.get('introduce-me', 'position');
         node[0].style.left = `${left}px`;
         node[0].style.top = `${top}px`;
-        node[0].style.height = `${height}px`;
         node[0].style.width = `${width}px`;
         node[0].style.transform = `scale(${scale})`;
     }

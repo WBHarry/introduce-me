@@ -110,7 +110,7 @@
 }
 .introduce-me.introduction .settings-ui {
   position: absolute;
-  top: calc(50% - 12px);
+  top: calc(50% - 36px);
   right: 0px;
   z-index: 1;
   width: 64px;
@@ -264,9 +264,6 @@
   left: 0;
   z-index: 1;
   border-radius: 0 0 4px 0;
-}
-.window-resizable-handle:not(.introduce-me.banner-settings.position-anchor) {
-  bottom: -48px;
 }
 .introduce-me.banner-settings .introduce-me.introduction {
   position: initial;
