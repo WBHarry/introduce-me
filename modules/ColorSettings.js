@@ -1,4 +1,5 @@
 import Introduction from "./Introduction.js";
+import AudioSettings from "./AudioSettings.js";
 
 export default class ColorSettings extends FormApplication {
     constructor(localToken, localActor, title) {
@@ -47,9 +48,8 @@ export default class ColorSettings extends FormApplication {
     }
 
     async _updateObject(event, formData){
-        const expandedData = foundry.utils.expandObject(formData);
-        Object.keys(expandedData).forEach(key => {
-            this[key] = expandedData[key];
+        Object.keys(formData).forEach(key => {
+            this[key] = formData[key];
         });
 
         const path = event.currentTarget.attributes['name'] ?? event.currentTarget.attributes['data-edit'];
@@ -103,7 +103,7 @@ export default class ColorSettings extends FormApplication {
 
         $(html).find('button#save').click(async event => {
             if(this.localActor){
-                if(areColorsEqual(this.colors.actor, this.localToken, this.localActor)){
+                if(areDispositionSettingsEqual(this.colors.actor, this.localToken, this.localActor)){
                     await this.localActor.unsetFlag('introduce-me', 'introduction-colors');
                 }
                 else {
@@ -131,6 +131,19 @@ export default class ColorSettings extends FormApplication {
             const defaultColor = type === 'actor' ? getActorIntroductionColorsByData(this.localToken, this.localActor) : DefaultColors[type];
             this.colors[type] = defaultColor;
             this.render();
+        });
+
+        $(html).find('button.audio-button').click(async event => {
+            event.stopPropagation();
+            event.preventDefault();
+            const id = event.currentTarget.attributes.getNamedItem('[data-id]').value;
+            try {
+                const audio = await AudioSettings.generate(deepClone(this.colors[id].audio));
+                this.colors[id].audio = audio;
+                this.render();   
+            }
+            catch(e){}
+
         });
     }
 }
@@ -198,12 +211,13 @@ const getDispositionName = (token, actor) => {
     }
 }
 
-export const areColorsEqual = (colors, token, actor) => {
+export const areDispositionSettingsEqual = (colors, token, actor) => {
     const defaultColor = getActorIntroductionColorsByData(token, actor);
-
-    return (
+    const diff = (a, b) => Boolean(a) === Boolean(b) && (!a || Object.keys(diffObject(a, b)).length === 0);
+    return ( // Use diffObject if it gets fixed for arrays in objects: https://github.com/foundryvtt/foundryvtt/issues/6813#issuecomment-1152704071
         colors?.background === defaultColor.background &&
         colors?.text === defaultColor.text &&
-        colors?.clip === defaultColor.clip
+        colors?.clip === defaultColor.clip &&
+        diff(colors?.audio?.sounds, defaultColor.audio?.sounds)
     );
 };

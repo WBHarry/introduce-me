@@ -1,4 +1,4 @@
-import ColorSettings, { areColorsEqual } from './ColorSettings.js';
+import ColorSettings, { areDispositionSettingsEqual } from './ColorSettings.js';
 import Introduction from './Introduction.js';
 
 export default class IntroduceDialog extends FormApplication {
@@ -32,7 +32,7 @@ export default class IntroduceDialog extends FormApplication {
     getData() {
         const duration = this.duration !== undefined ? this.duration : this.defaultDuration;
         const actorColor = this.actor.getFlag('introduce-me', 'introduction-colors');
-        const isDefaultColor = !actorColor ? true : areColorsEqual(actorColor, this.token, this.actor);
+        const isDefaultColor = !actorColor ? true : areDispositionSettingsEqual(actorColor, this.token, this.actor);
         return { 
             flavor: this.flavor, 
             duration: duration,

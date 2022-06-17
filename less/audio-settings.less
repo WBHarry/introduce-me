@@ -1,0 +1,45 @@
+.introduce-me {
+    .audio-settings {
+        .audio-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+            &:not(:last-child) {
+                border-bottom: 2px solid black;
+            }
+        }
+        .picker-row {
+            .remove-audio {
+                color: black;
+                margin-right: 4px;
+                &:hover {
+                    text-shadow: 0 0 5px red;
+                    cursor: pointer;
+                }
+            }
+
+            input {
+                margin-right: 4px;
+                text-overflow: ellipsis;
+            }
+            button {
+                line-height: normal;
+                margin: 0;
+            }
+        }
+        .volume-row {
+            input {
+                flex: 3;
+            }
+            span {
+                flex: 2;
+            }
+        }
+        .loop-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
+}

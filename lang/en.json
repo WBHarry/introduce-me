@@ -35,7 +35,17 @@
             "backgroundLabel": "Background Color",
             "textLabel": "Text Color",
             "clipsLabel": "Show Clips",
+            "audioLabel": "Audio",
+            "audioButton": "Configure sound or music",
 	        "tester": "Color Tester"
+        },
+        "audioSettings": {
+            "title": "Audio Settings",
+            "loop": "Loop",
+            "volume": "Volume",
+            "audio": "Audio",
+            "playAudio": "Private audio test",
+            "removeAudio": "Clear audio"
         },
         "colorTemplates": {
             "name": "Color Templates",

@@ -163,6 +163,42 @@
   height: 16px;
   font-size: 14px;
 }
+.introduce-me .audio-settings .audio-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+}
+.introduce-me .audio-settings .audio-row:not(:last-child) {
+  border-bottom: 2px solid black;
+}
+.introduce-me .audio-settings .picker-row .remove-audio {
+  color: black;
+  margin-right: 4px;
+}
+.introduce-me .audio-settings .picker-row .remove-audio:hover {
+  text-shadow: 0 0 5px red;
+  cursor: pointer;
+}
+.introduce-me .audio-settings .picker-row input {
+  margin-right: 4px;
+  text-overflow: ellipsis;
+}
+.introduce-me .audio-settings .picker-row button {
+  line-height: normal;
+  margin: 0;
+}
+.introduce-me .audio-settings .volume-row input {
+  flex: 3;
+}
+.introduce-me .audio-settings .volume-row span {
+  flex: 2;
+}
+.introduce-me .audio-settings .loop-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .introduce-me.color-settings .flex-content {
   align-items: center;
   margin-bottom: 4px;
@@ -205,8 +241,12 @@
 .introduce-me.color-settings .action-button > i {
   margin: 0px;
 }
+.introduce-me.color-settings .audio-button.selected {
+  color: var(--color-shadow-highlight);
+}
 .introduce-me.color-settings .clip-label {
   white-space: nowrap;
+  min-width: 68px;
 }
 .introduce-me.color-settings .clip-row {
   display: flex;

@@ -1,5 +1,6 @@
 import Introduction from "./Introduction.js";
 import { DefaultColors } from './ColorSettings.js';
+import AudioSettings from './AudioSettings.js';
 
 export default class ColorTemplates extends FormApplication {
     constructor() {
@@ -79,6 +80,15 @@ export default class ColorTemplates extends FormApplication {
         $(html).find('button.preview-button').click(async event => {
             const index = event.currentTarget.attributes.getNamedItem('[data-id]').value;
             await new Introduction().editDisplay(this.colorTemplates[index]);
+        });
+
+        $(html).find('button.audio-button').click(async event => {
+            const id = event.currentTarget.attributes.getNamedItem('[data-id]').value;
+            try {
+                const audio = await AudioSettings.generate(this.colorTemplates[id].audio);
+                this.colorTemplates[id].audio = audio;
+                this.render(); 
+            } catch(e){}
         });
 
         $(html).find('button#save').click(event => {

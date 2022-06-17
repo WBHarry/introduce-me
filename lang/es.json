@@ -35,7 +35,17 @@
             "backgroundLabel": "Color de Fondo",
             "textLabel": "Color de Texto",
             "clipsLabel": "Mostrar Clips",
+            "audioLabel": "Audio",
+            "audioButton": "Configure sound or music",
 	        "tester": "Prueba de Color"
+        },
+        "audioSettings": {
+            "title": "Audio Settings",
+            "loop": "Loop",
+            "volume": "Volume",
+            "audio": "Audio",
+            "playAudio": "Private audio test",
+            "removeAudio": "Clear audio"
         },
         "colorTemplates": {
             "name": "Plantillas de Color",
@@ -49,6 +59,9 @@
         },
         "HUD": {
             "introduceButton": "Pres\u00E9ntame"
+        },
+        "actorSettings": {
+            "introduceButton": "Introduce"
         },
         "gameSettings": {
             "showHud": {

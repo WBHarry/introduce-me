@@ -43,6 +43,8 @@ export default class Introduction {
                 }   
             }
 
+            let sound = null;
+
             game.socket.on(`module.introduce-me`, request => {
                 if(request.type === RequestType.close){
                         this.manualClose(node);
@@ -57,6 +59,11 @@ export default class Introduction {
             const useActorName = game.settings.get('introduce-me', 'use-actor-name');
             const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? String.fromCharCode(parseInt("00A0", 16)), actor);
             const colors = getActorIntroductionColors(token, actor);
+
+            if(colors.audio?.sounds.length > 0){
+                sound = await AudioHelper.play(colors.audio.sounds[0], false);
+            }
+
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
                 name: useActorName ? actor.name : token.name, 
                 img: this.getIntroductionImage(token, actor), 
@@ -105,22 +112,29 @@ export default class Introduction {
 
             if(introductionDuration > 0){
                 animationTimeline.to(node, { opacity: 0, duration: 0.5 }, `>${introductionDuration}`);
+                if(introductionDuration )
                 setTimeout(() => {
+                    sound?.fade(0, { duration: 2000 });
+                }, 4000 + Math.max(introductionDuration-2000, 0));
+                setTimeout(() => {
+                    sound?.stop();
                     $(node).remove();
                 }, 4000+(introductionDuration*1000));
             }
 
             $(node).find('.close-button').click(async event => {
                 await game.socket.emit(`module.introduce-me`, { type: RequestType.close });
-                this.manualClose(node);
+                this.manualClose(node, sound);
             });
 
         }
     }
 
-    manualClose = (node) => {
+    manualClose = (node, sound) => {
         gsap.to(node, { opacity: 0, duration: 0.5 });
+        sound?.fade(0, { duration: 2000 });
         setTimeout(() => {
+            sound?.stop();
             $(node).remove();
         }, 2000);
     };
@@ -129,6 +143,11 @@ export default class Introduction {
         cleanupDOM();
         const useActorName = game.settings.get('introduce-me', 'use-actor-name');
         const flavor = this.flavorParse(localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), localActor);
+        let sound = null;
+
+        if(colors.audio?.sounds.length > 0){
+            sound = await AudioHelper.play(colors.audio.sounds[0], false);
+        }
 
         $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
             name: localToken ? (useActorName ? localActor.name : localToken.name) : game.i18n.localize("introduceMe.colorSettings.tester"), 
@@ -142,6 +161,7 @@ export default class Introduction {
         this.setIntroductionPosition($(document.body).find('.introduce-me.introduction'));
 
         $(document.body).find('.close-button').click(event => {
+            sound?.stop();
             $(document.body).find('.introduce-me.introduction').remove();
         });
     };

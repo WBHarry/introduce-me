@@ -16,4 +16,9 @@
     <div class="flex0 clip-row">
         <input id="{{concat this.name ".clip"}}" type="checkbox" name="{{concat this.name ".clip"}}" data-dtype="Boolean" {{checked this.color.clip}}/>
     </div>
+    <div class="flex0 clip-row">
+        <button class="action-button audio-button {{#if (gt this.color.audio.sounds.length 0)}}selected{{/if}}" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.audioButton"}}">
+            <i {{#if this.color.audio}}{{#if (gt this.color.audio.sounds.length 0)}}class="fas fa-volume-up"{{else}}class="fas fa-volume-mute"{{/if}}{{else}}class="fas fa-volume-mute"{{/if}}></i>
+        </button>
+    </div>
 </div>
