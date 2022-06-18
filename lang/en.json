@@ -3,7 +3,8 @@
         "introduce": {
             "close": "Close Introduction",
             "update": "Update introduction position and size",
-            "default": "Reset to default position and size"
+            "default": "Reset to default position and size",
+            "toggleAudio": "Pause/Play Audio"
         },
         "introduceDialog": {
             "title": "Introduce Me",

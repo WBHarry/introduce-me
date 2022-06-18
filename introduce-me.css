@@ -151,6 +151,9 @@
 .introduce-me.introduction .settings-ui .action-button > i {
   margin: 0px;
 }
+.introduce-me.introduction .settings-ui .audio-button > i {
+  font-size: 16px;
+}
 .introduce-me.introduction .settings-ui .close-button {
   color: var(--color-border-highlight-alt);
 }

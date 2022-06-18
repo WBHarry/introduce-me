@@ -45,8 +45,13 @@ export default class Introduction {
             }
 
             game.socket.on(`module.introduce-me`, request => {
-                if(request.type === RequestType.close){
+                switch(request.type){
+                    case RequestType.close:
                         this.manualClose(node, sound);
+                        break;
+                    case RequestType.toggleAudio:
+                        this.toggleAudio(node, sound, colors.audio);
+                        break;
                 }
             });
 
@@ -71,6 +76,7 @@ export default class Introduction {
                 flavor: flavor,
                 colors: colors,
                 showSettings: !game.user.isGM || introductionDuration > 0 ? undefined : 1,
+                audio: sound,
             })));
 
             const node = $(document.body).find('.introduce-me.introduction');
@@ -128,8 +134,32 @@ export default class Introduction {
                 this.manualClose(node, sound);
             });
 
+            $(node).find('.audio-button').click(async event => {
+                await game.socket.emit(`module.introduce-me`, { type: RequestType.toggleAudio });
+                this.toggleAudio(node, sound, colors.audio);
+            });
         }
     }
+
+    toggleAudio = (node, sound, audio) => {
+        const audioButton = $(node).find('.audio-button > i');
+        audioButton.removeClass();
+        if(sound.pausedTime){
+            const baseVolume = game.settings.get("core", "globalPlaylistVolume");
+            const { volume } = audio.sounds[0].options;
+            sound.play({
+                volume: baseVolume*volume,
+                offset: sound.pausedTime,
+                fade: audio.sounds[0].fadeIn
+            });
+
+            audioButton.addClass('fas fa-pause');
+        }
+        else {
+            sound.pause();
+            audioButton.addClass('fas fa-play');
+        }
+    };
 
     manualClose = (node, sound) => {
         gsap.to(node, { opacity: 0, duration: 0.5 });

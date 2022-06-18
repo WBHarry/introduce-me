@@ -14,4 +14,5 @@ export const setupSockets = async () => {
 export const RequestType = {
     introduce: 'introduce',
     close: 'close',
+    toggleAudio: 'toggleAudio',
 };
