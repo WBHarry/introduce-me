@@ -172,6 +172,15 @@
 .introduce-me .audio-settings .audio-row:not(:last-child) {
   border-bottom: 2px solid black;
 }
+.introduce-me .audio-settings .audio-row .flexrow.disabled > * {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.introduce-me .audio-settings .audio-row .flexrow.disabled > *:hover {
+  cursor: default;
+  pointer-events: none;
+}
 .introduce-me .audio-settings .picker-row .remove-audio {
   color: black;
   margin-right: 4px;

@@ -8,6 +8,16 @@
             &:not(:last-child) {
                 border-bottom: 2px solid black;
             }
+
+            .flexrow.disabled > * {
+                opacity: 0.3;
+                cursor: default;
+                pointer-events: none;
+                &:hover {
+                    cursor: default;
+                    pointer-events: none;
+                }
+            }
         }
         .picker-row {
             .remove-audio {

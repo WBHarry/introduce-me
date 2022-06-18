@@ -1,6 +1,7 @@
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import IntroduceDialog from './IntroduceDialog.js';
 import { getActorIntroductionColors } from './ColorSettings.js';
+import { playIntroductionAudio } from './AudioSettings.js';
 import { RequestType } from './SocketHandler.js';
 
 export default class Introduction {
@@ -43,8 +44,6 @@ export default class Introduction {
                 }   
             }
 
-            let sound = null;
-
             game.socket.on(`module.introduce-me`, request => {
                 if(request.type === RequestType.close){
                         this.manualClose(node);
@@ -59,10 +58,8 @@ export default class Introduction {
             const useActorName = game.settings.get('introduce-me', 'use-actor-name');
             const flavor = this.flavorParse(overrideFlavor ?? await actor.getFlag('introduce-me', 'flavor') ?? String.fromCharCode(parseInt("00A0", 16)), actor);
             const colors = getActorIntroductionColors(token, actor);
-
-            if(colors.audio?.sounds.length > 0){
-                sound = await AudioHelper.play(colors.audio.sounds[0], false);
-            }
+            
+            const sound = await playIntroductionAudio(colors.audio);
 
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
                 name: useActorName ? actor.name : token.name, 
@@ -143,11 +140,7 @@ export default class Introduction {
         cleanupDOM();
         const useActorName = game.settings.get('introduce-me', 'use-actor-name');
         const flavor = this.flavorParse(localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), localActor);
-        let sound = null;
-
-        if(colors.audio?.sounds.length > 0){
-            sound = await AudioHelper.play(colors.audio.sounds[0], false);
-        }
+        const sound = await playIntroductionAudio(colors.audio);
 
         $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
             name: localToken ? (useActorName ? localActor.name : localToken.name) : game.i18n.localize("introduceMe.colorSettings.tester"), 

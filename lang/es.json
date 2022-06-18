@@ -44,6 +44,8 @@
             "loop": "Loop",
             "volume": "Volume",
             "audio": "Audio",
+            "offset": "Start time",
+            "endOffset": "End Time",
             "playAudio": "Private audio test",
             "removeAudio": "Clear audio"
         },
