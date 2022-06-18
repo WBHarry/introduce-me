@@ -189,7 +189,7 @@ const playAudio = async (sound, soundData, schedule, baseVolume) => {
     sound.schedule(() => {
         schedule?.();
         if(loop){
-            playAudio(sound, soundData);
+            playAudio(sound, soundData, schedule, baseVolume);
         }
         else {
             sound.stop();
