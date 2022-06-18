@@ -8,7 +8,7 @@ export default class ColorSettings extends FormApplication {
         this.localToken = localToken;
         this.localActor = localActor;
         if(localActor){
-            this.colors = localActor?.getFlag('introduce-me', 'introduction-colors') ?? {
+            this.colors = {
                 actor: getActorIntroductionColors(localToken, localActor)
             }
         }
@@ -49,12 +49,12 @@ export default class ColorSettings extends FormApplication {
 
     async _updateObject(event, formData){
         Object.keys(formData).forEach(key => {
-            this[key] = formData[key];
+            setProperty(this, key, formData[key]);
         });
 
         const path = event.currentTarget.attributes['name'] ?? event.currentTarget.attributes['data-edit'];
         if(path?.value){
-            setProperty(this, `colors.${path.value.split('.')[1]}.template`, undefined);
+            setProperty(this, `colors.${path.value.split('.')[1]}.template`, null);
         }
         
         this.render();
@@ -96,26 +96,14 @@ export default class ColorSettings extends FormApplication {
                 }
 
                 const key = this.localActor ? getDispositionName(this.localToken, this.localActor) : event.currentTarget.attributes.getNamedItem('[data-id]').value;
-                setProperty(this, templatePath, DefaultColors[key]);
+                this.colors['actor'] = DefaultColors[key];
             }
             this.render();
         });
 
         $(html).find('button#save').click(async event => {
-            if(this.localActor){
-                if(areDispositionSettingsEqual(this.colors.actor, this.localToken, this.localActor)){
-                    await this.localActor.unsetFlag('introduce-me', 'introduction-colors');
-                }
-                else {
-                    await this.localActor.setFlag('introduce-me', 'introduction-colors', this.colors);
-                }
-
-                game.settings.set('introduce-me', 'color-templates', this.templates);
-            }
-            else {
-                game.settings.set('introduce-me', 'introduction-colors', this.colors);
-            }
-
+            event.preventDefault();
+            await this.saveColors();
             this.close();
         });
 
@@ -138,14 +126,58 @@ export default class ColorSettings extends FormApplication {
             event.preventDefault();
             const id = event.currentTarget.attributes.getNamedItem('[data-id]').value;
             try {
-                const audio = await AudioSettings.generate(deepClone(this.colors[id].audio));
+                const audio = await AudioSettings.generate(this.colors[id].audio);
                 this.colors[id].audio = audio;
+                this.colors[id].template = null;
                 this.render();   
             }
             catch(e){}
 
         });
     }
+
+    async saveColors() {
+        game.settings.set('introduce-me', 'introduction-colors', this.colors);
+    }
+}
+
+export class ActorColorSettings extends ColorSettings {
+    constructor(localToken, localActor, resolve) {
+        super(localToken, localActor, game.i18n.localize('introduceMe.introduceDialog.actorColorSettings'));
+        this.resolve = resolve;
+    }
+
+    static get defaultOptions() {
+        const defaults = super.defaultOptions;
+        const overrides = {
+          id: 'actor-color-settings',
+        };
+        
+        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
+        
+        return mergedOptions;
+    }
+
+    async saveColors() {
+        await this.localActor.unsetFlag('introduce-me', 'introduction-colors');
+        if(!areDispositionSettingsEqual(this.colors.actor, this.localToken, this.localActor)){
+            await this.localActor.setFlag('introduce-me', 'introduction-colors', this.colors.actor);
+        }
+
+        await game.settings.set('introduce-me', 'color-templates', this.templates);
+        this.resolve();
+    }
+
+    close(options) {
+        super.close(options);
+        this.resolve();
+    }
+
+    static generate = async (localToken, localActor) => {
+        return new Promise((resolve) => {
+            return new ActorColorSettings(localToken, localActor, resolve).render(true);
+        });
+    };
 }
 
 export const DefaultColors = {
@@ -174,7 +206,13 @@ export const DefaultColors = {
 export const getActorIntroductionColors = (token, actor) => {
     const localIntroductionColors = actor.getFlag('introduce-me', 'introduction-colors');
     if(localIntroductionColors){
-        return localIntroductionColors.actor;
+        if(!localIntroductionColors.template){
+            return localIntroductionColors;
+        }
+
+        const templates = game.settings.get('introduce-me', 'color-templates');
+        const { actors, ...template } = templates.find(x => x.id === localIntroductionColors.template);
+        return { ...template, template: template.id };
     }
     
     return getActorIntroductionColorsByData(token, actor);

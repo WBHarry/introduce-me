@@ -1,4 +1,4 @@
-import ColorSettings, { areDispositionSettingsEqual } from './ColorSettings.js';
+import { areDispositionSettingsEqual, ActorColorSettings } from './ColorSettings.js';
 import Introduction from './Introduction.js';
 
 export default class IntroduceDialog extends FormApplication {
@@ -91,33 +91,4 @@ export default class IntroduceDialog extends FormApplication {
             this.close();
         });
     }
-}
-
-class ActorColorSettings extends ColorSettings {
-    constructor(localToken, localActor, resolve) {
-        super(localToken, localActor, game.i18n.localize('introduceMe.introduceDialog.actorColorSettings'));
-        this.resolve = resolve;
-    }
-
-    static get defaultOptions() {
-        const defaults = super.defaultOptions;
-        const overrides = {
-          id: 'actor-color-settings',
-        };
-        
-        const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
-        
-        return mergedOptions;
-    }
-
-    close(options) {
-        super.close(options);
-        this.resolve?.();
-    }
-
-    static generate = async (localToken, localActor) => {
-        return new Promise((resolve) => {
-            return new ActorColorSettings(localToken, localActor, resolve).render(true);
-        });
-    };
 }
