@@ -42,10 +42,11 @@
         "audioSettings": {
             "title": "Audio Settings",
             "loop": "Loop",
-            "volume": "Volume",
             "audio": "Audio",
+            "volumeLabel": "Sound Volume",
             "offset": "Start time",
             "endOffset": "End Time",
+            "fadeIn": "Fade in",
             "playAudio": "Private audio test",
             "removeAudio": "Clear audio"
         },

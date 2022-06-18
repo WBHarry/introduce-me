@@ -6,7 +6,7 @@
             margin-bottom: 4px;
             padding-bottom: 4px;
             &:not(:last-child) {
-                border-bottom: 2px solid black;
+                border-bottom: 1px solid black;
             }
 
             .flexrow.disabled > * {
@@ -20,6 +20,13 @@
             }
         }
         .picker-row {
+            > .flexrow {
+                width: 100%;
+            }
+            .audio-label {
+                justify-content: space-between; 
+                align-items: center;
+            }
             .remove-audio {
                 color: black;
                 margin-right: 4px;
@@ -36,6 +43,15 @@
             button {
                 line-height: normal;
                 margin: 0;
+                &.file-picker {
+                    min-width: 48px;
+                }
+            }
+
+            .sound-time {
+                align-self: center;
+                white-space: nowrap;
+                margin-right: 8px;
             }
         }
         .volume-row {
@@ -50,6 +66,13 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
+        }
+        .fadein-row {
+            display: flex;
+            justify-content: flex-end;
+            input {
+                width: 48px;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ export default class AudioSettings extends FormApplication {
         this.audio = audio ?? getDefaultSettings();
         this.tracks = tracks;
         this.playingSound = null;
+        this.timestampUpdate = null;
     }
 
     static get defaultOptions() {
@@ -31,18 +32,20 @@ export default class AudioSettings extends FormApplication {
         return { 
             audio: this.audio.sounds[0],
             playingSound: this.playingSound,
-            duration: Math.floor(this.tracks[0]?.duration)
+            currentTime: this.playingSound ? Math.floor(this.playingSound.currentTime) : 0,
+            duration: this.tracks[0]?.duration ? Math.floor(this.tracks[0].duration) : 0,
         };
     }
 
     async _updateObject(event, formData) { 
         const offsetChanged = formData['audio.sounds.0.options.offset'] !== this.audio.sounds[0].options.offset;
-        const endOffsetChanged = formData['audio.sounds.0.endOffset'] !== this.audio.sounds[0].endOffset
+        const endOffsetChanged = formData['audio.sounds.0.endOffset'] !== this.audio.sounds[0].endOffset;
+        const volumeChanged = formData['audio.sounds.0.options.volume'] !== this.audio.sounds[0].options.volume;
         Object.keys(formData).forEach(key => {
             setProperty(this, key, formData[key]);
         });
 
-        this.scrubAudio(offsetChanged, endOffsetChanged);
+        this.scrubAudio(offsetChanged, endOffsetChanged, volumeChanged);
         this.render();
     }
 
@@ -70,6 +73,8 @@ export default class AudioSettings extends FormApplication {
                 this.playingSound._scheduledEvents.forEach(clearTimeout);
                 this.playingSound.stop();
                 this.playingSound = null;
+                clearInterval(this.timestampUpdate);
+                this.timestampUpdate = null;
             }
             else {
                 const onEnd = () => {
@@ -79,6 +84,9 @@ export default class AudioSettings extends FormApplication {
                     }
                 };
                 this.playingSound = await playIntroductionAudio(this.audio, onEnd);
+                this.timestampUpdate = setInterval(() => {
+                    this.render();
+                }, 1000);
             }
 
             this.render();
@@ -90,13 +98,18 @@ export default class AudioSettings extends FormApplication {
         });
     }
 
+
+
     close(options) {
         this.playingSound?.stop();
+        this.tracks = [];
+        clearInterval(this.timestampUpdate);
+
         super.close(options);
         this.reject?.();
     }
 
-    async scrubAudio(offsetChanged, endOffsetChanged) {
+    async scrubAudio(offsetChanged, endOffsetChanged, volumeChanged) {
         if(this.playingSound && (offsetChanged || endOffsetChanged)) {
             const schedule = () => {
             };
@@ -109,6 +122,9 @@ export default class AudioSettings extends FormApplication {
 
             this.playingSound.stop();
             this.playingSound = await playIntroductionAudio(this.audio, onEnd, schedule);
+        }
+        else if(this.playingSound && volumeChanged) {
+            this.playingSound.fade(this.audio.sounds[0].options.volume, { duration: 0 });
         }
     }
 
@@ -140,19 +156,19 @@ export const playIntroductionAudio = async (audio, onEnd, schedule) => {
 }
 
 const playAudio = async (sound, soundData, schedule) => {
-    const { src, options, loop, endOffset } = soundData;
+    const { options, loop, endOffset, fadeIn } = soundData;
     const { volume, ...rest } = options;
     sound.play({ ...rest, volume: 0 });
-        sound.fade(volume);
-        sound.schedule(() => {
-            schedule?.();
-            if(loop){
-                playAudio(sound, soundData);
-            }
-            else {
-                sound.stop();
-            }
-        }, endOffset);
+    sound.fade(volume, { duration: fadeIn*1000 });
+    sound.schedule(() => {
+        schedule?.();
+        if(loop){
+            playAudio(sound, soundData);
+        }
+        else {
+            sound.stop();
+        }
+    }, endOffset);
         
 };
 
@@ -165,5 +181,6 @@ const getDefaultSettings = () => ({
         },
         loop: false,
         endOffset: 0,
+        fadeIn: 1,
     }]
 });

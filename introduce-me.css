@@ -170,7 +170,7 @@
   padding-bottom: 4px;
 }
 .introduce-me .audio-settings .audio-row:not(:last-child) {
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 }
 .introduce-me .audio-settings .audio-row .flexrow.disabled > * {
   opacity: 0.3;
@@ -180,6 +180,13 @@
 .introduce-me .audio-settings .audio-row .flexrow.disabled > *:hover {
   cursor: default;
   pointer-events: none;
+}
+.introduce-me .audio-settings .picker-row > .flexrow {
+  width: 100%;
+}
+.introduce-me .audio-settings .picker-row .audio-label {
+  justify-content: space-between;
+  align-items: center;
 }
 .introduce-me .audio-settings .picker-row .remove-audio {
   color: black;
@@ -197,6 +204,14 @@
   line-height: normal;
   margin: 0;
 }
+.introduce-me .audio-settings .picker-row button.file-picker {
+  min-width: 48px;
+}
+.introduce-me .audio-settings .picker-row .sound-time {
+  align-self: center;
+  white-space: nowrap;
+  margin-right: 8px;
+}
 .introduce-me .audio-settings .volume-row input {
   flex: 3;
 }
@@ -207,6 +222,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+.introduce-me .audio-settings .fadein-row {
+  display: flex;
+  justify-content: flex-end;
+}
+.introduce-me .audio-settings .fadein-row input {
+  width: 48px;
 }
 .introduce-me.color-settings .flex-content {
   align-items: center;
