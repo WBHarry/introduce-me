@@ -46,7 +46,7 @@ export default class Introduction {
 
             game.socket.on(`module.introduce-me`, request => {
                 if(request.type === RequestType.close){
-                        this.manualClose(node);
+                        this.manualClose(node, sound);
                 }
             });
 
@@ -60,6 +60,10 @@ export default class Introduction {
             const colors = getActorIntroductionColors(token, actor);
             
             const sound = await playIntroductionAudio(colors.audio);
+
+            Hooks.on('globalPlaylistVolumeChanged', async (volume) => {
+                await sound.fade(volume*colors.audio.sounds[0].options.volume);
+            });
 
             $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
                 name: useActorName ? actor.name : token.name, 
@@ -141,6 +145,10 @@ export default class Introduction {
         const useActorName = game.settings.get('introduce-me', 'use-actor-name');
         const flavor = this.flavorParse(localActor?.getFlag('introduce-me', 'flavor') ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), localActor);
         const sound = await playIntroductionAudio(colors.audio);
+
+        Hooks.on('globalPlaylistVolumeChanged', async (volume) => {
+            await sound.fade(volume*colors.audio.sounds[0].options.volume);
+        });
 
         $(document.body).append($(await renderTemplate('modules/introduce-me/templates/introduction.hbs', { 
             name: localToken ? (useActorName ? localActor.name : localToken.name) : game.i18n.localize("introduceMe.colorSettings.tester"), 

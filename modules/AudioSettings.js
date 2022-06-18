@@ -9,6 +9,7 @@ export default class AudioSettings extends FormApplication {
         this.tracks = tracks;
         this.playingSound = null;
         this.timestampUpdate = null;
+        this.soundHook = null;
     }
 
     static get defaultOptions() {
@@ -56,6 +57,9 @@ export default class AudioSettings extends FormApplication {
                     case 'endOffset':
                         setProperty(this, key, Math.max(formData[key], formData['audio.sounds.0.options.offset']+1));
                         break;
+                    default:
+                        setProperty(this, key, formData[key]);
+                        break;
                 }
             }
         });
@@ -90,8 +94,11 @@ export default class AudioSettings extends FormApplication {
                 this.playingSound = null;
                 clearInterval(this.timestampUpdate);
                 this.timestampUpdate = null;
+                
+                Hooks.off('globalPlaylistVolumeChanged', this.soundHook);
+                this.soundHook = 0;
             }
-            else {
+            else {          
                 const onEnd = () => {
                     if(!this.audio.sounds[0].loop) {
                         this.playingSound = null;
@@ -99,6 +106,9 @@ export default class AudioSettings extends FormApplication {
                     }
                 };
                 this.playingSound = await playIntroductionAudio(this.audio, onEnd);
+                this.soundHook = Hooks.on('globalPlaylistVolumeChanged', async (volume) => {
+                    await this.playingSound.fade(volume*this.audio.sounds[0].options.volume);
+                });
                 this.timestampUpdate = setInterval(() => {
                     this.render();
                 }, 1000);
@@ -153,6 +163,7 @@ export default class AudioSettings extends FormApplication {
 
 export const playIntroductionAudio = async (audio, onEnd, schedule) => {
     if(audio?.sounds.length > 0){
+        const baseVolume = game.settings.get("core", "globalPlaylistVolume");
         const sound = await new Sound(audio.sounds[0].src).load();
         sound._onEnd = () => {
             sound._scheduledEvents.forEach(clearTimeout);
@@ -163,18 +174,18 @@ export const playIntroductionAudio = async (audio, onEnd, schedule) => {
             onEnd?.();
         };
         
-        playAudio(sound, audio.sounds[0], schedule);
+        playAudio(sound, audio.sounds[0], schedule, baseVolume);
         return sound;
     }
 
     return null;
 }
 
-const playAudio = async (sound, soundData, schedule) => {
+const playAudio = async (sound, soundData, schedule, baseVolume) => {
     const { options, loop, endOffset, fadeIn } = soundData;
     const { volume, ...rest } = options;
     sound.play({ ...rest, volume: 0 });
-    sound.fade(volume, { duration: fadeIn*1000 });
+    sound.fade(baseVolume*volume, { duration: fadeIn*1000 });
     sound.schedule(() => {
         schedule?.();
         if(loop){
