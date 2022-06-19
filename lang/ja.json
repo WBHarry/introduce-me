@@ -1,0 +1,70 @@
+{
+    "introduceMe": {
+        "introduceDialog": {
+            "title": "Introduce Me",
+            "flavorTitle": "フレーバーテキスト",
+            "colorsTitle": "イントロダクションの色を編集",
+            "durationTitle": "イントロダクションの表示時間",
+            "preview": "プライベートプレビュー",
+            "save": "設定を保存する",
+            "introduce": "名乗りを上げる",
+            "noneDefault": "アクターがデフォルトでない色を持つ",
+            "default": "デフォルト設定に戻す",
+            "actorColorSettings": "アクターのカラー設定"
+        },
+        "settings": {
+            "title": "設定"
+        },
+        "colorSettings": {
+            "name": "イントロダクションの色",
+            "label": "カラー設定",
+            "default": "デフォルトカラーに戻す",
+            "preview": "プライベートプレビュー",
+            "save": "保存",
+            "actor": "アクター",
+            "players": "プレイヤー",
+            "friendly": "友好",
+            "neutral": "中立",
+            "hostile": "敵対",
+            "template": "テンプレート",
+            "backgroundLabel": "背景色",
+            "textLabel": "文章の色",
+            "clipsLabel": "装飾をつける",
+	    "tester": "カラーテスター"
+        },
+        "colorTemplates": {
+            "name": "カラーテンプレート",
+            "label": "カラーテンプレート",
+            "newTemplatePlaceholder": "新規テンプレートの名前は…",
+            "create": "新規テンプレートを作成する"
+        },
+        "HUD": {
+            "introduceButton": "Introduce Me"
+        },
+        "gameSettings": {
+            "showHud": {
+                "name": "HUDを表示する",
+                "hint": "HUDが表示されない場合は、代わりにモジュールマクロを使用して機能にアクセスします。"
+            },
+            "useToken": {
+                "name": "トークン画像を使用する",
+                "hint": "イントロダクションで、アバターの代わりにアクタートークンを表示するようにしました。"
+            },
+            "useActorName": {
+                "name": "アクター名を使用する",
+                "hint": "イントロダクションにトークン名ではなく、アクター名を表示するようにしました。"
+            },
+            "useIntroducePermission": {
+                "name": "権限とイントロダクション",
+                "hint": "アクターが紹介されたとき、すでに大きい場合を除き、プレイヤーの許可ステータスを「制限」に設定します。"
+            },
+            "introductionDuration": {
+                "name": "イントロダクションのデフォルト時間",
+                "hint": "アニメーションが終了した後、イントロダクションが削除されるまでのデフォルトの時間を秒単位で指定します。"
+            },
+            "introductionColors": {
+                "name": "イントロダクションの色"
+            }
+        }
+    }
+}
