@@ -80,6 +80,10 @@
                 "name": "Use Actor Name",
                 "hint": "Show the Actor name instead of the Token name in the Introduction."
             },
+            "setDisplayName": {
+                "name": "Set Display Name",
+                "hint": "Set the actor's Display Name setting to 'Hovered by Anyone' upon introduction."
+            },
             "useIntroducePermission": {
                 "name": "Introduce with Permission",
                 "hint": "When an actor is introduced, set their permission status to 'limited' for players unless already greater."
