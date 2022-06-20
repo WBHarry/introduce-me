@@ -79,7 +79,7 @@ export default class Introduction {
                 flavor: flavor,
                 colors: colors,
                 showSettings: !game.user.isGM || introductionDuration > 0 ? undefined : 1,
-                audio: colors.audio.sounds[0].loop ? sound : null,
+                audio: colors.audio?.sounds[0].loop ? sound : null,
             })));
 
             const node = $(document.body).find('.introduce-me.introduction');
