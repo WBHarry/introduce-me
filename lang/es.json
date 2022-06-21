@@ -1,31 +1,31 @@
 {
     "introduceMe": {
         "introduce": {
-            "close": "Close Introduction",
-            "update": "Update introduction position and size",
-            "default": "Reset to default position and size",
-            "toggleAudio": "Pause/Play Audio"
+            "close": "Cerrar presentación",
+            "update": "Actualizar posición y tamaño de la presentación",
+            "default": "Restablecer a la posición y tamaño predeterminada",
+            "toggleAudio": "Pausar/Reproducir sonido"
         },
         "introduceDialog": {
             "title": "Pres\u00E9ntame",
-            "flavorTitle": "Texto Adicional",
-            "colorsTitle": "Editar colores de Presentaci\u00F3n del Actor",
-            "durationTitle": "Duraci\u00F3n de la Presentaci\u00F3n",
-            "preview": "Vista Previa Privada",
-            "save": "Guardar Ajustes",
+            "flavorTitle": "Texto adicional",
+            "colorsTitle": "Editar colores de presentaci\u00F3n del actor",
+            "durationTitle": "Duraci\u00F3n de la presentaci\u00F3n",
+            "preview": "Vista previa privada",
+            "save": "Guardar ajustes",
             "introduce": "Presentar",
             "noneDefault": "El actor no tiene colores predeterminados",
             "default": "Reiniciar a predeterminados",
-            "actorColorSettings": "Ajustes de Color del Actor"
+            "actorColorSettings": "Ajustes de color del actor"
         },
         "settings": {
             "title": "Ajustes"
         },
         "colorSettings": {
-            "name": "Colores de la Presentaci\u00F3n",
-            "label": "Ajustes de Color",
+            "name": "Colores de la presentaci\u00F3n",
+            "label": "Ajustes de color",
             "default": "Reiniciar a colores predeterminados",
-            "preview": "Vista Previa Privada",
+            "preview": "Vista previa privada",
             "save": "Guardar",
             "actor": "Actor",
             "players": "Jugador",
@@ -33,63 +33,63 @@
             "neutral": "Neutral",
             "hostile": "Hostil",
             "template": "Plantilla",
-            "backgroundLabel": "Color de Fondo",
-            "textLabel": "Color de Texto",
-            "clipsLabel": "Mostrar Clips",
-            "audioLabel": "Audio",
-            "audioButton": "Configure sound or music",
+            "backgroundLabel": "Color de fondo",
+            "textLabel": "Color de texto",
+            "clipsLabel": "Mostrar clips",
+            "audioLabel": "Sonido",
+            "audioButton": "Configurar sonidos o música",
 	        "tester": "Prueba de Color"
         },
         "audioSettings": {
-            "title": "Audio Settings",
-            "loop": "Loop",
-            "audio": "Audio",
-            "volumeLabel": "Sound Volume",
-            "offset": "Start time",
-            "endOffset": "End Time",
+            "title": "Ajustes de sonido",
+            "loop": "Bucle",
+            "audio": "Sonido",
+            "volumeLabel": "Volumen del sonido",
+            "offset": "Tiempo de inicio",
+            "endOffset": "Tiempo de finalización",
             "fadeIn": "Fade in",
-            "playAudio": "Private audio test",
-            "removeAudio": "Clear audio"
+            "playAudio": "Prueva privada de sonido",
+            "removeAudio": "Quitar sonido"
         },
         "colorTemplates": {
-            "name": "Plantillas de Color",
-            "label": "Plantillas de Color",
+            "name": "Plantillas de color",
+            "label": "Plantillas de color",
             "newTemplatePlaceholder": "Nuevo nombre de plantilla..",
-            "create": "Crear Nueva Plantilla"
+            "create": "Crear nueva plantilla"
         },
         "bannerSettings": {
-            "name": "Banner Settings",
-            "label": "Banner Placement"
+            "name": "Ajustes del cartel",
+            "label": "Posición del cartel"
         },
         "HUD": {
             "introduceButton": "Pres\u00E9ntame"
         },
         "actorSettings": {
-            "introduceButton": "Introduce"
+            "introduceButton": "Presentar"
         },
         "gameSettings": {
             "showHud": {
                 "name": "Mostrar HUD",
-                "hint": "Si el HUD no se muestra, entonces usar las macros del m\u00F3dulo para acceder a la funcionalidad."
+                "hint": "Si el HUD no se muestra, en su lugar, se utilizan las macros del m\u00F3dulo para presentar a los actores."
             },
             "useToken": {
-                "name": "Usar Iconos",
-                "hint": "Mostrar el icono del actor en lugar del avatar en la Presentaci\u00F3n."
+                "name": "Usar tokens",
+                "hint": "Mostrar el token del actor en lugar del avatar en la Presentaci\u00F3n."
             },
             "useActorName": {
-                "name": "Use Actor Name",
-                "hint": "Show the Actor name instead of the Token name in the Introduction."
+                "name": "Use nombre del actor",
+                "hint": "Mostrar el nombre del actor en lugar del nombre del token en la Presentación."
             },
             "setDisplayName": {
-                "name": "Set Display Name",
-                "hint": "Set the actor's Display Name setting to 'Hovered by Anyone' upon introduction."
+                "name": "Establecer el nombre a mostrar",
+                "hint": "Establece el ajuste de Mostrar nombre a 'Al pasar el ratón (cualquiera)' tras la Presentación."
             },
             "useIntroducePermission": {
-                "name": "Introduce with Permission",
-                "hint": "When an actor is introduced, set their permission status to 'limited' for players unless already greater."
+                "name": "Presentar con permisos",
+                "hint": "Cuando se presenta un actor, establece sus permisos en 'limitado' para los jugadores, a menos que ya sea superior."
             },
             "introductionDuration": {
-                "name": "Duraci\u00F3n Predeterminada de la Presentaci\u00F3n",
+                "name": "Duraci\u00F3n predeterminada de la Presentaci\u00F3n",
                 "hint": "La duraci\u00F3n predeterminada en segundos que la Presentaci\u00F3n permanecer\u00E1 tras el fin de la animaci\u00F3n antes de ser eliminada."
             },
             "introductionColors": {
