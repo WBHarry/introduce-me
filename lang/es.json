@@ -70,7 +70,7 @@
         "gameSettings": {
             "showHud": {
                 "name": "Mostrar HUD",
-                "hint": "Si el HUD no se muestra, entonces usar las macros del m\u00F3dulo para acceder a la funcionalidad."
+                "hint": "Si el HUD no se muestra, en su lugar, se utilizan las macros del m\u00F3dulo para presentar a los actores."
             },
             "useToken": {
                 "name": "Usar tokens",
@@ -78,7 +78,7 @@
             },
             "useActorName": {
                 "name": "Use nombre del actor",
-                "hint": "Mostrar el nombre del Actor en lugar del nombre del token en la Presentación."
+                "hint": "Mostrar el nombre del actor en lugar del nombre del token en la Presentación."
             },
             "setDisplayName": {
                 "name": "Establecer el nombre a mostrar",
