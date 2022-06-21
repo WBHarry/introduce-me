@@ -31,8 +31,8 @@
         }
     ],
     "socket": true,
-    "version": "0.9.4.1",
-    "minimumCoreVersion": "8",
+    "version": "0.9.4.2",
+    "minimumCoreVersion": "0.8.9",
     "compatibleCoreVersion": "9",
     "url": "https://github.com/WBHarry/introduce-me",
     "manifest": "https://github.com/WBHarry/introduce-me/releases/latest/download/module.json",
