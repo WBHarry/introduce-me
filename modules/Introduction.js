@@ -31,17 +31,20 @@ export default class Introduction {
                     }
                 } : {};
 
-                await actor.update({'token.displayName': 30, ...permissionUpdate});
-                const scenes = Array.from(game.scenes);
-                for(let i = 0; i < scenes.length; i++){
-                    const tokens = Array.from(scenes[i].tokens);
-                    for(let j = 0; j < tokens.length; j++){
-                        const token = tokens[j];
-                        if(token.actorId ?? token.data.actorId === actor.id){
-                            await token.update({displayName: 30});
+                const setDisplayName = await game.settings.get('introduce-me', 'set-display-name');
+                if(setDisplayName) {
+                    await actor.update({'token.displayName': 30, ...permissionUpdate});
+                    const scenes = Array.from(game.scenes);
+                    for(let i = 0; i < scenes.length; i++){
+                        const tokens = Array.from(scenes[i].tokens);
+                        for(let j = 0; j < tokens.length; j++){
+                            const token = tokens[j];
+                            if(token.actorId ?? token.data.actorId === actor.id){
+                                await token.update({displayName: 30});
+                            }
                         }
-                    }
-                }   
+                    }  
+                } 
             }
 
             game.socket.on(`module.introduce-me`, request => {
@@ -76,7 +79,7 @@ export default class Introduction {
                 flavor: flavor,
                 colors: colors,
                 showSettings: !game.user.isGM || introductionDuration > 0 ? undefined : 1,
-                audio: sound,
+                audio: colors.audio?.sounds[0].loop ? sound : null,
             })));
 
             const node = $(document.body).find('.introduce-me.introduction');
