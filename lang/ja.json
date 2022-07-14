@@ -1,0 +1,100 @@
+{
+    "introduceMe": {
+        "introduce": {
+            "close": "紹介を閉じる",
+            "update": "紹介の位置と大きさを更新",
+            "default": "デフォルトの位置と大きさにリセット",
+            "toggleAudio": "音声を再生・停止"
+        },
+        "introduceDialog": {
+            "title": "Introduce Me",
+            "flavorTitle": "フレーバーテキスト",
+            "colorsTitle": "イントロダクションの色を編集",
+            "durationTitle": "イントロダクションの表示時間",
+            "preview": "プライベートプレビュー",
+            "save": "設定を保存する",
+            "introduce": "名乗りを上げる",
+            "noneDefault": "アクターがデフォルトでない色を持つ",
+            "default": "デフォルト設定に戻す",
+            "actorColorSettings": "アクターのカラー設定"
+        },
+        "settings": {
+            "title": "設定"
+        },
+        "colorSettings": {
+            "name": "イントロダクションの色",
+            "label": "カラー設定",
+            "default": "デフォルトカラーに戻す",
+            "preview": "プライベートプレビュー",
+            "save": "保存",
+            "actor": "アクター",
+            "players": "プレイヤー",
+            "friendly": "友好",
+            "neutral": "中立",
+            "hostile": "敵対",
+            "template": "テンプレート",
+            "backgroundLabel": "背景色",
+            "textLabel": "文章の色",
+            "clipsLabel": "装飾をつける",
+            "audioLabel": "音声",
+            "audioButton": "音声を設定",
+	        "tester": "カラーテスター"
+        },
+        "audioSettings": {
+            "title": "音声設定",
+            "loop": "ループ",
+            "audio": "音声",
+            "volumeLabel": "音量",
+            "offset": "再生開始時間",
+            "endOffset": "再生終了時間",
+            "fadeIn": "フェード・イン",
+            "playAudio": "音声プライベートプレビュー",
+            "removeAudio": "音声クリア"
+        },
+        "colorTemplates": {
+            "name": "カラーテンプレート",
+            "label": "カラーテンプレート",
+            "newTemplatePlaceholder": "新規テンプレートの名前は…",
+            "create": "新規テンプレートを作成する"
+        },
+        "bannerSettings": {
+            "name": "バナー設定",
+            "label": "バナー位置"
+        },
+        "HUD": {
+            "introduceButton": "Introduce Me"
+        },
+        "actorSettings": {
+            "introduceButton": "紹介e"
+        },
+        "gameSettings": {
+            "showHud": {
+                "name": "HUDを表示する",
+                "hint": "HUDが表示されない場合は、代わりにモジュールマクロを使用して機能にアクセスします。"
+            },
+            "useToken": {
+                "name": "トークン画像を使用する",
+                "hint": "イントロダクションで、アバターの代わりにアクタートークンを表示するようにしました。"
+            },
+            "useActorName": {
+                "name": "アクター名を使用する",
+                "hint": "イントロダクションにトークン名ではなく、アクター名を表示するようにしました。"
+            },
+            "setDisplayName": {
+                "name": "名前表示設定",
+                "hint": "紹介後、アクターの表示名を「マウスホバー時に表示（全員）」に設定します"
+            },
+            "useIntroducePermission": {
+                "name": "権限とイントロダクション",
+                "hint": "アクターが紹介されたとき、すでに大きい場合を除き、プレイヤーの許可ステータスを「制限」に設定します。"
+            },
+            "introductionDuration": {
+                "name": "イントロダクションのデフォルト時間",
+                "hint": "アニメーションが終了した後、イントロダクションが削除されるまでのデフォルトの時間を秒単位で指定します。"
+            },
+            "introductionColors": {
+                "name": "イントロダクションの色"
+            }
+        }
+    }
+}
