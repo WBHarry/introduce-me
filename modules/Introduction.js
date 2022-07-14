@@ -16,12 +16,13 @@ export default class Introduction {
     introduceMe = async (token) => {
         if(game.user.isGM && token) {
             await game.socket.emit(`module.introduce-me`, { type: RequestType.introduce, data: { uuid: token.document?.uuid ?? token.uuid } });
-            await this.introductionDisplay(token, token.actor);
+            await this.introductionDisplay(token, token.actor??token.document);
         }
     }
 
-    introductionDisplay = async (token, actor, preview, overrideFlavor, overrideDuration) => {
+    introductionDisplay = async (token, syntheticActor, preview, overrideFlavor, overrideDuration) => {
         if(token){
+            const actor = game.actors.get(syntheticActor.id);
             if(!preview && game.user.isGM){
                 const usePermission = await game.settings.get('introduce-me', 'use-introduce-permission');
                 const permissionUpdate = usePermission ? {
