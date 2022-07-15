@@ -36,7 +36,7 @@
         }
     ],
     "socket": true,
-    "version": "0.9.4.7",
+    "version": "0.9.4.8",
     "minimumCoreVersion": "0.8.9",
     "compatibleCoreVersion": "9",
     "url": "https://github.com/WBHarry/introduce-me",

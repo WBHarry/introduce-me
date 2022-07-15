@@ -31,10 +31,11 @@ export default class Introduction {
                         default: actor.data.permission.default > 1 ? actor.data.permission.default : 1, 
                     }
                 } : {};
-                await actor.update({'token.displayName': 30, ...permissionUpdate});
+                await actor.update({...permissionUpdate});
                 
                 const setDisplayName = await game.settings.get('introduce-me', 'set-display-name');
                 if(setDisplayName) {
+                    await actor.update({'token.displayName': 30});
                     const scenes = Array.from(game.scenes);
                     for(let i = 0; i < scenes.length; i++){
                         const tokens = Array.from(scenes[i].tokens);
