@@ -5,7 +5,7 @@ export default class AudioSettings extends FormApplication {
         this.resolve = resolve;
         this.reject = reject;
     
-        this.audio = audio ?? getDefaultSettings();
+        this.audio = deepClone(audio) ?? getDefaultSettings();
         this.tracks = tracks;
         this.playingSound = null;
         this.timestampUpdate = null;
