@@ -20,15 +20,16 @@ export default class Introduction {
         }
     }
 
-    introductionDisplay = async (token, syntheticActor, preview, overrideFlavor, overrideDuration) => {
+    introductionDisplay = async (syntheticToken, syntheticActor, preview, overrideFlavor, overrideDuration) => {
+        const token = syntheticToken.document??syntheticToken;
         if(token){
             const actor = game.actors.get(syntheticActor.id);
             if(!preview && game.user.isGM){
                 const usePermission = await game.settings.get('introduce-me', 'use-introduce-permission');
                 const permissionUpdate = usePermission ? {
                     'permission': {
-                        ...actor.data.permission,
-                        default: actor.data.permission.default > 1 ? actor.data.permission.default : 1, 
+                        ...actor.permission,
+                        default: actor.permission.default > 1 ? actor.permission.default : 1, 
                     }
                 } : {};
 
@@ -40,7 +41,7 @@ export default class Introduction {
                         const tokens = Array.from(scenes[i].tokens);
                         for(let j = 0; j < tokens.length; j++){
                             const token = tokens[j];
-                            if(token.actorId ?? token.data.actorId === actor.id){
+                            if(token.actorId ?? token.actorId === actor.id){
                                 await token.update({displayName: 30});
                             }
                         }
@@ -219,11 +220,11 @@ export default class Introduction {
 
     getIntroductionImage = (token, actor) => {
         const useToken = game.settings.get('introduce-me', 'use-token');
-        return useToken ? token.img ?? token.data.img : actor.img;
+        return useToken ? token.texture.src : actor.img;
     }
 
     flavorParse = (flavor, actor) => {
-        return Roll.replaceFormulaData(flavor, actor?.data?.data) ?? flavor;
+        return Roll.replaceFormulaData(flavor, actor?.data) ?? flavor;
     }
     
     setIntroductionPosition = (node) => {
