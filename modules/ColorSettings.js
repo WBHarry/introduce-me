@@ -220,11 +220,11 @@ export const getActorIntroductionColors = (token, actor) => {
 
 const getActorIntroductionColorsByData = (token, actor) => {
     const introductionColors = game.settings.get('introduce-me', 'introduction-colors');
-    if(actor.data.type === 'character'){
+    if(actor.type === 'character'){
         return introductionColors.players;
     }
 
-    switch(token.disposition ?? token.data.disposition){
+    switch(token.disposition){
         case -1:
             return introductionColors.hostile;
         case 0:
@@ -235,11 +235,11 @@ const getActorIntroductionColorsByData = (token, actor) => {
 }
 
 const getDispositionName = (token, actor) => {
-    if(actor.data.type === 'character'){
+    if(actor.type === 'character'){
         return 'players';
     }
 
-    switch(token.disposition ?? token.data.disposition){
+    switch(token.disposition){
         case -1:
             return 'hostile';
         case 0:

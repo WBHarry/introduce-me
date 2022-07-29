@@ -49,13 +49,13 @@ export default class Introduction {
                 } 
             }
 
-            game.socket.on(`module.introduce-me`, request => {
+            game.socket.on(`module.introduce-me`, async request => {
                 switch(request.type){
                     case RequestType.close:
                         this.manualClose(node, sound);
                         break;
                     case RequestType.toggleAudio:
-                        this.toggleAudio(node, sound, colors.audio);
+                        await this.toggleAudio(node, sound, colors.audio);
                         break;
                 }
             });
@@ -141,17 +141,18 @@ export default class Introduction {
 
             $(node).find('.audio-button').click(async event => {
                 await game.socket.emit(`module.introduce-me`, { type: RequestType.toggleAudio });
-                this.toggleAudio(node, sound, colors.audio);
+                await this.toggleAudio(node, sound, colors.audio);
             });
         }
     }
 
-    toggleAudio = (node, sound, audio) => {
+    toggleAudio = async (node, sound, audio) => {
         const audioButton = $(node).find('.audio-button > i');
         audioButton.removeClass();
         if(sound.pausedTime){
             const baseVolume = game.settings.get("core", "globalPlaylistVolume");
             const { volume } = audio.sounds[0].options;
+            await sound.load();
             sound.play({
                 volume: baseVolume*volume,
                 offset: sound.pausedTime,
@@ -224,7 +225,7 @@ export default class Introduction {
     }
 
     flavorParse = (flavor, actor) => {
-        return Roll.replaceFormulaData(flavor, actor?.data) ?? flavor;
+        return Roll.replaceFormulaData(flavor, actor) ?? flavor;
     }
     
     setIntroductionPosition = (node) => {

@@ -50,7 +50,7 @@ Hooks.on('getActorDirectoryEntryContext', (html, entryOptions) => {
 
         if (docId) {
             const actor = game.actors.get(docId);
-            new IntroduceDialog(actor.data.token, actor).render(true);
+            new IntroduceDialog(actor.token, actor).render(true);
         }
       },
       icon: '<i class="fas fa-handshake"></i>',
