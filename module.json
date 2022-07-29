@@ -1,5 +1,6 @@
 {
     "id": "introduce-me",
+    "name": "introduce-me",
     "title": "Introduce Me",
     "description": "Introduce NPCs, monsters and PCs with a bit of flair",
     "version": "0.9.5.0",
@@ -13,6 +14,7 @@
         "verified": "10.276",
         "maximum": 10
     },
+    "minimumCoreVersion": 10,
     "esmodules": [
         "introduce-me.js"
     ],
