@@ -11,7 +11,7 @@
     ],
     "compatibility": {
         "minimum": 10,
-        "verified": "10.276",
+        "verified": "10.285",
         "maximum": 10
     },
     "minimumCoreVersion": 10,
