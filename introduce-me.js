@@ -7,7 +7,7 @@ import IntroduceDialog from './modules/IntroduceDialog.js';
 
 Hooks.once('init', () => {
     game.modules.get("introduce-me").api = {
-        introduceMe: async (token) => await new Introduction().introduceMe(token),
+        introduceMe: async (token) => await new Introduction().introduceMe(token, token.actor),
         introduceDialog: new Introduction().introduceMeDialog,
     };
     gsap.registerPlugin(SplitText);
@@ -38,7 +38,7 @@ Hooks.on('renderTokenConfig', async (data, html) => {
     }
 });
 
-Hooks.on('getActorDirectoryEntryContext', (html, entryOptions) => {
+Hooks.on('getActorDirectoryEntryContext', (_, entryOptions) => {
     entryOptions.push({
       name: game.i18n.localize('introduceMe.actorSettings.introduceButton'),
       callback: (li) => {
@@ -50,7 +50,7 @@ Hooks.on('getActorDirectoryEntryContext', (html, entryOptions) => {
 
         if (docId) {
             const actor = game.actors.get(docId);
-            new IntroduceDialog(actor.token, actor).render(true);
+            new IntroduceDialog(actor._source.token, actor).render(true);
         }
       },
       icon: '<i class="fas fa-handshake"></i>',

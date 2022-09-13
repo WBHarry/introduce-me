@@ -87,7 +87,7 @@ export default class IntroduceDialog extends FormApplication {
                 await actor.setFlag('introduce-me', 'introduction-duration', this.duration);
             }
             
-            await new Introduction().introduceMe(this.token);
+            await new Introduction().introduceMe(this.token, actor);
             this.close();
         });
     }

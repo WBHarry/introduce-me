@@ -13,10 +13,10 @@ export default class Introduction {
       return Introduction._instance;
     }
 
-    introduceMe = async (token) => {
+    introduceMe = async (token, actor) => {
         if(game.user.isGM && token) {
             await game.socket.emit(`module.introduce-me`, { type: RequestType.introduce, data: { uuid: token.document?.uuid ?? token.uuid } });
-            await this.introductionDisplay(token, token.actor??token.document);
+            await this.introductionDisplay(token, actor);
         }
     }
 
@@ -214,7 +214,7 @@ export default class Introduction {
         $(rightColumn).append(await renderTemplate('modules/introduce-me/templates/introductionInteract.hbs'));
 
         $(rightColumn).find('.introduce-me.introduction-interact').click(async () => {
-            this.introduceMe(data.object);
+            this.introduceMe(data.object, data.object.actor);
             data.clear();
         });
     }
