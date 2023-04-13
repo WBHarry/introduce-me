@@ -7,7 +7,7 @@ import IntroduceDialog from './modules/IntroduceDialog.js';
 
 Hooks.once('init', () => {
     game.modules.get("introduce-me").api = {
-        introduceMe: async (token) => await new Introduction().introduceMe(token, token.actor),
+        introduceMe: async (token, actor) => await new Introduction().introduceMe(token, actor ?? token.actor),
         introduceDialog: new Introduction().introduceMeDialog,
     };
     gsap.registerPlugin(SplitText);
