@@ -34,7 +34,7 @@
 }
 .introduce-me.introduction .introduction-container label#name {
   font-weight: bold;
-  font-family: 'Signika, sans-serif';
+  font-family: "Signika, sans-serif";
   height: 135px;
   text-align: center;
 }
@@ -384,4 +384,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Label IntroduceMe  */
+.introduce-me.introduction .introduction-container label#name {
+  padding-top: 45px;
+}
+
+.introduce-me.introduction .introduction-container img.clip {
+  display: none;
+}
+
+.introduce-me.introduction .introduction-container .text-container {
+  margin-right: 10px;
 }
