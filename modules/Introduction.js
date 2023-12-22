@@ -24,6 +24,8 @@ export default class Introduction {
         const token = syntheticToken.document??syntheticToken;
         if(token){
             const actor = game.actors.get(syntheticActor.id);
+            // Store the already presented people for portrait-box
+            actor.setFlag('introduce-me', 'introduced', true);
             if(!preview && game.user.isGM){
                 const usePermission = await game.settings.get('introduce-me', 'use-introduce-permission');
                 const permissionUpdate = usePermission ? {
