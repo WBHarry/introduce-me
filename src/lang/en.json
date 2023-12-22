@@ -1,0 +1,100 @@
+{
+    "introduceMe": {
+        "introduce": {
+            "close": "Close Introduction",
+            "update": "Update introduction position and size",
+            "default": "Reset to default position and size",
+            "toggleAudio": "Pause/Play Audio"
+        },
+        "introduceDialog": {
+            "title": "Introduce Me",
+            "flavorTitle": "Flavor Text",
+            "colorsTitle": "Edit Actor Introduction Colors",
+            "durationTitle": "Introduction Duration",
+            "preview": "Private Preview",
+            "save": "Save Settings",
+            "introduce": "Introduce",
+            "noneDefault": "The actor has non-default colors",
+            "default": "Reset to default",
+            "actorColorSettings": "Actor Color Settings"
+        },
+        "settings": {
+            "title": "Settings"
+        },
+        "colorSettings": {
+            "name": "Introduction Colors",
+            "label": "Color Settings",
+            "default": "Reset to default colors",
+            "preview": "Private Preview",
+            "save": "Save",
+            "actor": "Actor",
+            "players": "Players",
+            "friendly": "Friendly",
+            "neutral": "Neutral",
+            "hostile": "Hostile",
+            "template": "Template",
+            "backgroundLabel": "Background Color",
+            "textLabel": "Text Color",
+            "clipsLabel": "Show Clips",
+            "audioLabel": "Audio",
+            "audioButton": "Configure sound or music",
+	        "tester": "Color Tester"
+        },
+        "audioSettings": {
+            "title": "Audio Settings",
+            "loop": "Loop",
+            "audio": "Audio",
+            "volumeLabel": "Sound Volume",
+            "offset": "Start time",
+            "endOffset": "End Time",
+            "fadeIn": "Fade in",
+            "playAudio": "Private audio test",
+            "removeAudio": "Clear audio"
+        },
+        "colorTemplates": {
+            "name": "Color Templates",
+            "label": "Color Templates",
+            "newTemplatePlaceholder": "New template name..",
+            "create": "Create New Template"
+        },
+        "bannerSettings": {
+            "name": "Banner Settings",
+            "label": "Banner Placement"
+        },
+        "HUD": {
+            "introduceButton": "Introduce Me"
+        },
+        "actorSettings": {
+            "introduceButton": "Introduce"
+        },
+        "gameSettings": {
+            "showHud": {
+                "name": "Show HUD",
+                "hint": "Show the token HUD button. If disabled, use the module macros to introduce actors instead."
+            },
+            "useToken": {
+                "name": "Use Tokens",
+                "hint": "Show the actor token instead of the avatar in the Introduction."
+            },
+            "useActorName": {
+                "name": "Use Actor Name",
+                "hint": "Show the Actor name instead of the Token name in the Introduction."
+            },
+            "setDisplayName": {
+                "name": "Set Display Name",
+                "hint": "Set the actor's Display Name setting to 'Hovered by Anyone' upon introduction."
+            },
+            "useIntroducePermission": {
+                "name": "Introduce with Permission",
+                "hint": "When an actor is introduced, set their permission status to 'limited' for players unless already greater."
+            },
+            "introductionDuration": {
+                "name": "Default Introduction Duration",
+                "hint": "The default duration in seconds that the Introduction stays after the animation finishes before being removed."
+            },
+            "introductionColors": {
+                "name": "Introduction Colors"
+            }
+        }
+    }
+}

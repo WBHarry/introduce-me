@@ -1,0 +1,100 @@
+{
+    "introduceMe": {
+        "introduce": {
+            "close": "Cerrar presentación",
+            "update": "Actualizar posición y tamaño de la presentación",
+            "default": "Restablecer a la posición y tamaño predeterminada",
+            "toggleAudio": "Pausar/Reproducir sonido"
+        },
+        "introduceDialog": {
+            "title": "Pres\u00E9ntame",
+            "flavorTitle": "Texto adicional",
+            "colorsTitle": "Editar colores de presentaci\u00F3n del actor",
+            "durationTitle": "Duraci\u00F3n de la presentaci\u00F3n",
+            "preview": "Vista previa privada",
+            "save": "Guardar ajustes",
+            "introduce": "Presentar",
+            "noneDefault": "El actor no tiene colores predeterminados",
+            "default": "Reiniciar a predeterminados",
+            "actorColorSettings": "Ajustes de color del actor"
+        },
+        "settings": {
+            "title": "Ajustes"
+        },
+        "colorSettings": {
+            "name": "Colores de la presentaci\u00F3n",
+            "label": "Ajustes de color",
+            "default": "Reiniciar a colores predeterminados",
+            "preview": "Vista previa privada",
+            "save": "Guardar",
+            "actor": "Actor",
+            "players": "Jugador",
+            "friendly": "Amistoso",
+            "neutral": "Neutral",
+            "hostile": "Hostil",
+            "template": "Plantilla",
+            "backgroundLabel": "Color de fondo",
+            "textLabel": "Color de texto",
+            "clipsLabel": "Mostrar clips",
+            "audioLabel": "Sonido",
+            "audioButton": "Configurar sonidos o música",
+	        "tester": "Prueba de Color"
+        },
+        "audioSettings": {
+            "title": "Ajustes de sonido",
+            "loop": "Bucle",
+            "audio": "Sonido",
+            "volumeLabel": "Volumen del sonido",
+            "offset": "Tiempo de inicio",
+            "endOffset": "Tiempo de finalización",
+            "fadeIn": "Fade in",
+            "playAudio": "Prueva privada de sonido",
+            "removeAudio": "Quitar sonido"
+        },
+        "colorTemplates": {
+            "name": "Plantillas de color",
+            "label": "Plantillas de color",
+            "newTemplatePlaceholder": "Nuevo nombre de plantilla..",
+            "create": "Crear nueva plantilla"
+        },
+        "bannerSettings": {
+            "name": "Ajustes del cartel",
+            "label": "Posición del cartel"
+        },
+        "HUD": {
+            "introduceButton": "Pres\u00E9ntame"
+        },
+        "actorSettings": {
+            "introduceButton": "Presentar"
+        },
+        "gameSettings": {
+            "showHud": {
+                "name": "Mostrar HUD",
+                "hint": "Si el HUD no se muestra, en su lugar, se utilizan las macros del m\u00F3dulo para presentar a los actores."
+            },
+            "useToken": {
+                "name": "Usar tokens",
+                "hint": "Mostrar el token del actor en lugar del avatar en la Presentaci\u00F3n."
+            },
+            "useActorName": {
+                "name": "Use nombre del actor",
+                "hint": "Mostrar el nombre del actor en lugar del nombre del token en la Presentación."
+            },
+            "setDisplayName": {
+                "name": "Establecer el nombre a mostrar",
+                "hint": "Establece el ajuste de Mostrar nombre a 'Al pasar el ratón (cualquiera)' tras la Presentación."
+            },
+            "useIntroducePermission": {
+                "name": "Presentar con permisos",
+                "hint": "Cuando se presenta un actor, establece sus permisos en 'limitado' para los jugadores, a menos que ya sea superior."
+            },
+            "introductionDuration": {
+                "name": "Duraci\u00F3n predeterminada de la Presentaci\u00F3n",
+                "hint": "La duraci\u00F3n predeterminada en segundos que la Presentaci\u00F3n permanecer\u00E1 tras el fin de la animaci\u00F3n antes de ser eliminada."
+            },
+            "introductionColors": {
+                "name": "Colores de la Presentaci\u00F3n"
+            }
+        }
+    }
+}

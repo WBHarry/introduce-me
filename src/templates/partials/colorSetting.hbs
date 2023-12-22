@@ -1,0 +1,24 @@
+<div class="introduce-me color-settings flexrow flex-content">
+    {{#if this.showTemplates}} <label class="flex0 flexrow color-label"><strong>{{localize this.color.label}}</strong></label>{{/if}}
+    <button class="flex0 action-button preview-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.preview"}}"><i class="fas fa-eye"></i></button>
+    {{#if this.showTemplates}}<button class="flex0 action-button default-button" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.default"}}"><i class="fas fa-undo"></i></button>{{/if}}
+    {{#if this.showTemplates}} 
+        <select name="{{concat this.name ".template"}}" [data-id]="{{this.key}}" class="template-select">
+            {{selectOptions this.templates selected=this.color.template nameAttr="id" labelAttr="label" blank="No Template" }}
+        </select>
+    {{/if}}
+    <div class="flex1 flexrow column-margin">
+        {{colorPicker name=(concat this.name ".background") value=this.color.background}}
+    </div>
+    <div class="flex1 flexrow">
+        {{colorPicker name=(concat this.name ".text") value=this.color.text}}
+    </div>
+    <div class="flex0 clip-row">
+        <input id="{{concat this.name ".clip"}}" type="checkbox" name="{{concat this.name ".clip"}}" data-dtype="Boolean" {{checked this.color.clip}}/>
+    </div>
+    <div class="flex0 clip-row">
+        <button class="action-button audio-button {{#if (gt this.color.audio.sounds.length 0)}}selected{{/if}}" [data-id]="{{this.key}}" title="{{localize "introduceMe.colorSettings.audioButton"}}">
+            <i {{#if this.color.audio}}{{#if (gt this.color.audio.sounds.length 0)}}class="fas fa-volume-up"{{else}}class="fas fa-volume-mute"{{/if}}{{else}}class="fas fa-volume-mute"{{/if}}></i>
+        </button>
+    </div>
+</div>

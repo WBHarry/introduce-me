@@ -1,0 +1,19 @@
+<form class="introduce-me color-templates" autocomplete="off">
+    <header>
+        <input class="flex0 input" name="newTemplateName" value="{{this.newTemplateName}}" type="text" data-dtype="text" placeholder="{{localize "introduceMe.colorTemplates.newTemplatePlaceholder"}}" />
+        <button class="flex0 color-template-create" {{#unless this.createTemplateDisabled}}title="{{localize "introduceMe.colorTemplates.create"}}"{{/unless}} {{#if this.createdTemplateDisabled}}disabled{{/if}}><i class="fas fa-plus"></i></button>
+    </header>
+    <content>
+        {{#each this.templates}}
+            {{> "modules/introduce-me/templates/partials/colorTemplate.hbs" 
+               template=this
+               index=@index
+               selected=../selected
+               open=(lookup ../selected @index)
+            }}
+        {{/each}}
+    </content>
+    <footer>
+        <button id="save"><i class="fas fa-save"></i>{{localize "introduceMe.colorSettings.save"}}</button>
+    </footer>
+</form>

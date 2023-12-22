@@ -1,0 +1,174 @@
+.introduce-me {
+    &.introduction { 
+        z-index: 1000;
+        transform-origin: 0 0;
+        position: absolute;
+        .introduction-container {
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+            &.editing {
+                width: 716px;
+            }
+            .actor-container {
+                display: flex;
+                margin-right: 40px;
+                width: 200px;
+                > img {
+                    border: 0;
+                }
+            }
+            .text-container {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                justify-content: space-between;
+                align-items: center;
+                margin-right: 64px;
+            }
+            & label {
+                font-size: 40px;
+                opacity: 0;
+                width: 100%;
+            }
+            & label#name {
+                font-weight: bold;
+                font-family: 'Signika, sans-serif';
+                height: 135px;
+                text-align: center;
+                > div {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            }
+            & label#citation {
+                font-style: oblique;
+                font-size: 23px;
+                position: relative;
+                bottom: 10px;
+                line-height: 37.5px;
+                font-family: ui-monospace;
+                text-align: center;
+            }
+            & img#actorImage {
+                width: 200px;
+                opacity: 0;
+                height: 200px;
+                position: absolute;
+                left: 40px;
+                align-self: center;
+                &.visible {
+                    opacity: 1;
+                }
+            }
+            & img.clip {
+                position: absolute;
+                height: 64px;
+                width: 64px;
+                border: 0px;
+                &.right.top {
+                    right: 0;
+                    top: 0;
+                }
+                &.right.bottom {
+                    right: 0;
+                    bottom: 0;
+                    transform: scaleX(-1) rotate(-180deg);
+                }
+                &.left.top {
+                    left: 0;
+                    top: 0;
+                    transform: scaleX(-1) rotate(0deg);
+                }
+                &.left.bottom {
+                    left: 0;
+                    bottom: 0;
+                    transform: rotate(180deg);
+                }
+            }
+            .visible {
+                opacity: 1;
+            }
+
+            .close-button {
+                position: absolute;
+                top: -25px;
+                right: calc(50% - 100px);
+                width: 200px;
+                height: 25px;
+                background: crimson;
+                border-radius: 0px;
+                border: 0;
+                font-size: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                > i {
+                    margin: 0px;
+                }
+            }
+        }
+
+        .settings-ui {
+            position: absolute;
+            top: calc(50% - 36px);
+            right: 0px;
+            z-index: 1;
+            width: 64px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background: url(../../ui/parchment.jpg) repeat;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+            .main-buttons {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: space-evenly;
+            }
+            .action-button {
+                background: beige;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                margin-right: 4px;
+                border: 0;
+                font-size: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &.standalone {
+                    margin-right: 16px;
+                }
+                cursor: pointer;
+                > i {
+                    margin: 0px;
+                }
+            }
+            .audio-button {
+                > i {
+                    font-size: 16px;
+                }
+            }
+            .close-button {
+                color: var(--color-border-highlight-alt);
+            }
+            .check-button {
+                color: green;
+            }
+            .default-button {
+                background: beige;
+                width: 16px;
+                height: 16px;
+                font-size: 14px;
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+ <form class="introduce-me introduce-dialog" autocomplete="off">
+     <content>
+        <div class="setting">
+            <label><strong>{{localize "introduceMe.introduceDialog.flavorTitle"}}</strong></label>
+            <div class="flexrow input-row">
+                <input class="flex1 flavor-input" name="flavor" value="{{this.flavor}}" type="text" data-dtype="string"/>
+                <div class="flex0 default-button"></div>
+            </div>
+        </div>
+        <div class="setting">
+            <label><strong>{{localize "introduceMe.introduceDialog.colorsTitle"}}</strong></label>
+            <div class="flexrow input-row">
+                <button id="color-setting"><i class="fas fa-palette color-palette"></i></button>
+                {{#if this.isDefaultColor}}
+                    <div class="flex0 default-button"></div>
+                {{else}}
+                    <span class="flex0 default-button"><i class="fas fa-exclamation" title="{{localize "introduceMe.introduceDialog.noneDefault"}}"></i></span>
+                {{/if}}
+            </div>
+        </div>
+        <div class="setting">
+            <label><strong>{{localize "introduceMe.introduceDialog.durationTitle"}}</strong></label>
+            <div class="flexrow input-row">
+                <input class="flex1" name="duration" value="{{this.duration}}" type="number" data-dtype="number" />
+                <button class="flex0 default-button" id="introduction-duration" title="{{localize "introduceMe.introduceDialog.default"}}">
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+        </div>
+    </content>
+    <footer>
+        <button id="introduce"><i class="fas fa-handshake"></i>{{localize "introduceMe.introduceDialog.introduce"}}</button>
+        <div class="flexrow">
+            <button id="preview"><i class="fas fa-eye"></i>{{localize "introduceMe.introduceDialog.preview"}}</button>
+            <button id="save"><i class="fas fa-save"></i>{{localize "introduceMe.introduceDialog.save"}}</button>
+        </div>
+    </footer>
+</form>

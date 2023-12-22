@@ -1,0 +1,27 @@
+<div class="introduce-me introduction">
+    {{#if this.showSettings}}
+        <div class="settings-ui">
+            <div class="main-buttons">
+                {{#if this.audio }}<button class="action-button audio-button" title="{{localize "introduceMe.introduce.toggleAudio"}}"><i {{#if this.audio.pausedTime}}class="fas fa-play"{{else}}class="fas fa-pause"{{/if}}></i></button>{{/if}}
+                <button class="action-button close-button {{#unless (eq this.showSettings 2)}}{{#unless this.audio}}standalone{{/unless}}{{/unless}}" title="{{localize "introduceMe.introduce.close"}}"><i class="fas fa-times"></i></button>
+                {{#if (eq this.showSettings 2)}}<button class="action-button check-button" title="{{localize "introduceMe.introduce.update"}}"><i class="fas fa-check"></i></button>{{/if}}
+            </div>
+            {{#if (eq this.showSettings 2)}}<button class="action-button default-button" title="{{localize "introduceMe.introduce.default"}}"><i class="fas fa-undo"></i></button>{{/if}}
+        </div>
+    {{/if}}
+    <div class="introduction-container {{#if this.editing}}editing{{/if}}" style="background-color: {{this.colors.background}};">
+        <div class="actor-container">
+            {{#if this.colors.clip}}
+                <img class="clip right top" src="modules/introduce-me/assets/CornerClip.png"></img>
+                <img class="clip right bottom" src="modules/introduce-me/assets/CornerClip.png"></img>
+                <img class="clip left top" src="modules/introduce-me/assets/CornerClip.png"></img>
+                <img class="clip left bottom" src="modules/introduce-me/assets/CornerClip.png"></img>
+            {{/if}}
+            <img id="actorImage" src="{{this.img}}" class="actor-image {{#if this.editing}}visible{{/if}}"></img>
+        </div>
+        <div class="text-container" style="overflow: hidden;">
+            <label class="{{#if this.editing}}visible{{/if}}" id="name" style="color: {{this.colors.text}};">{{this.name}}</label>
+            <label class="{{#if this.editing}}visible{{/if}}" id="citation" style="color: {{this.colors.text}};">{{this.flavor}}</label>
+        </div>
+    </div>
+</div>

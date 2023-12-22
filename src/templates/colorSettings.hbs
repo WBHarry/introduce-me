@@ -1,0 +1,19 @@
+<form class="introduce-me color-settings" autocomplete="off">
+    <content>
+        {{> "modules/introduce-me/templates/partials/colorSettingHeader.hbs"
+            showTemplates=true
+        }}
+        {{#each this.colors}}
+            {{> "modules/introduce-me/templates/partials/colorSetting.hbs" 
+                key=@key
+                name=(concat "colors." @key)
+                templates=../templates
+                showTemplates=true
+                color=this
+            }}
+        {{/each}}
+    </content>
+    <footer>
+        <button id="save"><i class="fas fa-save"></i>{{localize "introduceMe.colorSettings.save"}}</button>
+    </footer>
+</form>

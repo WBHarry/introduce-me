@@ -1,0 +1,400 @@
+.introduce-me.introduction {
+  z-index: 1000;
+  transform-origin: 0 0;
+  position: absolute;
+}
+.introduce-me.introduction .introduction-container {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+.introduce-me.introduction .introduction-container.editing {
+  width: 716px;
+}
+.introduce-me.introduction .introduction-container .actor-container {
+  display: flex;
+  margin-right: 40px;
+  width: 200px;
+}
+.introduce-me.introduction .introduction-container .actor-container > img {
+  border: 0;
+}
+.introduce-me.introduction .introduction-container .text-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 64px;
+}
+.introduce-me.introduction .introduction-container label {
+  font-size: 40px;
+  opacity: 0;
+  width: 100%;
+}
+.introduce-me.introduction .introduction-container label#name {
+  font-weight: bold;
+  font-family: "Signika, sans-serif";
+  height: 135px;
+  text-align: center;
+}
+.introduce-me.introduction .introduction-container label#name > div {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.introduce-me.introduction .introduction-container label#citation {
+  font-style: oblique;
+  font-size: 23px;
+  position: relative;
+  bottom: 10px;
+  line-height: 37.5px;
+  font-family: ui-monospace;
+  text-align: center;
+}
+.introduce-me.introduction .introduction-container img#actorImage {
+  width: 200px;
+  opacity: 0;
+  height: 200px;
+  position: absolute;
+  left: 40px;
+  align-self: center;
+}
+.introduce-me.introduction .introduction-container img#actorImage.visible {
+  opacity: 1;
+}
+.introduce-me.introduction .introduction-container img.clip {
+  position: absolute;
+  height: 64px;
+  width: 64px;
+  border: 0px;
+}
+.introduce-me.introduction .introduction-container img.clip.right.top {
+  right: 0;
+  top: 0;
+}
+.introduce-me.introduction .introduction-container img.clip.right.bottom {
+  right: 0;
+  bottom: 0;
+  transform: scaleX(-1) rotate(-180deg);
+}
+.introduce-me.introduction .introduction-container img.clip.left.top {
+  left: 0;
+  top: 0;
+  transform: scaleX(-1) rotate(0deg);
+}
+.introduce-me.introduction .introduction-container img.clip.left.bottom {
+  left: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+.introduce-me.introduction .introduction-container .visible {
+  opacity: 1;
+}
+.introduce-me.introduction .introduction-container .close-button {
+  position: absolute;
+  top: -25px;
+  right: calc(50% - 100px);
+  width: 200px;
+  height: 25px;
+  background: crimson;
+  border-radius: 0px;
+  border: 0;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-me.introduction .introduction-container .close-button > i {
+  margin: 0px;
+}
+.introduce-me.introduction .settings-ui {
+  position: absolute;
+  top: calc(50% - 36px);
+  right: 0px;
+  z-index: 1;
+  width: 64px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: url(../../ui/parchment.jpg) repeat;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.introduce-me.introduction .settings-ui .main-buttons {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+.introduce-me.introduction .settings-ui .action-button {
+  background: beige;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 4px;
+  border: 0;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.introduce-me.introduction .settings-ui .action-button.standalone {
+  margin-right: 16px;
+}
+.introduce-me.introduction .settings-ui .action-button > i {
+  margin: 0px;
+}
+.introduce-me.introduction .settings-ui .audio-button > i {
+  font-size: 16px;
+}
+.introduce-me.introduction .settings-ui .close-button {
+  color: var(--color-border-highlight-alt);
+}
+.introduce-me.introduction .settings-ui .check-button {
+  color: green;
+}
+.introduce-me.introduction .settings-ui .default-button {
+  background: beige;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+}
+.introduce-me .audio-settings .audio-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+}
+.introduce-me .audio-settings .audio-row:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+.introduce-me .audio-settings .audio-row .flexrow.disabled > * {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.introduce-me .audio-settings .audio-row .flexrow.disabled > *:hover {
+  cursor: default;
+  pointer-events: none;
+}
+.introduce-me .audio-settings .picker-row > .flexrow {
+  width: 100%;
+}
+.introduce-me .audio-settings .picker-row .audio-label {
+  justify-content: space-between;
+  align-items: center;
+}
+.introduce-me .audio-settings .picker-row .remove-audio {
+  color: black;
+  margin-right: 4px;
+}
+.introduce-me .audio-settings .picker-row .remove-audio:hover {
+  text-shadow: 0 0 5px red;
+  cursor: pointer;
+}
+.introduce-me .audio-settings .picker-row input {
+  margin-right: 4px;
+  text-overflow: ellipsis;
+}
+.introduce-me .audio-settings .picker-row button {
+  line-height: normal;
+  margin: 0;
+}
+.introduce-me .audio-settings .picker-row button.file-picker {
+  min-width: 48px;
+}
+.introduce-me .audio-settings .picker-row .sound-time {
+  align-self: center;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+.introduce-me .audio-settings .volume-row input {
+  flex: 3;
+}
+.introduce-me .audio-settings .volume-row span {
+  flex: 2;
+}
+.introduce-me .audio-settings .loop-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.introduce-me .audio-settings .fadein-row {
+  display: flex;
+  justify-content: flex-end;
+}
+.introduce-me .audio-settings .fadein-row input {
+  width: 48px;
+}
+.introduce-me.color-settings .flex-content {
+  align-items: center;
+  margin-bottom: 4px;
+}
+.introduce-me.color-settings .flex-content:not(:last-of-type) {
+  padding-bottom: 4px;
+  border-bottom: 1px solid black;
+}
+.introduce-me.color-settings .flex-content label {
+  display: flex;
+  justify-content: center;
+}
+.introduce-me.color-settings .flex-content .column-margin {
+  margin-right: 16px;
+}
+.introduce-me.color-settings .color-label {
+  width: 60px;
+  min-width: 60px;
+}
+.introduce-me.color-settings .template-select {
+  width: 100px;
+  height: 26px;
+  margin-right: 4px;
+}
+.introduce-me.color-settings .template-label {
+  width: 100px;
+  margin-right: 4px;
+}
+.introduce-me.color-settings .action-button {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  margin: 0px 4px 0px 0px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-me.color-settings .action-button > i {
+  margin: 0px;
+}
+.introduce-me.color-settings .audio-button.selected {
+  color: var(--color-shadow-highlight);
+}
+.introduce-me.color-settings .clip-label {
+  white-space: nowrap;
+  min-width: 68px;
+}
+.introduce-me.color-settings .clip-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+}
+.introduce-me.color-settings footer {
+  margin-top: 8px;
+}
+.introduce-me.color-templates form > header {
+  width: 50%;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.introduce-me.color-templates form > header button {
+  flex: 0;
+  margin: 0px 0px 0px 4px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.introduce-me.color-templates form > header button i {
+  margin: 0;
+}
+.introduce-me.color-templates .color-template-content {
+  margin-bottom: 8px;
+  height: 0;
+  overflow-y: hidden;
+}
+.introduce-me.color-templates .color-template-content[open] {
+  height: auto;
+}
+.introduce-me.color-templates .template-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.introduce-me.color-templates .template-toggle .delete-template {
+  cursor: pointer;
+}
+.introduce-me.color-templates .template-toggle .delete-template:hover {
+  text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.introduce-me.banner-settings {
+  position: absolute;
+  transform-origin: 0 0;
+}
+.introduce-me.banner-settings .position-anchor {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: 0 0 4px 0;
+}
+.introduce-me.banner-settings .introduce-me.introduction {
+  position: initial;
+}
+.introduce-me.banner-settings.window-app .window-content {
+  padding: 0;
+  overflow-x: visible;
+  overflow-y: visible;
+}
+.introduce-me.banner-settings .introduce-me.introduction .introduction-container.editing {
+  width: auto;
+  height: auto;
+}
+.introduce-me.introduce-dialog {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+.introduce-me.introduce-dialog content {
+  margin-bottom: 8px;
+}
+.introduce-me.introduce-dialog content .setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.introduce-me.introduce-dialog content .setting:not(:last-child) {
+  margin-bottom: 4px;
+}
+.introduce-me.introduce-dialog content .setting .input-row {
+  width: 100%;
+}
+.introduce-me.introduce-dialog content .setting .input-row .default-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  min-width: 26px;
+}
+.introduce-me.introduce-dialog content .setting .input-row .default-button i {
+  margin: 0px;
+}
+.introduce-me.introduction-interact.control-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Label IntroduceMe  */
+.introduce-me.introduction .introduction-container label#name {
+  padding-top: 45px;
+}
+
+.introduce-me.introduction .introduction-container img.clip {
+  display: none;
+}
+
+.introduce-me.introduction .introduction-container .text-container {
+  margin-right: 10px;
+}

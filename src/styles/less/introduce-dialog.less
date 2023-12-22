@@ -1,0 +1,32 @@
+.introduce-me {
+    &.introduce-dialog {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+        content {
+            margin-bottom: 8px;
+            .setting {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                &:not(:last-child) {
+                    margin-bottom: 4px;
+                }
+                .input-row {
+                    width: 100%;
+                    .default-button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-left: 4px;
+                        min-width: 26px;
+                        i {
+                            margin: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
