@@ -6,23 +6,23 @@ const path = require(`path`);
 const archiver = require(`archiver`);
 const stringify = require(`json-stringify-pretty-compact`);
 const sourcemaps = require(`gulp-sourcemaps`);
-const typescript = require(`typescript`);
+// const typescript = require(`typescript`);
 // const createLiteral = typescript.createLiteral;
-const createLiteral = typescript.factory.createStringLiteral;
-const factory = typescript.factory;
-const isExportDeclaration = typescript.isExportDeclaration;
-const isImportDeclaration = typescript.isImportDeclaration;
-const isStringLiteral = typescript.isStringLiteral;
-const LiteralExpression = typescript.LiteralExpression;
-const Node = typescript.Node;
-const TransformationContext = typescript.TransformationContext;
-const TSTransformer = typescript.Transformer;
-const TransformerFactory = typescript.TransformerFactory;
-const visitEachChild = typescript.visitEachChild;
-const visitNode = typescript.visitNode;
+// const createLiteral = typescript.factory.createStringLiteral;
+// const factory = typescript.factory;
+// const isExportDeclaration = typescript.isExportDeclaration;
+// const isImportDeclaration = typescript.isImportDeclaration;
+// const isStringLiteral = typescript.isStringLiteral;
+// const LiteralExpression = typescript.LiteralExpression;
+// const Node = typescript.Node;
+// const TransformationContext = typescript.TransformationContext;
+// const TSTransformer = typescript.Transformer;
+// const TransformerFactory = typescript.TransformerFactory;
+// const visitEachChild = typescript.visitEachChild;
+// const visitNode = typescript.visitNode;
 const less = require(`gulp-less`);
 const sass = require(`gulp-sass`)(require(`sass`));
-const ts = require(`gulp-typescript`);
+// const ts = require(`gulp-typescript`);
 const git = require(`gulp-git`);
 const argv = require(`yargs`).argv;
 const minifyJs = require('gulp-uglify');
@@ -85,64 +85,64 @@ const getManifest = () => {
 }
 
 
-const createTransformer = () => {
-	/**
-	 * @param {typescript.Node} node
-	 */
-	const shouldMutateModuleSpecifier = (node) => {
-		if (!isImportDeclaration(node) && !isExportDeclaration(node))
-			return false;
-		if (node.moduleSpecifier === undefined)
-			return false;
-		if (!isStringLiteral(node.moduleSpecifier))
-			return false;
-		if (!node.moduleSpecifier.text.startsWith(`./`) && !node.moduleSpecifier.text.startsWith(`../`))
-			return false;
+// const createTransformer = () => {
+// 	/**
+// 	 * @param {typescript.Node} node
+// 	 */
+// 	const shouldMutateModuleSpecifier = (node) => {
+// 		if (!isImportDeclaration(node) && !isExportDeclaration(node))
+// 			return false;
+// 		if (node.moduleSpecifier === undefined)
+// 			return false;
+// 		if (!isStringLiteral(node.moduleSpecifier))
+// 			return false;
+// 		if (!node.moduleSpecifier.text.startsWith(`./`) && !node.moduleSpecifier.text.startsWith(`../`))
+// 			return false;
 
-		return path.extname(node.moduleSpecifier.text) === ``;
-	}
+// 		return path.extname(node.moduleSpecifier.text) === ``;
+// 	}
 
-	return (context) => {
-		return (node) => {
-			function visitor(node) {
-				if (shouldMutateModuleSpecifier(node)) {
-					if (isImportDeclaration(node)) {
-						const newModuleSpecifier = createLiteral(`${(node.moduleSpecifier).text}.js`);
-						return factory.updateImportDeclaration(node, node.decorators, node.modifiers, node.importClause, newModuleSpecifier, undefined);
-					} else if (isExportDeclaration(node)) {
-						const newModuleSpecifier = createLiteral(`${(node.moduleSpecifier).text}.js`);
-						return factory.updateExportDeclaration(node, node.decorators, node.modifiers, false, node.exportClause, newModuleSpecifier, undefined);
-					}
-				}
-				return visitEachChild(node, visitor, context);
-			}
-			return visitNode(node, visitor);
-		};
-	};
-}
+// 	return (context) => {
+// 		return (node) => {
+// 			function visitor(node) {
+// 				if (shouldMutateModuleSpecifier(node)) {
+// 					if (isImportDeclaration(node)) {
+// 						const newModuleSpecifier = createLiteral(`${(node.moduleSpecifier).text}.js`);
+// 						return factory.updateImportDeclaration(node, node.decorators, node.modifiers, node.importClause, newModuleSpecifier, undefined);
+// 					} else if (isExportDeclaration(node)) {
+// 						const newModuleSpecifier = createLiteral(`${(node.moduleSpecifier).text}.js`);
+// 						return factory.updateExportDeclaration(node, node.decorators, node.modifiers, false, node.exportClause, newModuleSpecifier, undefined);
+// 					}
+// 				}
+// 				return visitEachChild(node, visitor, context);
+// 			}
+// 			return visitNode(node, visitor);
+// 		};
+// 	};
+// }
 
-const tsConfig = ts.createProject(`tsconfig.json`, {
-	getCustomTransformers: (_program) => ({
-		after: [createTransformer()],
-	}),
-});
+// const tsConfig = ts.createProject(`tsconfig.json`, {
+// 	getCustomTransformers: (_program) => ({
+// 		after: [createTransformer()],
+// 	}),
+// });
 
 /********************/
 /*		BUILD		*/
 /********************/
 
-/**
- * Build TypeScript
- */
-function buildTS() {
+// /**
+//  * Build TypeScript
+//  */
+// function buildTS() {
 
-	return (
-		gulp
-		.src(`src/**/*.ts`)
-		.pipe(tsConfig())
-		.pipe(gulp.dest(`dist`))
-	);
-}
+// 	return (
+// 		gulp
+// 		.src(`src/**/*.ts`)
+// 		.pipe(tsConfig())
+// 		.pipe(gulp.dest(`dist`))
+// 	);
+// }
 
 /**
  * Build JavaScript
@@ -669,7 +669,8 @@ function gitTag() {
 }
 
 const execGit = gulp.series(gitAdd, gitCommit, gitTag);
-const execBuild = gulp.parallel(buildTS, buildJS, buildJSMap, buildMJS, buildCSS, buildCSSMap, buildLess, buildSASS, copyFiles);
+// const execBuild = gulp.parallel(buildTS, buildJS, buildJSMap, buildMJS, buildCSS, buildCSSMap, buildLess, buildSASS, copyFiles);
+const execBuild = gulp.parallel(buildJS, buildJSMap, buildMJS, buildCSS, buildCSSMap, buildLess, buildSASS, copyFiles);
 
 exports.build = gulp.series(clean, execBuild);
 exports.bundle = gulp.series(clean, execBuild, bundleModule, cleanDist);
