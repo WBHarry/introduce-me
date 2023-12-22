@@ -1,8 +1,8 @@
-import Introduction from './modules/Introduction.js';
+import Introduction from './scripts/Introduction.js';
 import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
-import { registerGameSettings, registerHandlebars } from './modules/Setup.js';
-import { setupSockets } from './modules/SocketHandler.js';
-import IntroduceDialog from './modules/IntroduceDialog.js';
+import { registerGameSettings, registerHandlebars } from './scripts/Setup.js';
+import { setupSockets } from './scripts/SocketHandler.js';
+import IntroduceDialog from './scripts/IntroduceDialog.js';
 
 
 Hooks.once('init', () => {
