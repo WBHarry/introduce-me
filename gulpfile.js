@@ -28,7 +28,7 @@ const argv = require(`yargs`).argv;
 const minifyJs = require('gulp-uglify');
 const concat = require('gulp-concat');
 // const filter = require('gulp-filter');
-
+const moduleId = 'introduce-me'; // <= ID OF THE MODULE
 const loadJson = (path) => {
 	console.log(path)
 	try {
@@ -61,7 +61,7 @@ const getManifest = () => {
 	if (fs.existsSync(`src`)) {
 		json.root = `src`;
 	} else {
-		json.root = `dist`;
+		json.root = `dist/${moduleId}`;
 	}
 
 	const modulePath = path.join(json.root, `module.json`);
@@ -140,7 +140,7 @@ const getManifest = () => {
 // 		gulp
 // 		.src(`src/**/*.ts`)
 // 		.pipe(tsConfig())
-// 		.pipe(gulp.dest(`dist`))
+// 		.pipe(gulp.dest(`dist/${moduleId}`))
 // 	);
 // }
 
@@ -151,7 +151,7 @@ function buildJS() {
 	return (
 		gulp
 		.src(`src/**/*.js`)
-		.pipe(gulp.dest(`dist`))
+		.pipe(gulp.dest(`dist/${moduleId}`))
 	);
 }
 
@@ -162,7 +162,7 @@ function buildJSMap() {
 	return (
 		gulp
 		.src(`src/**/*.js.map`)
-		.pipe(gulp.dest(`dist`))
+		.pipe(gulp.dest(`dist/${moduleId}`))
 	);
 }
 
@@ -173,7 +173,7 @@ function buildMJS() {
 	return (
 		gulp
 		.src(`src/**/*.mjs`)
-		.pipe(gulp.dest(`dist`))
+		.pipe(gulp.dest(`dist/${moduleId}`))
 	);
 }
 
@@ -181,28 +181,28 @@ function buildMJS() {
  * Build Css
  */
 function buildCSS() {
-	return gulp.src(`src/**/*.css`).pipe(gulp.dest(`dist`));
+	return gulp.src(`src/**/*.css`).pipe(gulp.dest(`dist/${moduleId}`));
 }
 
 /**
  * Build Css
  */
 function buildCSSMap() {
-	return gulp.src(`src/**/*.css.map`).pipe(gulp.dest(`dist`));
+	return gulp.src(`src/**/*.css.map`).pipe(gulp.dest(`dist/${moduleId}`));
 }
 
 /**
  * Build Less
  */
 function buildLess() {
-	return gulp.src(`src/**/*.less`).pipe(less()).pipe(gulp.dest(`dist`));
+	return gulp.src(`src/**/*.less`).pipe(less()).pipe(gulp.dest(`dist/${moduleId}`));
 }
 
 /**
  * Build SASS
  */
 function buildSASS() {
-	return gulp.src(`src/**/*.scss`).pipe(sass().on(`error`, sass.logError)).pipe(gulp.dest(`dist`));
+	return gulp.src(`src/**/*.scss`).pipe(sass().on(`error`, sass.logError)).pipe(gulp.dest(`dist/${moduleId}`));
 }
 
 const bundleModule = async () => {
@@ -220,9 +220,9 @@ const bundleModule = async () => {
 		.pipe(minifyJs())
 		.pipe(concat(`module.js`))
 		.pipe(sourcemaps.write(`./`))
-		.pipe(gulp.dest(`./dist`))
+		.pipe(gulp.dest(`./dist/${moduleId}`))
 		.on('end', function() {
-			recursiveFileSearch(`./dist`, (err, res) => {
+			recursiveFileSearch(`./dist/${moduleId}`, (err, res) => {
 				if (err) {
 					throw err;
 				}
@@ -237,7 +237,7 @@ const bundleModule = async () => {
 						});
 					}
 				}
-				cleanEmptyFoldersRecursively(`./dist`);
+				cleanEmptyFoldersRecursively(`./dist/${moduleId}`);
 			})
 		});
 }
@@ -315,7 +315,7 @@ const copyFiles = async () => {
 							throw err;
 
 						for (const file of res) {
-							const newFile = path.join(`dist`, path.relative(process.cwd(), file.replace(/.*src[\/\\]/g, ``)));
+							const newFile = path.join(`dist/${moduleId}`, path.relative(process.cwd(), file.replace(/.*src[\/\\]/g, ``)));
 							console.log(`Copying file: ` + newFile);
 							const folder = path.parse(newFile).dir;
 							if (!fs.existsSync(folder)) {
@@ -327,8 +327,8 @@ const copyFiles = async () => {
 						}
 					})
 				else {
-					console.log(`Copying file: ` + p + ` to ` + path.join(`dist`, entity));
-					fs.copyFileSync(p, path.join(`dist`, entity));
+					console.log(`Copying file: ` + p + ` to ` + path.join(`dist/${moduleId}`, entity));
+					fs.copyFileSync(p, path.join(`dist/${moduleId}`, entity));
 				}
 			}
 		}
@@ -445,7 +445,7 @@ const linkUserData = async () => {
 
 	let destDir;
 	try {
-		if (fs.existsSync(path.resolve(`.`, `dist`, `module.json`)) || fs.existsSync(path.resolve(`.`, `src`, `module.json`))) {
+		if (fs.existsSync(path.resolve(`.`, `dist/${moduleId}`, `module.json`)) || fs.existsSync(path.resolve(`.`, `src`, `module.json`))) {
 			destDir = `modules`;
 		} else {
 			throw Error(`Could not find module.json or system.json`);
@@ -467,7 +467,7 @@ const linkUserData = async () => {
 			fs.unlinkSync(linkDir);
 		} else if (!fs.existsSync(linkDir)) {
 			console.log(`Copying build to ${linkDir}`);
-			fs.symlinkSync(path.resolve(`./dist`), linkDir);
+			fs.symlinkSync(path.resolve(`./dist/${moduleId}`), linkDir);
 		}
 		return Promise.resolve();
 	} catch (err) {
@@ -539,7 +539,7 @@ async function packageBuild() {
 			zip.pipe(zipFile);
 
 			// Add the directory with the final code
-			zip.directory(`dist/`, moduleJson.id);
+			zip.directory(`dist/${moduleId}`, moduleJson.id);
 			console.log(`Zip files`);
 
 			zip.finalize();
