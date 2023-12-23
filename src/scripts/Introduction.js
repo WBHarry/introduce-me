@@ -2,7 +2,9 @@ import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import IntroduceDialog from "./IntroduceDialog.js";
 import { getActorIntroductionColors } from "./ColorSettings.js";
 import { playIntroductionAudio } from "./AudioSettings.js";
-import { RequestType } from "./SocketHandler.js";
+import CONSTANTS from "./constants/constants.js";
+import { introduceMeSocket } from "./socket.js";
+// import { RequestType } from "./SocketHandler.js";
 
 export default class Introduction {
   constructor() {
@@ -15,10 +17,19 @@ export default class Introduction {
 
   introduceMe = async (token, actor) => {
     if (game.user.isGM && token) {
-      await game.socket.emit(`module.introduce-me`, {
-        type: RequestType.introduce,
-        data: { uuid: token.document?.uuid ?? token.uuid ?? actor.uuid },
-      });
+      // await game.socket.emit(`module.introduce-me`, {
+      //   type: CONSTANTS.API.REQUEST_TYPE.introduce,
+      //   data: { uuid: token.document?.uuid ?? token.uuid ?? actor.uuid },
+      // });
+      const args = [
+        {
+          type: CONSTANTS.API.REQUEST_TYPE.introduce,
+          data: { uuid: token.document?.uuid ?? token.uuid ?? actor.uuid },
+        },
+        null,null,null
+      ];
+      await introduceMeSocket.executeForEveryone("introduceMe", ...args);
+
       await this.introductionDisplay(token, actor);
     }
   };
@@ -56,16 +67,16 @@ export default class Introduction {
         }
       }
 
-      game.socket.on(`module.introduce-me`, async (request) => {
-        switch (request.type) {
-          case RequestType.close:
-            this.manualClose(node, sound);
-            break;
-          case RequestType.toggleAudio:
-            await this.toggleAudio(node, sound, colors.audio);
-            break;
-        }
-      });
+      // game.socket.on(`module.introduce-me`, async (request) => {
+      //   switch (request.type) {
+      //     case CONSTANTS.API.REQUEST_TYPE.close:
+      //       this.manualClose(node, sound);
+      //       break;
+      //     case CONSTANTS.API.REQUEST_TYPE.toggleAudio:
+      //       await this.toggleAudio(node, sound, colors.audio);
+      //       break;
+      //   }
+      // });
 
       const defaultIntroductionDuration = game.settings.get("introduce-me", "introduction-duration");
       const actorIntroductionDuration = actor.getFlag("introduce-me", "introduction-duration");
@@ -168,14 +179,32 @@ export default class Introduction {
       $(node)
         .find(".close-button")
         .click(async (event) => {
-          await game.socket.emit(`module.introduce-me`, { type: RequestType.close });
+          // await game.socket.emit(`module.introduce-me`, { type: CONSTANTS.API.REQUEST_TYPE.close });
+          const args = [
+            {
+              type: CONSTANTS.API.REQUEST_TYPE.close,
+              data: null,
+            },
+            node, sound, colors.audio
+          ];
+          await introduceMeSocket.executeForOthers("introduceMe", ...args);
+
           this.manualClose(node, sound);
         });
 
       $(node)
         .find(".audio-button")
         .click(async (event) => {
-          await game.socket.emit(`module.introduce-me`, { type: RequestType.toggleAudio });
+          // await game.socket.emit(`module.introduce-me`, { type: CONSTANTS.API.REQUEST_TYPE.toggleAudio });
+          const args = [
+            {
+              type: CONSTANTS.API.REQUEST_TYPE.toggleAudio,
+              data: null,
+            },
+            node, sound, colors.audio
+          ];
+          await introduceMeSocket.executeForOthers("introduceMe", ...args);
+
           await this.toggleAudio(node, sound, colors.audio);
         });
     }

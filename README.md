@@ -27,9 +27,9 @@ After the display, the actor will be set to display their name whenever someone 
 
 # Usage
 
-Actors can be introduced either via a button placed on the Token's HUD menu, accessed via rightclicking it, or by using the macros included in the Introduce Me compendium. There is a module setting for disabling the HUD menu button if you're using the macros and don't want it taking space.
+Actors can be introduced either via a button placed on the Token's HUD menu, accessed via right clicking it, or by using the macros included in the Introduce Me compendium. There is a module setting for disabling the HUD menu button if you're using the macros and don't want it taking space.
 
-Flavor texts look best if they're not exessively long. The 'Private Preview' function can be used to check how it will look with the players none the wiser.
+Flavor texts look best if they're not excessively long. The 'Private Preview' function can be used to check how it will look with the players none the wiser.
 
 ## Installation
 
@@ -111,3 +111,4 @@ This package is under an [MIT license](LICENSE) and the [Foundry Virtual Tableto
 ## Credit
 
 - Thanks to [WBHarry](https://github.com/WBHarry) for the module [Introduce Me](https://github.com/WBHarry/introduce-me)
+- Thanks to [DarKDinDoN](https://github.com/DarKDinDoN) for the module [Introduce Me (with some bug fix)](https://github.com/DarKDinDoN/introduce-me)

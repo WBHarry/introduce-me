@@ -2,7 +2,7 @@ import ColorSettings, { DefaultColors } from "./ColorSettings.js";
 import ColorTemplates from "./ColorTemplates.js";
 import BannerSettings, { defaultPosition } from "./BannerSettings.js";
 
-export const registerGameSettings = () => {
+export const registerSettings = () => {
   game.settings.registerMenu("introduce-me", "color-settings", {
     name: game.i18n.localize("introduceMe.colorSettings.name"),
     label: game.i18n.localize("introduceMe.colorSettings.label"),
@@ -108,6 +108,15 @@ export const registerGameSettings = () => {
     default: defaultPosition,
     config: false,
     type: Object,
+  });
+
+  game.settings.register("introduce-me", "debug", {
+    name: game.i18n.localize("introduceMe.gameSettings.debug.name"),
+    hint: game.i18n.localize("introduceMe.gameSettings.debug.hint"),
+    scope: "client",
+    default: false,
+    config: true,
+    type: Boolean,
   });
 };
 
