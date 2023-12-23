@@ -1,5 +1,5 @@
 {
-  "introduceMe": {
+  "introduce-me": {
     "introduce": {
       "close": "Close Introduction",
       "update": "Update introduction position and size",
@@ -69,31 +69,37 @@
     },
     "gameSettings": {
       "showHud": {
-        "name": "Show HUD",
+        "title": "Show HUD",
         "hint": "Show the token HUD button. If disabled, use the module macros to introduce actors instead."
       },
       "useToken": {
-        "name": "Use Tokens",
+        "title": "Use Tokens",
         "hint": "Show the actor token instead of the avatar in the Introduction."
       },
       "useActorName": {
-        "name": "Use Actor Name",
+        "title": "Use Actor Name",
         "hint": "Show the Actor name instead of the Token name in the Introduction."
       },
       "setDisplayName": {
-        "name": "Set Display Name",
+        "title": "Set Display Name",
         "hint": "Set the actor's Display Name setting to 'Hovered by Anyone' upon introduction."
       },
       "useIntroducePermission": {
-        "name": "Introduce with Permission",
+        "title": "Introduce with Permission",
         "hint": "When an actor is introduced, set their permission status to 'limited' for players unless already greater."
       },
       "introductionDuration": {
-        "name": "Default Introduction Duration",
+        "title": "Default Introduction Duration",
         "hint": "The default duration in seconds that the Introduction stays after the animation finishes before being removed."
       },
       "introductionColors": {
-        "name": "Introduction Colors"
+        "title": "Introduction Colors",
+        "hint": ""
+      },
+      "debug": {
+        "title": "Enable debugging",
+        "label": "Prints debug messages to the console",
+        "hint": "Prints debug messages to the console"
       }
     }
   }

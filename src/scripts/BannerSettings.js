@@ -1,20 +1,22 @@
 import Scalable from "./Scalable.js";
 import { cleanupDOM } from "./Introduction.js";
+import { i18n } from "./lib/lib.js";
+import CONSTANTS from "./constants/constants.js";
 
 export default class BannerSettings extends FormApplication {
   constructor(token, actor) {
-    const position = game.settings.get("introduce-me", "position");
+    const position = game.settings.get(CONSTANTS.MODULE_ID, "position");
     super(
       {},
       {
-        title: game.i18n.localize("introduceMe.bannerSettings.label"),
+        title: i18n(`${CONSTANTS.MODULE_ID}.bannerSettings.label`),
         width: position.width,
         top: position.top,
         left: position.left,
         scale: position.scale,
       }
     );
-    const introductionColors = game.settings.get("introduce-me", "introduction-colors");
+    const introductionColors = game.settings.get(CONSTANTS.MODULE_ID, "introduction-colors");
     const introductionColorsArray = Object.keys(introductionColors).reduce((acc, key) => {
       acc.push({
         ...introductionColors[key],
@@ -23,7 +25,7 @@ export default class BannerSettings extends FormApplication {
       });
       return acc;
     }, []);
-    const templates = game.settings.get("introduce-me", "color-templates");
+    const templates = game.settings.get(CONSTANTS.MODULE_ID, "color-templates");
     this.colors = introductionColorsArray.concat(templates);
     this.color = {
       ...introductionColors.friendly,
@@ -39,11 +41,11 @@ export default class BannerSettings extends FormApplication {
     const defaults = super.defaultOptions;
     const overrides = {
       id: "banner-settings",
-      template: "modules/introduce-me/templates/introductionInner.hbs",
+      template: `modules/${CONSTANTS.MODULE_ID}/templates/introductionInner.hbs`,
       closeOnSubmit: false,
       submitOnChange: true,
       resizable: true,
-      classes: ["introduce-me", "banner-settings"],
+      classes: [CONSTANTS.MODULE_ID, "banner-settings"],
     };
 
     const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -56,8 +58,8 @@ export default class BannerSettings extends FormApplication {
       colors: this.color,
       editing: true,
       img: "icons/svg/cowled.svg",
-      name: game.i18n.localize("introduceMe.colorSettings.tester"),
-      flavor: game.i18n.localize("introduceMe.introduceDialog.flavorTitle"), // Flavor parse?
+      name: i18n(`${CONSTANTS.MODULE_ID}.colorSettings.tester`),
+      flavor: i18n(`${CONSTANTS.MODULE_ID}.introduceDialog.flavorTitle`), // Flavor parse?
       showSettings: 2,
     };
   }
@@ -68,7 +70,7 @@ export default class BannerSettings extends FormApplication {
   }
 
   async _renderOuter() {
-    const outer = $(await renderTemplate("modules/introduce-me/templates/bannerSettings.hbs"));
+    const outer = $(await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/bannerSettings.hbs`));
     outer[0].style.height = "auto";
     const header = $(outer).find(".position-anchor")[0];
     new Scalable(this, outer, header, true);
@@ -92,7 +94,7 @@ export default class BannerSettings extends FormApplication {
     $(html)
       .find(".check-button")
       .click((event) => {
-        game.settings.set("introduce-me", "position", this.position);
+        game.settings.set(CONSTANTS.MODULE_ID, "position", this.position);
         this.close();
       });
 

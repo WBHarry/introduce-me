@@ -14,6 +14,6 @@ export function registerSocket() {
 
   introduceMeSocket.register("introduceMe", (...args) => API.introduceMeArr(...args));
 
-  game.modules.get("introduce-me").socket = introduceMeSocket;
+  game.modules.get(CONSTANTS.MODULE_ID).socket = introduceMeSocket;
   return introduceMeSocket;
 }

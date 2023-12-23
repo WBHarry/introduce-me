@@ -1,18 +1,20 @@
 import { areDispositionSettingsEqual, ActorColorSettings } from "./ColorSettings.js";
 import Introduction from "./Introduction.js";
+import CONSTANTS from "./constants/constants.js";
+import { i18n } from "./lib/lib.js";
 
 export default class IntroduceDialog extends FormApplication {
   constructor(token, actor) {
-    const useActorName = game.settings.get("introduce-me", "use-actor-name");
+    const useActorName = game.settings.get(CONSTANTS.MODULE_ID, "use-actor-name");
     super(
       {},
-      { title: `${game.i18n.localize("introduceMe.introduceDialog.title")}: ${useActorName ? actor.name : token.name}` }
+      { title: `${i18n(`${CONSTANTS.MODULE_ID}.introduceDialog.title`)}: ${useActorName ? actor.name : token.name}` }
     );
-    this.defaultDuration = game.settings.get("introduce-me", "introduction-duration");
+    this.defaultDuration = game.settings.get(CONSTANTS.MODULE_ID, "introduction-duration");
     this.token = token;
     this.actor = actor;
-    this.flavor = actor.getFlag("introduce-me", "flavor");
-    this.duration = actor.getFlag("introduce-me", "introduction-duration");
+    this.flavor = actor.getFlag(CONSTANTS.MODULE_ID, "flavor");
+    this.duration = actor.getFlag(CONSTANTS.MODULE_ID, "introduction-duration");
   }
 
   static get defaultOptions() {
@@ -21,10 +23,10 @@ export default class IntroduceDialog extends FormApplication {
       height: "auto",
       width: 400,
       id: "flavor-dialog",
-      template: "modules/introduce-me/templates/introduceDialog.hbs",
+      template: `modules/${CONSTANTS.MODULE_ID}/templates/introduceDialog.hbs`,
       closeOnSubmit: false,
       submitOnChange: true,
-      classes: ["introduce-me", "introduce-dialog"],
+      classes: [CONSTANTS.MODULE_ID, "introduce-dialog"],
     };
 
     const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -34,7 +36,7 @@ export default class IntroduceDialog extends FormApplication {
 
   getData() {
     const duration = this.duration !== undefined ? this.duration : this.defaultDuration;
-    const actorColor = this.actor.getFlag("introduce-me", "introduction-colors");
+    const actorColor = this.actor.getFlag(CONSTANTS.MODULE_ID, "introduction-colors");
     const isDefaultColor = !actorColor ? true : areDispositionSettingsEqual(actorColor, this.token, this.actor);
     return {
       flavor: this.flavor,
@@ -76,12 +78,12 @@ export default class IntroduceDialog extends FormApplication {
     $(html)
       .find("#save")
       .click(async () => {
-        await actor.setFlag("introduce-me", "flavor", this.flavor);
+        await actor.setFlag(CONSTANTS.MODULE_ID, "flavor", this.flavor);
 
         if (this.duration === undefined) {
-          await actor.unsetFlag("introduce-me", "introduction-duration");
+          await actor.unsetFlag(CONSTANTS.MODULE_ID, "introduction-duration");
         } else {
-          await actor.setFlag("introduce-me", "introduction-duration", this.duration);
+          await actor.setFlag(CONSTANTS.MODULE_ID, "introduction-duration", this.duration);
         }
 
         this.close();
@@ -90,12 +92,12 @@ export default class IntroduceDialog extends FormApplication {
     $(html)
       .find("#introduce")
       .click(async () => {
-        await actor.setFlag("introduce-me", "flavor", this.flavor);
+        await actor.setFlag(CONSTANTS.MODULE_ID, "flavor", this.flavor);
 
         if (this.duration === undefined) {
-          await actor.unsetFlag("introduce-me", "introduction-duration");
+          await actor.unsetFlag(CONSTANTS.MODULE_ID, "introduction-duration");
         } else {
-          await actor.setFlag("introduce-me", "introduction-duration", this.duration);
+          await actor.setFlag(CONSTANTS.MODULE_ID, "introduction-duration", this.duration);
         }
 
         await new Introduction().introduceMe(this.token, actor);

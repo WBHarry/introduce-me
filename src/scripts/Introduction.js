@@ -4,6 +4,8 @@ import { getActorIntroductionColors } from "./ColorSettings.js";
 import { playIntroductionAudio } from "./AudioSettings.js";
 import CONSTANTS from "./constants/constants.js";
 import { introduceMeSocket } from "./socket.js";
+import API from "./API/api.js";
+import { i18n } from "./lib/lib.js";
 // import { RequestType } from "./SocketHandler.js";
 
 export default class Introduction {
@@ -17,7 +19,7 @@ export default class Introduction {
 
   introduceMe = async (token, actor) => {
     if (game.user.isGM && token) {
-      // await game.socket.emit(`module.introduce-me`, {
+      // await game.socket.emit(`module.${CONSTANTS.MODULE_ID}`, {
       //   type: CONSTANTS.API.REQUEST_TYPE.introduce,
       //   data: { uuid: token.document?.uuid ?? token.uuid ?? actor.uuid },
       // });
@@ -26,7 +28,9 @@ export default class Introduction {
           type: CONSTANTS.API.REQUEST_TYPE.introduce,
           data: { uuid: token.document?.uuid ?? token.uuid ?? actor.uuid },
         },
-        null,null,null
+        null,
+        null,
+        null,
       ];
       await introduceMeSocket.executeForEveryone("introduceMe", ...args);
 
@@ -39,9 +43,9 @@ export default class Introduction {
     if (token) {
       const actor = game.actors.get(syntheticActor.id);
       // Store the already presented people for portrait-box
-      actor.setFlag("introduce-me", "introduced", true);
+      actor.setFlag(CONSTANTS.MODULE_ID, "introduced", true);
       if (!preview && game.user.isGM) {
-        const usePermission = await game.settings.get("introduce-me", "use-introduce-permission");
+        const usePermission = await game.settings.get(CONSTANTS.MODULE_ID, "use-introduce-permission");
         const permissionUpdate = usePermission
           ? {
               permission: {
@@ -51,7 +55,7 @@ export default class Introduction {
             }
           : {};
 
-        const setDisplayName = await game.settings.get("introduce-me", "set-display-name");
+        const setDisplayName = await game.settings.get(CONSTANTS.MODULE_ID, "set-display-name");
         if (setDisplayName) {
           await actor.update({ "token.displayName": 30, ...permissionUpdate });
           const scenes = Array.from(game.scenes);
@@ -67,7 +71,7 @@ export default class Introduction {
         }
       }
 
-      // game.socket.on(`module.introduce-me`, async (request) => {
+      // game.socket.on(`module.${CONSTANTS.MODULE_ID}`, async (request) => {
       //   switch (request.type) {
       //     case CONSTANTS.API.REQUEST_TYPE.close:
       //       this.manualClose(node, sound);
@@ -78,8 +82,8 @@ export default class Introduction {
       //   }
       // });
 
-      const defaultIntroductionDuration = game.settings.get("introduce-me", "introduction-duration");
-      const actorIntroductionDuration = actor.getFlag("introduce-me", "introduction-duration");
+      const defaultIntroductionDuration = game.settings.get(CONSTANTS.MODULE_ID, "introduction-duration");
+      const actorIntroductionDuration = actor.getFlag(CONSTANTS.MODULE_ID, "introduction-duration");
       const introductionDuration = overrideDuration
         ? overrideDuration
         : actorIntroductionDuration !== undefined
@@ -87,9 +91,11 @@ export default class Introduction {
         : defaultIntroductionDuration;
 
       cleanupDOM();
-      const useActorName = game.settings.get("introduce-me", "use-actor-name");
+      const useActorName = game.settings.get(CONSTANTS.MODULE_ID, "use-actor-name");
       const flavor = this.flavorParse(
-        overrideFlavor ?? (await actor.getFlag("introduce-me", "flavor")) ?? String.fromCharCode(parseInt("00A0", 16)),
+        overrideFlavor ??
+          (await actor.getFlag(CONSTANTS.MODULE_ID, "flavor")) ??
+          String.fromCharCode(parseInt("00A0", 16)),
         actor
       );
       const colors = getActorIntroductionColors(token, actor);
@@ -102,7 +108,7 @@ export default class Introduction {
 
       $(document.body).append(
         $(
-          await renderTemplate("modules/introduce-me/templates/introduction.hbs", {
+          await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/introduction.hbs`, {
             name: useActorName ? actor.name : token.name,
             img: this.getIntroductionImage(token, actor),
             flavor: flavor,
@@ -179,13 +185,15 @@ export default class Introduction {
       $(node)
         .find(".close-button")
         .click(async (event) => {
-          // await game.socket.emit(`module.introduce-me`, { type: CONSTANTS.API.REQUEST_TYPE.close });
+          // await game.socket.emit(`module.${CONSTANTS.MODULE_ID}`, { type: CONSTANTS.API.REQUEST_TYPE.close });
           const args = [
             {
               type: CONSTANTS.API.REQUEST_TYPE.close,
               data: null,
             },
-            node, sound, colors.audio
+            node,
+            sound,
+            colors.audio,
           ];
           await introduceMeSocket.executeForOthers("introduceMe", ...args);
 
@@ -195,13 +203,15 @@ export default class Introduction {
       $(node)
         .find(".audio-button")
         .click(async (event) => {
-          // await game.socket.emit(`module.introduce-me`, { type: CONSTANTS.API.REQUEST_TYPE.toggleAudio });
+          // await game.socket.emit(`module.${CONSTANTS.MODULE_ID}`, { type: CONSTANTS.API.REQUEST_TYPE.toggleAudio });
           const args = [
             {
               type: CONSTANTS.API.REQUEST_TYPE.toggleAudio,
               data: null,
             },
-            node, sound, colors.audio
+            node,
+            sound,
+            colors.audio,
           ];
           await introduceMeSocket.executeForOthers("introduceMe", ...args);
 
@@ -211,39 +221,41 @@ export default class Introduction {
   };
 
   toggleAudio = async (node, sound, audio) => {
-    const audioButton = $(node).find(".audio-button > i");
-    audioButton.removeClass();
-    if (sound.pausedTime) {
-      const baseVolume = game.settings.get("core", "globalPlaylistVolume");
-      const { volume } = audio.sounds[0].options;
-      await sound.load();
-      sound.play({
-        volume: baseVolume * volume,
-        offset: sound.pausedTime,
-        fade: audio.sounds[0].fadeIn,
-      });
+    // const audioButton = $(node).find(".audio-button > i");
+    // audioButton.removeClass();
+    // if (sound.pausedTime) {
+    //   const baseVolume = game.settings.get("core", "globalPlaylistVolume");
+    //   const { volume } = audio.sounds[0].options;
+    //   await sound.load();
+    //   sound.play({
+    //     volume: baseVolume * volume,
+    //     offset: sound.pausedTime,
+    //     fade: audio.sounds[0].fadeIn,
+    //   });
 
-      audioButton.addClass("fas fa-pause");
-    } else {
-      sound.pause();
-      audioButton.addClass("fas fa-play");
-    }
+    //   audioButton.addClass("fas fa-pause");
+    // } else {
+    //   sound.pause();
+    //   audioButton.addClass("fas fa-play");
+    // }
+    return await API.toggleAudio(node, sound, audio);
   };
 
   manualClose = (node, sound) => {
-    gsap.to(node, { opacity: 0, duration: 0.5 });
-    sound?.fade(0, { duration: 2000 });
-    setTimeout(() => {
-      sound?.stop();
-      $(node).remove();
-    }, 2000);
+    // gsap.to(node, { opacity: 0, duration: 0.5 });
+    // sound?.fade(0, { duration: 2000 });
+    // setTimeout(() => {
+    //   sound?.stop();
+    //   $(node).remove();
+    // }, 2000);
+    return API.manualClose(node, sound);
   };
 
   editDisplay = async (colors, localToken, localActor) => {
     cleanupDOM();
-    const useActorName = game.settings.get("introduce-me", "use-actor-name");
+    const useActorName = game.settings.get(CONSTANTS.MODULE_ID, "use-actor-name");
     const flavor = this.flavorParse(
-      localActor?.getFlag("introduce-me", "flavor") ?? game.i18n.localize("introduceMe.introduceDialog.flavorTitle"),
+      localActor?.getFlag(CONSTANTS.MODULE_ID, "flavor") ?? i18n(`${CONSTANTS.MODULE_ID}.introduceDialog.flavorTitle`),
       localActor
     );
     const sound = await playIntroductionAudio(colors.audio);
@@ -254,12 +266,12 @@ export default class Introduction {
 
     $(document.body).append(
       $(
-        await renderTemplate("modules/introduce-me/templates/introduction.hbs", {
+        await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/introduction.hbs`, {
           name: localToken
             ? useActorName
               ? localActor.name
               : localToken.name
-            : game.i18n.localize("introduceMe.colorSettings.tester"),
+            : i18n(`${CONSTANTS.MODULE_ID}.colorSettings.tester`),
           img: localActor ? this.getIntroductionImage(localToken, localActor) : "icons/svg/cowled.svg",
           flavor: flavor,
           colors: colors,
@@ -287,7 +299,7 @@ export default class Introduction {
 
   renderHUD = async (data, html) => {
     const rightColumn = $(html).find(".col.right");
-    $(rightColumn).append(await renderTemplate("modules/introduce-me/templates/introductionInteract.hbs"));
+    $(rightColumn).append(await renderTemplate(`modules/${CONSTANTS.MODULE_ID}/templates/introductionInteract.hbs`));
 
     $(rightColumn)
       .find(".introduce-me.introduction-interact")
@@ -298,7 +310,7 @@ export default class Introduction {
   };
 
   getIntroductionImage = (token, actor) => {
-    const useToken = game.settings.get("introduce-me", "use-token");
+    const useToken = game.settings.get(CONSTANTS.MODULE_ID, "use-token");
     return useToken ? token.texture.src : actor.img;
   };
 
@@ -307,7 +319,7 @@ export default class Introduction {
   };
 
   setIntroductionPosition = (node) => {
-    const { left, top, width, scale } = game.settings.get("introduce-me", "position");
+    const { left, top, width, scale } = game.settings.get(CONSTANTS.MODULE_ID, "position");
     node[0].style.left = `${left}px`;
     node[0].style.top = `${top}px`;
     node[0].style.width = `${width}px`;

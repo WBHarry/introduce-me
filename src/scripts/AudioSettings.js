@@ -1,6 +1,9 @@
+import CONSTANTS from "./constants/constants.js";
+import { i18n } from "./lib/lib.js";
+
 export default class AudioSettings extends FormApplication {
   constructor(audio, tracks, resolve, reject) {
-    super({}, { title: game.i18n.localize("introduceMe.audioSettings.title") });
+    super({}, { title: i18n(`${CONSTANTS.MODULE_ID}.audioSettings.title`) });
     this.resolve = resolve;
     this.reject = reject;
 
@@ -17,10 +20,10 @@ export default class AudioSettings extends FormApplication {
       height: "auto",
       width: 450,
       id: "audio-settings",
-      template: "modules/introduce-me/templates/audioSettings.hbs",
+      template: `modules/${CONSTANTS.MODULE_ID}/templates/audioSettings.hbs`,
       closeOnSubmit: false,
       submitOnChange: true,
-      classes: ["introduce-me", "audio-settings"],
+      classes: [CONSTANTS.MODULE_ID, "audio-settings"],
     };
 
     const mergedOptions = foundry.utils.mergeObject(defaults, overrides);

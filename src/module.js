@@ -5,16 +5,14 @@ import { registerSettings, registerHandlebars } from "./scripts/settings.js";
 import IntroduceDialog from "./scripts/IntroduceDialog.js";
 import API from "./scripts/API/api.js";
 import { registerSocket } from "./scripts/socket.js";
+import CONSTANTS from "./scripts/constants/constants.js";
+import { i18n } from "./scripts/lib/lib.js";
 
 /* ------------------------------------ */
 /* Initialize module					*/
 /* ------------------------------------ */
 Hooks.once("init", async () => {
   // console.log(`${CONSTANTS.MODULE_ID} | Initializing ${CONSTANTS.MODULE_ID}`);
-  // game.modules.get("introduce-me").api = {
-  //   introduceMe: async (token, actor) => await new Introduction().introduceMe(token, actor ?? token.actor),
-  //   introduceDialog: new Introduction().introduceMeDialog,
-  // };
   // Register custom module settings
   registerSettings();
 
@@ -34,7 +32,7 @@ Hooks.once("init", async () => {
 /* ------------------------------------ */
 Hooks.once("setup", function () {
   // Do anything after initialization but before ready
-  game.modules.get("introduce-me").api = API;
+  game.modules.get(CONSTANTS.MODULE_ID).api = API;
 });
 
 /* ------------------------------------ */
@@ -64,7 +62,7 @@ Hooks.once("devModeReady", ({ registerPackageDebugFlag }) => {
 });
 
 Hooks.on("renderTokenHUD", async (data, html) => {
-  if (game.user.isGM && game.settings.get("introduce-me", "show-hud")) {
+  if (game.user.isGM && game.settings.get(CONSTANTS.MODULE_ID, "show-hud")) {
     await new Introduction().renderHUD(data, html);
   }
 });
@@ -75,8 +73,8 @@ Hooks.on("renderTokenConfig", async (data, html) => {
     const closeButton = $(html).find(".window-header > .header-button.close").first();
     const insertPoint = configButton.length > 0 ? configButton : closeButton;
     $(insertPoint).before(
-      `<a class="introduce-me-button"><i class="fas fa-handshake"></i>${game.i18n.localize(
-        "introduceMe.actorSettings.introduceButton"
+      `<a class="introduce-me-button"><i class="fas fa-handshake"></i>${i18n(
+        `${CONSTANTS.MODULE_ID}.actorSettings.introduceButton`
       )}</>`
     );
     $(".window-header > .introduce-me-button").click((event) => {
@@ -87,7 +85,7 @@ Hooks.on("renderTokenConfig", async (data, html) => {
 
 Hooks.on("getActorDirectoryEntryContext", (_, entryOptions) => {
   entryOptions.push({
-    name: game.i18n.localize("introduceMe.actorSettings.introduceButton"),
+    name: i18n(`${CONSTANTS.MODULE_ID}.actorSettings.introduceButton`),
     callback: (li) => {
       const docId = $(li).attr("data-document-id")
         ? $(li).attr("data-document-id")

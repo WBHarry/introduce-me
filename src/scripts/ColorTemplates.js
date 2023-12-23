@@ -1,11 +1,13 @@
 import Introduction from "./Introduction.js";
 import { DefaultColors } from "./ColorSettings.js";
 import AudioSettings from "./AudioSettings.js";
+import { i18n } from "./lib/lib.js";
+import CONSTANTS from "./constants/constants.js";
 
 export default class ColorTemplates extends FormApplication {
   constructor() {
-    super({}, { title: game.i18n.localize("introduceMe.colorTemplates.label") });
-    this.colorTemplates = game.settings.get("introduce-me", "color-templates");
+    super({}, { title: i18n(`${CONSTANTS.MODULE_ID}.colorTemplates.label`) });
+    this.colorTemplates = game.settings.get(CONSTANTS.MODULE_ID, "color-templates");
     this.selected = {};
     this.newTemplateName = "";
   }
@@ -16,10 +18,10 @@ export default class ColorTemplates extends FormApplication {
       height: "auto",
       width: 600,
       id: "color-templates",
-      template: "modules/introduce-me/templates/colorTemplates.hbs",
+      template: `modules/${CONSTANTS.MODULE_ID}/templates/colorTemplates.hbs`,
       closeOnSubmit: false,
       submitOnChange: true,
-      classes: ["introduce-me", "color-templates"],
+      classes: [CONSTANTS.MODULE_ID, "color-templates"],
     };
 
     const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -105,22 +107,22 @@ export default class ColorTemplates extends FormApplication {
       .find("button#save")
       .click((event) => {
         const removedTemplates = game.settings
-          .get("introduce-me", "color-templates")
+          .get(CONSTANTS.MODULE_ID, "color-templates")
           .filter((x) => !this.colorTemplates.some((colorTemplate) => colorTemplate.id == x.id));
         removeTemplateFromActors(removedTemplates);
 
-        game.settings.set("introduce-me", "color-templates", this.colorTemplates);
+        game.settings.set(CONSTANTS.MODULE_ID, "color-templates", this.colorTemplates);
         this.close();
       });
   }
 }
 
 const removeTemplateFromActors = (removedTemplates) => {
-  const dispositionColors = game.settings.get("introduce-me", "introduction-colors");
+  const dispositionColors = game.settings.get(CONSTANTS.MODULE_ID, "introduction-colors");
   removedTemplates.forEach((template) => {
     template.actors?.forEach((actorId) => {
       const actor = game.actors.get(actorId);
-      actor.unsetFlag("introduce-me", "introduction-colors");
+      actor.unsetFlag(CONSTANTS.MODULE_ID, "introduction-colors");
     });
 
     Object.keys(dispositionColors).forEach((key) => {
@@ -130,5 +132,5 @@ const removeTemplateFromActors = (removedTemplates) => {
     });
   });
 
-  game.settings.set("introduce-me", "introduction-colors", dispositionColors);
+  game.settings.set(CONSTANTS.MODULE_ID, "introduction-colors", dispositionColors);
 };

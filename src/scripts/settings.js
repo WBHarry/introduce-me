@@ -1,130 +1,132 @@
 import ColorSettings, { DefaultColors } from "./ColorSettings.js";
 import ColorTemplates from "./ColorTemplates.js";
 import BannerSettings, { defaultPosition } from "./BannerSettings.js";
+import CONSTANTS from "./constants/constants.js";
 
 export const registerSettings = () => {
-  game.settings.registerMenu("introduce-me", "color-settings", {
-    name: game.i18n.localize("introduceMe.colorSettings.name"),
-    label: game.i18n.localize("introduceMe.colorSettings.label"),
-    hint: "",
+  game.settings.registerMenu(CONSTANTS.MODULE_ID, "color-settings", {
+    name: `${CONSTANTS.MODULE_ID}.colorSettings.showHud.title`,
+    label: `${CONSTANTS.MODULE_ID}.colorSettings.showHud.label`,
+    hint: `${CONSTANTS.MODULE_ID}.colorSettings.showHud.hint`,
     icon: "fas fa-palette",
     type: ColorSettings,
     restricted: true,
   });
 
-  game.settings.registerMenu("introduce-me", "color-templates", {
-    name: game.i18n.localize("introduceMe.colorTemplates.name"),
-    label: game.i18n.localize("introduceMe.colorTemplates.label"),
-    hint: "",
+  game.settings.registerMenu(CONSTANTS.MODULE_ID, "color-templates", {
+    name: `${CONSTANTS.MODULE_ID}.colorTemplates.showHud.title`,
+    label: `${CONSTANTS.MODULE_ID}.colorTemplates.showHud.label`,
+    hint: `${CONSTANTS.MODULE_ID}.colorTemplates.showHud.hint`,
     icon: "fas fa-book",
     type: ColorTemplates,
     restricted: true,
   });
 
-  game.settings.registerMenu("introduce-me", "banner-settings", {
-    name: game.i18n.localize("introduceMe.bannerSettings.name"),
-    label: game.i18n.localize("introduceMe.bannerSettings.label"),
-    hint: "",
+  game.settings.registerMenu(CONSTANTS.MODULE_ID, "banner-settings", {
+    name: `${CONSTANTS.MODULE_ID}.bannerSettings.showHud.title`,
+    label: `${CONSTANTS.MODULE_ID}.bannerSettings.showHud.label`,
+    hint: `${CONSTANTS.MODULE_ID}.bannerSettings.showHud.hint`,
     icon: "far fa-image",
     type: BannerSettings,
     restricted: false,
   });
 
-  game.settings.register("introduce-me", "show-hud", {
-    name: game.i18n.localize("introduceMe.gameSettings.showHud.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.showHud.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "show-hud", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.showHud.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.showHud.hint`,
     scope: "world",
     default: true,
     config: true,
     type: Boolean,
   });
 
-  game.settings.register("introduce-me", "use-token", {
-    name: game.i18n.localize("introduceMe.gameSettings.useToken.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.useToken.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "use-token", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.useToken.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.useToken.hint`,
     scope: "world",
     default: false,
     config: true,
     type: Boolean,
   });
 
-  game.settings.register("introduce-me", "use-actor-name", {
-    name: game.i18n.localize("introduceMe.gameSettings.useActorName.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.useActorName.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "use-actor-name", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.useActorName.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.useActorName.hint`,
     scope: "world",
     default: false,
     config: true,
     type: Boolean,
   });
 
-  game.settings.register("introduce-me", "set-display-name", {
-    name: game.i18n.localize("introduceMe.gameSettings.setDisplayName.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.setDisplayName.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "set-display-name", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.setDisplayName.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.setDisplayName.hint`,
     scope: "world",
     default: false,
     config: true,
     type: Boolean,
   });
 
-  game.settings.register("introduce-me", "use-introduce-permission", {
-    name: game.i18n.localize("introduceMe.gameSettings.useIntroducePermission.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.useIntroducePermission.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "use-introduce-permission", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.useIntroducePermission.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.useIntroducePermission.hint`,
     scope: "world",
     default: false,
     config: true,
     type: Boolean,
   });
 
-  game.settings.register("introduce-me", "introduction-duration", {
-    name: game.i18n.localize("introduceMe.gameSettings.introductionDuration.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.introductionDuration.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "introduction-duration", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.introductionDuration.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.introductionDuration.hint`,
     scope: "world",
     default: 2,
     config: true,
     type: Number,
   });
 
-  game.settings.register("introduce-me", "introduction-colors", {
-    name: game.i18n.localize("introduceMe.gameSettings.introductionColors.name"),
+  game.settings.register(CONSTANTS.MODULE_ID, "introduction-colors", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.introductionColors.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.introductionColors.hint`,
     scope: "world",
     default: DefaultColors,
     config: false,
     type: Object,
   });
 
-  game.settings.register("introduce-me", "color-templates", {
-    name: "",
-    hint: "",
+  game.settings.register(CONSTANTS.MODULE_ID, "color-templates", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.color-templates.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.color-templates.hint`,
     scope: "world",
     default: [],
     config: false,
     type: Object,
   });
 
-  game.settings.register("introduce-me", "position", {
-    name: "",
-    hint: "",
+  game.settings.register(CONSTANTS.MODULE_ID, "position", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.position.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.position.hint`,
     scope: "client",
     default: defaultPosition,
     config: false,
     type: Object,
   });
 
-  game.settings.register("introduce-me", "debug", {
-    name: game.i18n.localize("introduceMe.gameSettings.debug.name"),
-    hint: game.i18n.localize("introduceMe.gameSettings.debug.hint"),
+  game.settings.register(CONSTANTS.MODULE_ID, "debug", {
+    name: `${CONSTANTS.MODULE_ID}.gameSettings.debug.title`,
+    hint: `${CONSTANTS.MODULE_ID}.gameSettings.debug.hint`,
     scope: "client",
-    default: false,
     config: true,
+    default: false,
     type: Boolean,
   });
 };
 
 export const registerHandlebars = () => {
   loadTemplates([
-    "modules/introduce-me/templates/introduction.hbs",
-    "modules/introduce-me/templates/partials/colorSetting.hbs",
-    "modules/introduce-me/templates/partials/colorTemplate.hbs",
-    "modules/introduce-me/templates/partials/colorSettingHeader.hbs",
+    `modules/${CONSTANTS.MODULE_ID}/templates/introduction.hbs`,
+    `modules/${CONSTANTS.MODULE_ID}/templates/partials/colorSetting.hbs`,
+    `modules/${CONSTANTS.MODULE_ID}/templates/partials/colorTemplate.hbs`,
+    `modules/${CONSTANTS.MODULE_ID}/templates/partials/colorSettingHeader.hbs`,
   ]);
 };

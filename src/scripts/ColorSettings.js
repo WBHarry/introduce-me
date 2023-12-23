@@ -1,10 +1,12 @@
 import Introduction from "./Introduction.js";
 import AudioSettings from "./AudioSettings.js";
+import { i18n } from "./lib/lib.js";
+import CONSTANTS from "./constants/constants.js";
 
 export default class ColorSettings extends FormApplication {
   constructor(localToken, localActor, title) {
-    super({}, { title: title ?? game.i18n.localize("introduceMe.colorSettings.label") });
-    this.templates = game.settings.get("introduce-me", "color-templates");
+    super({}, { title: title ?? i18n(`${CONSTANTS.MODULE_ID}.colorSettings.label`) });
+    this.templates = game.settings.get(CONSTANTS.MODULE_ID, "color-templates");
     this.localToken = localToken;
     this.localActor = localActor;
     if (localActor) {
@@ -12,7 +14,7 @@ export default class ColorSettings extends FormApplication {
         actor: getActorIntroductionColors(localToken, localActor),
       };
     } else {
-      this.colors = game.settings.get("introduce-me", "introduction-colors");
+      this.colors = game.settings.get(CONSTANTS.MODULE_ID, "introduction-colors");
     }
   }
 
@@ -22,10 +24,10 @@ export default class ColorSettings extends FormApplication {
       height: "auto",
       width: "auto",
       id: "color-settings",
-      template: "modules/introduce-me/templates/colorSettings.hbs",
+      template: `modules/${CONSTANTS.MODULE_ID}/templates/colorSettings.hbs`,
       closeOnSubmit: false,
       submitOnChange: true,
-      classes: ["introduce-me", "color-settings"],
+      classes: [CONSTANTS.MODULE_ID, "color-settings"],
     };
 
     const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -39,7 +41,7 @@ export default class ColorSettings extends FormApplication {
       colors: Object.keys(this.colors).reduce((acc, key) => {
         acc[key] = {
           ...this.colors[key],
-          label: `introduceMe.colorSettings.${key}`,
+          label: `${CONSTANTS.MODULE_ID}.colorSettings.${key}`,
         };
         return acc;
       }, {}),
@@ -146,13 +148,13 @@ export default class ColorSettings extends FormApplication {
   }
 
   async saveColors() {
-    game.settings.set("introduce-me", "introduction-colors", this.colors);
+    game.settings.set(CONSTANTS.MODULE_ID, "introduction-colors", this.colors);
   }
 }
 
 export class ActorColorSettings extends ColorSettings {
   constructor(localToken, localActor, resolve) {
-    super(localToken, localActor, game.i18n.localize("introduceMe.introduceDialog.actorColorSettings"));
+    super(localToken, localActor, i18n(`${CONSTANTS.MODULE_ID}.introduceDialog.actorColorSettings`));
     this.resolve = resolve;
   }
 
@@ -168,12 +170,12 @@ export class ActorColorSettings extends ColorSettings {
   }
 
   async saveColors() {
-    await this.localActor.unsetFlag("introduce-me", "introduction-colors");
+    await this.localActor.unsetFlag(CONSTANTS.MODULE_ID, "introduction-colors");
     if (!areDispositionSettingsEqual(this.colors.actor, this.localToken, this.localActor)) {
-      await this.localActor.setFlag("introduce-me", "introduction-colors", this.colors.actor);
+      await this.localActor.setFlag(CONSTANTS.MODULE_ID, "introduction-colors", this.colors.actor);
     }
 
-    await game.settings.set("introduce-me", "color-templates", this.templates);
+    await game.settings.set(CONSTANTS.MODULE_ID, "color-templates", this.templates);
     this.resolve();
   }
 
@@ -213,13 +215,13 @@ export const DefaultColors = {
 };
 
 export const getActorIntroductionColors = (token, actor) => {
-  const localIntroductionColors = actor.getFlag("introduce-me", "introduction-colors");
+  const localIntroductionColors = actor.getFlag(CONSTANTS.MODULE_ID, "introduction-colors");
   if (localIntroductionColors) {
     if (!localIntroductionColors.template) {
       return localIntroductionColors;
     }
 
-    const templates = game.settings.get("introduce-me", "color-templates");
+    const templates = game.settings.get(CONSTANTS.MODULE_ID, "color-templates");
     const { actors, ...template } = templates.find((x) => x.id === localIntroductionColors.template);
     return { ...template, template: template.id };
   }
@@ -228,7 +230,7 @@ export const getActorIntroductionColors = (token, actor) => {
 };
 
 const getActorIntroductionColorsByData = (token, actor) => {
-  const introductionColors = game.settings.get("introduce-me", "introduction-colors");
+  const introductionColors = game.settings.get(CONSTANTS.MODULE_ID, "introduction-colors");
   if (actor.type === "character") {
     return introductionColors.players;
   }
