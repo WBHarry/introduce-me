@@ -32,7 +32,7 @@ export default class Introduction {
         null,
         null,
       ];
-      await introduceMeSocket.executeForEveryone("introduceMe", ...args);
+      await introduceMeSocket.executeForOthers("introduceMe", ...args);
 
       await this.introductionDisplay(token, actor);
     }
