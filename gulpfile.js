@@ -403,6 +403,9 @@ const clean = async () => {
 	if (!fs.existsSync(`dist`)) {
 		fs.mkdirSync(`dist`);
 	}
+	if (!fs.existsSync(`dist/${moduleId}`)) {
+		fs.mkdirSync(`dist/${moduleId}`);
+	}
 
 	const name = path.basename(path.resolve(`.`));
 	const files = [];
