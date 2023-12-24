@@ -22,7 +22,7 @@
       "title": "Settings"
     },
     "colorSettings": {
-      "name": "Introduction Colors",
+      "title": "Introduction Colors",
       "label": "Color Settings",
       "default": "Reset to default colors",
       "preview": "Private Preview",
@@ -52,13 +52,13 @@
       "removeAudio": "Clear audio"
     },
     "colorTemplates": {
-      "name": "Color Templates",
+      "title": "Color Templates",
       "label": "Color Templates",
       "newTemplatePlaceholder": "New template name..",
       "create": "Create New Template"
     },
     "bannerSettings": {
-      "name": "Banner Settings",
+      "title": "Banner Settings",
       "label": "Banner Placement"
     },
     "HUD": {

@@ -1,4 +1,4 @@
-### 0.9.7
+### 0.9.7-8
 
 - Complete rewrite and apply eslint and standard structure page
 - Integration with socketlib
