@@ -80,7 +80,12 @@
     }
   ],
   "systems": [],
-  "scripts": [],
+  "scripts": [
+    "greensock/dist/gsap.min.js",
+    "greensock/dist/PixiPlugin.min.js",
+    "greensock/dist/ScrollToPlugin.min.js",
+    "greensock/dist/SplitText.min.js"
+  ],
   "esmodules": ["module.js"],
   "styles": ["styles/introduce-me.css"],
   "compatibility": {
