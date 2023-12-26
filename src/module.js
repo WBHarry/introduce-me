@@ -1,5 +1,5 @@
 import Introduction from "./scripts/Introduction.js";
-import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
+// import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import { registerSettings, registerHandlebars } from "./scripts/settings.js";
 // import { setupSockets } from "./scripts/SocketHandler.js";
 import IntroduceDialog from "./scripts/IntroduceDialog.js";

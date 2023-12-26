@@ -1,4 +1,4 @@
-import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
+// import gsap, { SplitText } from "/scripts/greensock/esm/all.js";
 import IntroduceDialog from "./IntroduceDialog.js";
 import { getActorIntroductionColors } from "./ColorSettings.js";
 import { playIntroductionAudio } from "./AudioSettings.js";
