@@ -2,7 +2,7 @@
   "id": "introduce-me",
   "title": "Introduce Me",
   "description": "Introduce NPCs, monsters and PCs with a bit of flair",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "authors": [
     {
       "name": "HarryBoy"
@@ -68,7 +68,7 @@
     {
       "name": "introduce-me",
       "label": "Introduce Me",
-      "path": "./packs/introduce-me.db",
+      "path": "packs/introduce-me.db",
       "type": "Macro",
       "ownership": {
         "PLAYER": "NONE",
@@ -95,8 +95,8 @@
   },
   "manifestPlusVersion": "1.2.1",
   "url": "https://github.com/p4535992/foundryvtt-introduce-me",
-  "manifest": "https://github.com/p4535992/foundryvtt-introduce-me/releases/download/0.9.9/module.json",
-  "download": "https://github.com/p4535992/foundryvtt-introduce-me/releases/download/0.9.9/module.zip",
+  "manifest": "https://github.com/p4535992/foundryvtt-introduce-me/releases/download/0.9.10/module.json",
+  "download": "https://github.com/p4535992/foundryvtt-introduce-me/releases/download/0.9.10/module.zip",
   "readme": "https://github.com/p4535992/foundryvtt-introduce-me/blob/master/README.md",
   "changelog": "https://github.com/p4535992/foundryvtt-introduce-me/blob/master/CHANGELOG.md",
   "bugs": "https://github.com/p4535992/foundryvtt-introduce-me/issues",

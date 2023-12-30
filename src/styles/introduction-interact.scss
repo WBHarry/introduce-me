@@ -1,0 +1,9 @@
+.introduce-me {
+  &.introduction-interact {
+    &.control-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

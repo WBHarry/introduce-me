@@ -2,7 +2,7 @@
 	"name": "introduce-me",
 	"title": "Introduce Me",
 	"description": "Introduce NPCs, monsters and PCs with a bit of flair",
-	"version": "0.9.8",
+	"version": "0.9.10",
 	"main": "module.js",
 	"license": "SEE LICENSE IN LICENSE",
 	"private": true,
