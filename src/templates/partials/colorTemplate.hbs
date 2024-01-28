@@ -1,0 +1,17 @@
+<div>
+    <h2 id="{{this.index}}" class="template-toggle">
+        <div>
+            <i {{#if this.open}}class="far fa-minus-square"{{else}}class="far fa-plus-square"{{/if}}></i>
+            <span>{{localize this.template.label}}</span>
+        </div>
+        <i id="{{this.template.id}}" class="fas fa-trash delete-template"></i>
+    </h2>
+    <div class="color-template-content" {{#if this.open}}open{{/if}}>
+        {{> "modules/introduce-me/templates/partials/colorSettingHeader.hbs"}}
+        {{> "modules/introduce-me/templates/partials/colorSetting.hbs" 
+            key=this.index
+            name=(concat "colorTemplates." this.index)
+            color=this.template
+        }}
+    </div>
+</div>

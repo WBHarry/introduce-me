@@ -1,0 +1,117 @@
+{
+  "id": "introduce-me",
+  "title": "Introduce Me",
+  "description": "Introduce NPCs, monsters and PCs with a bit of flair",
+  "version": "0.9.10",
+  "authors": [
+    {
+      "name": "HarryBoy"
+    },
+    {
+      "name": "p4535992",
+      "url": "https://github.com/p4535992",
+      "discord": "",
+      "twitter": "",
+      "patreon": "",
+      "github": "p4535992",
+      "ko-fi": "",
+      "reddit": "",
+      "email": ""
+    }
+  ],
+  "type": "module",
+  "socket": true,
+  "includes": [
+    "./assets/**",
+    "./lang/**",
+    "./languages/**",
+    "./scripts/**",
+    "./styles/**",
+    "./templates/**",
+    "./module.json",
+    "./README.md",
+    "./icons/**",
+    "./packs/**"
+  ],
+  "media": [
+    {
+      "type": "icon",
+      "location": ""
+    },
+    {
+      "type": "cover",
+      "location": ""
+    },
+    {
+      "type": "screenshot",
+      "location": ""
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "es",
+      "name": "Espanol",
+      "path": "lang/es.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "introduce-me",
+      "label": "Introduce Me",
+      "path": "packs/introduce-me.db",
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "NONE",
+        "TRUSTED": "NONE",
+        "ASSISTANT": "OWNER"
+      },
+      "module": "introduce-me",
+      "flags": {}
+    }
+  ],
+  "systems": [],
+  "scripts": [
+    "greensock/dist/gsap.min.js",
+    "greensock/dist/PixiPlugin.min.js",
+    "greensock/dist/ScrollToPlugin.min.js",
+    "greensock/dist/SplitText.min.js"
+  ],
+  "esmodules": ["module.js"],
+  "styles": ["styles/introduce-me.css"],
+  "compatibility": {
+    "minimum": 10,
+    "verified": 11,
+    "maximum": 11
+  },
+  "manifestPlusVersion": "1.2.1",
+  "url": "https://github.com/p4535992/foundryvtt-introduce-me",
+  "manifest": "https://github.com/p4535992/foundryvtt-introduce-me/releases/download/0.9.10/module.json",
+  "download": "https://github.com/p4535992/foundryvtt-introduce-me/releases/download/0.9.10/module.zip",
+  "readme": "https://github.com/p4535992/foundryvtt-introduce-me/blob/master/README.md",
+  "changelog": "https://github.com/p4535992/foundryvtt-introduce-me/blob/master/CHANGELOG.md",
+  "bugs": "https://github.com/p4535992/foundryvtt-introduce-me/issues",
+  "allowBugReporter": true,
+  "relationships": {
+    "systems": [],
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json",
+        "compatibility": {}
+      }
+    ],
+    "recommends": [],
+    "conflicts": []
+  }
+}
